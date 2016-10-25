@@ -1,13 +1,17 @@
-#include <iostream>
-#include <glm/glm.hpp>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include "ui/Window.h"
 
 int main()
 {
-    glfwInit();
-    glewInit();
-    glClearColor(0, 0, 0, 0);
-    std::cout << "test";
+    Window window("OpenGL", 800, 800);
+
+    float lastTime = 0;
+    while(!window.shouldClose()) {
+        window.clear();
+        if(lastTime) {
+            window.update(glfwGetTime() - lastTime);
+        }
+        lastTime = glfwGetTime();
+    }
+
  	return 0;
 }
