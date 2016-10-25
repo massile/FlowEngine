@@ -1,3 +1,4 @@
+#include <GL/glew.h>
 #include "Window.h"
 #include <iostream>
 
@@ -9,18 +10,24 @@ Window::Window(const std::string &title, int width, int height)
         glfwTerminate();
     }
 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
     if(!initWindowPointer()) {
         std::cout << "Can't create window" << std::endl;
         glfwDestroyWindow(m_window);
         glfwTerminate();
     }
+    glewInit();
+    glewExperimental = true;
 
     glfwSetErrorCallback(error_callback);
 }
 
 Window::~Window()
 {
-    glfwDestroyWindow(m_window);    
+    glfwDestroyWindow(m_window);
     glfwTerminate();
 }
 
@@ -44,7 +51,6 @@ void Window::update(float dt)
 {
     glfwSwapBuffers(m_window);
     glfwPollEvents();
-    std::cout << dt << std::endl;
 }
 
 void error_callback(int error, const char *description)
