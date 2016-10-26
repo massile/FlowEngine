@@ -13,7 +13,7 @@ This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.s
   - [x] Shaders
   - [x] Modern way to load a mesh (with buffers & vertex arrays)
   - [ ] Mesh loading (.obj format)
-  - [ ] Textures
+  - [x] Textures
   - [ ] Cameras
   - [ ] Coordinate system
   - [ ] Lighting ([Phong](https://en.wikipedia.org/wiki/Phong_shading))
@@ -22,7 +22,5 @@ This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.s
   - [ ] Advanced lighting ([CookTorrance](http://www.codinglabs.net/article_physically_based_rendering_cook_torrance.aspx))
   - [ ] Shadow mapping
   - [ ] Normal mapping
-  
-  
-  
- ![](http://img4.hostingpics.net/pics/120678Capturedu20161026021022.png)
+    
+ ![](http://image.noelshack.com/fichiers/2016/43/1477486216-capture-du-2016-10-26-14-48-10.png)

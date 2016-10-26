@@ -58,3 +58,16 @@ void Shader::link(GLuint vertexShader, GLuint fragmentShader) {
         std::cout << "Error on program link: " << errorStr.data() << std::endl;
     }
 }
+
+void Shader::uniform(const std::string &name, int value)
+{
+    glUniform1i(getUniformLocation(name), value);
+}
+
+GLuint Shader::getUniformLocation(const std::string& name)
+{
+    if(m_uniforms.find(name) == m_uniforms.end()) {
+        m_uniforms[name] = glGetUniformLocation(m_id, name.c_str());
+    }
+    return m_uniforms[name];
+}
