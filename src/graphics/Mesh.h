@@ -20,10 +20,11 @@ private:
     GLuint m_vbo;
     GLuint m_ebo;
 
+    glm::mat4 m_modelMatrix = glm::mat4x4();
 
 public:
     Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices);
     ~Mesh();
 
-    void draw(const Shader& shader);
+    void draw(Shader& shader);
 };

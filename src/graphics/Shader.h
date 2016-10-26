@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include <string>
 #include <map>
+#include <glm/detail/type_mat.hpp>
 
 class Shader
 {
@@ -15,6 +16,7 @@ public:
     ~Shader();
 
     void uniform(const std::string& name, int value);
+    void uniform(const std::string& name, const glm::mat4& value);
 
     inline void use() const { glUseProgram(m_id); }
     inline GLuint getId() const { return m_id; }

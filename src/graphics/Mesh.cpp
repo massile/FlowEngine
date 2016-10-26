@@ -34,9 +34,10 @@ Mesh::~Mesh()
     glDeleteVertexArrays(1, &m_vertexArrayObjectId);
 }
 
-void Mesh::draw(const Shader &shader)
+void Mesh::draw(Shader &shader)
 {
     shader.use();
+    shader.uniform("model", m_modelMatrix);
     glBindVertexArray(m_vertexArrayObjectId);
     glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, nullptr);
     glBindVertexArray(0);

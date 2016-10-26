@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Shader.h"
 #include "../parse/File.h"
+#include <glm/gtc/type_ptr.hpp>
 
 Shader::Shader(const std::string &vertexPath, const std::string &fragmentPath)
 {
@@ -62,6 +63,11 @@ void Shader::link(GLuint vertexShader, GLuint fragmentShader) {
 void Shader::uniform(const std::string &name, int value)
 {
     glUniform1i(getUniformLocation(name), value);
+}
+
+void Shader::uniform(const std::string &name, const glm::mat4& matrix)
+{
+    glUniformMatrix4fv(getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 GLuint Shader::getUniformLocation(const std::string& name)

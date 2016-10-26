@@ -15,7 +15,7 @@ This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.s
   - [ ] Mesh loading (.obj format)
   - [x] Textures
   - [ ] Cameras
-  - [ ] Coordinate system
+  - [x] Coordinate system
   - [ ] Lighting ([Phong](https://en.wikipedia.org/wiki/Phong_shading))
   - [ ] Material system
   - [ ] Mesh loading with skeleton ([.sls format](https://github.com/massile/sls-blender-exporter))
@@ -23,4 +23,4 @@ This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.s
   - [ ] Shadow mapping
   - [ ] Normal mapping
     
- ![](http://image.noelshack.com/fichiers/2016/43/1477486216-capture-du-2016-10-26-14-48-10.png)
+ ![](http://image.noelshack.com/fichiers/2016/43/1477489558-capture-du-2016-10-26-15-45-31.png)
