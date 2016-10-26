@@ -11,7 +11,7 @@ find_package(GLEW REQUIRED)
 find_package(glfw3 3.2 REQUIRED)
 find_package(OpenGL REQUIRED)
 
-add_executable(FlowEngine src/main.cpp src/ui/Window.cpp src/ui/Window.h src/graphics/Shader.cpp src/graphics/Shader.h src/parse/File.cpp src/parse/File.h)
+add_executable(FlowEngine src/main.cpp src/ui/Window.cpp src/ui/Window.h src/graphics/Shader.cpp src/graphics/Shader.h src/parse/File.cpp src/parse/File.h src/graphics/Mesh.cpp src/graphics/Mesh.h)
 target_link_libraries(FlowEngine ${GLEW_LIBRARIES})
 target_link_libraries(FlowEngine ${OPENGL_gl_LIBRARY})
 target_link_libraries(FlowEngine glfw ${GLFW_LIBRARIES})
