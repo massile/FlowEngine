@@ -9,7 +9,7 @@ This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.s
 ## Results and expectations (for now)
  
   - [x] Window system
-  - [ ] Keyboard & mouse input
+  - [x] Keyboard & mouse input
   - [x] Shaders
   - [x] Modern way to load a mesh (with buffers & vertex arrays)
   - [ ] Mesh loading (.obj format)

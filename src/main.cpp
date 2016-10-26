@@ -20,7 +20,7 @@ int main()
                            "/home/tessellator/ClionProjects/FlowEngine/resources/shaders/basic.frag");
     Texture texture("tex", "/home/tessellator/ClionProjects/FlowEngine/resources/textures/floor.png");
 
-    Camera camera(glm::vec3(-5, 5, -5), 1.0f);
+    Camera camera(glm::vec3(-5, 5, -5), window.getWidth()/window.getHeight());
 
     shader.use();
     texture.use(shader);

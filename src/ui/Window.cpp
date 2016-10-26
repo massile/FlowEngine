@@ -22,13 +22,21 @@ Window::Window(const std::string &title, int width, int height)
     glewInit();
     glewExperimental = true;
 
-    glfwSetErrorCallback(error_callback);
+    setCallbacks();
 }
 
 Window::~Window()
 {
     glfwDestroyWindow(m_window);
     glfwTerminate();
+}
+
+void Window::setCallbacks()
+{
+    glfwSetErrorCallback(error_callback);
+    glfwSetKeyCallback(m_window, key_callback);
+    glfwSetCursorPosCallback(m_window, cursor_position_callback);
+    glfwSetMouseButtonCallback(m_window, mouse_button_callback);
 }
 
 bool Window::initWindowPointer()
@@ -38,6 +46,7 @@ bool Window::initWindowPointer()
         return false;
     }
     glfwMakeContextCurrent(m_window);
+    glfwSetWindowUserPointer(m_window, this);
 
     return true;
 }
@@ -57,3 +66,23 @@ void error_callback(int error, const char *description)
 {
     std::cout << "Error#" << error << ": " << description << std::endl;
 }
+
+void key_callback(GLFWwindow *window, int key, int scanCode, int action, int mods)
+{
+    Window* win = (Window*) glfwGetWindowUserPointer(window);
+    win->m_keys[key] = action != GLFW_RELEASE;
+}
+
+void cursor_position_callback(GLFWwindow *window, double x, double y)
+{
+    Window* win = (Window*) glfwGetWindowUserPointer(window);
+    win->m_cursor_position = glm::vec2(x, y);
+}
+
+void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
+{
+    Window* win = (Window*) glfwGetWindowUserPointer(window);
+    win->m_mouse_buttons[button] = action != GLFW_RELEASE;
+}
+
+
