@@ -1,10 +1,12 @@
+![OpenGL](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Opengl-logo.svg/2000px-Opengl-logo.svg.png)
+
 # FlowEngine
 
 A 3D Engine written in OpenGL just for fun. :smile:
 
 ## Libraries
 
-This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.sourceforge.net/) and OpenGL to run.
+This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.sourceforge.net/) and OpenGL 3.3 to run.
 
 ## Results and expectations (for now)
  
