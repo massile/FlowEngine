@@ -25,4 +25,4 @@ This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.s
   - [ ] Shadow mapping
   - [ ] Normal mapping
     
- ![](http://image.noelshack.com/fichiers/2016/43/1477489558-capture-du-2016-10-26-15-45-31.png)
+ ![](http://i.giphy.com/l0MYs8WhG252ACbw4.gif)

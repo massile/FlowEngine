@@ -26,6 +26,7 @@ Window::Window(const std::string &title, int width, int height)
 
     glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetCursorPos(m_window, width/2, height/2);
+    glClearColor(1, 1, 1, 1);
 
     setCallbacks();
 }
