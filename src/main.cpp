@@ -2,8 +2,9 @@
 #include "ui/Window.h"
 #include "graphics/Shader.h"
 #include "graphics/Mesh.h"
-#include "graphics/Texture.h"
 #include "graphics/Camera.h"
+
+#define ROOT_DIR std::string("/home/tessellator/ClionProjects/FlowEngine")
 
 int main()
 {
@@ -15,28 +16,25 @@ int main()
     };
     std::vector<GLuint> indices = {0, 1, 2};
 
-    Mesh mesh = Mesh(vertices, indices);
-    Shader shader = Shader("/home/tessellator/ClionProjects/FlowEngine/resources/shaders/basic.vert",
-                           "/home/tessellator/ClionProjects/FlowEngine/resources/shaders/basic.frag");
-    Texture texture("tex", "/home/tessellator/ClionProjects/FlowEngine/resources/textures/floor.png");
+    Shader shader = Shader(ROOT_DIR + "/resources/shaders/basic.vert", ROOT_DIR + "/resources/shaders/basic.frag");
+    Texture texture("tex", ROOT_DIR + "/resources/textures/floor.png");
+    Mesh mesh = Mesh(texture, vertices, indices);
 
     Camera camera(glm::vec3(0, 0, -5), window.getWidth()/window.getHeight());
-
-    shader.use();
-    texture.use(shader);
 
     float lastTime = 0;
     while(!window.shouldClose()) {
         window.clear();
         mesh.draw(shader);
+
         if(lastTime) {
             float dt = glfwGetTime() - lastTime;
 
             camera.processInput(window, dt);
-
             camera.update(shader);
             window.update();
         }
+
         lastTime = glfwGetTime();
     }
 

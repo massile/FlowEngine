@@ -1,7 +1,7 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const std::vector<Vertex> &vertices, const std::vector<GLuint> &indices)
-        : m_vertices(vertices), m_indices(indices)
+Mesh::Mesh(const Texture& texture, const std::vector<Vertex> &vertices, const std::vector<GLuint> &indices)
+        : m_vertices(vertices), m_indices(indices), m_texture(texture)
 {
     glGenVertexArrays(1, &m_vertexArrayObjectId);
     glBindVertexArray(m_vertexArrayObjectId);
@@ -37,6 +37,8 @@ Mesh::~Mesh()
 void Mesh::draw(Shader &shader)
 {
     shader.use();
+    m_texture.use(shader);
+
     shader.uniform("model", m_modelMatrix);
     glBindVertexArray(m_vertexArrayObjectId);
     glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, nullptr);

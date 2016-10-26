@@ -4,6 +4,7 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include "Shader.h"
+#include "Texture.h"
 
 struct Vertex
 {
@@ -21,9 +22,10 @@ private:
     GLuint m_ebo;
 
     glm::mat4 m_modelMatrix = glm::mat4x4();
+    Texture m_texture;
 
 public:
-    Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices);
+    Mesh(const Texture& texture, const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices);
     ~Mesh();
 
     void draw(Shader& shader);
