@@ -3,7 +3,9 @@
 #include <iostream>
 
 Window::Window(const std::string &title, int width, int height)
-        : m_height(height), m_width(width), m_title(title)
+        : m_height(height), m_width(width), m_title(title),
+          m_cursor_position(width/2, height/2),
+          m_previous_cursor_position(m_cursor_position)
 {
     if(!glfwInit()) {
         std::cout << "Can't initialize GLFW" << std::endl;
@@ -21,6 +23,9 @@ Window::Window(const std::string &title, int width, int height)
     }
     glewInit();
     glewExperimental = true;
+
+    glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetCursorPos(m_window, width/2, height/2);
 
     setCallbacks();
 }
@@ -54,12 +59,13 @@ bool Window::initWindowPointer()
 void Window::clear() const
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glfwPollEvents();
 }
 
-void Window::update(float dt)
+void Window::update()
 {
     glfwSwapBuffers(m_window);
-    glfwPollEvents();
+    m_previous_cursor_position = m_cursor_position;
 }
 
 void error_callback(int error, const char *description)

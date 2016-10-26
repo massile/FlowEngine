@@ -19,6 +19,7 @@ private:
     bool m_keys[MAX_KEYS] = {false};
     bool m_mouse_buttons[MAX_BUTTONS] = {false};
     glm::vec2 m_cursor_position;
+    glm::vec2 m_previous_cursor_position;
 
 public:
     Window(const std::string& title, int width, int height);
@@ -29,11 +30,17 @@ public:
     inline int getHeight() const { return m_height; }
 
     void clear() const;
-    void update(float dt);
+    void update();
 
     inline bool isKeyPressed(int key) const { return m_keys[key]; }
     inline bool isMouseButtonPressed(int button) const { return m_mouse_buttons[button]; }
     inline glm::vec2 getCursorPosition() const { return m_cursor_position; }
+    inline glm::vec2 getCursorPositionOffset() const {
+        return glm::vec2(
+            m_cursor_position.x - m_previous_cursor_position.x,
+            m_previous_cursor_position.y - m_cursor_position.y
+        );
+    }
 
     friend void key_callback(GLFWwindow* window, int key, int scanCode, int action, int mods);
     friend void cursor_position_callback(GLFWwindow* window, double x, double y);

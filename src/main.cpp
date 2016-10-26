@@ -20,7 +20,7 @@ int main()
                            "/home/tessellator/ClionProjects/FlowEngine/resources/shaders/basic.frag");
     Texture texture("tex", "/home/tessellator/ClionProjects/FlowEngine/resources/textures/floor.png");
 
-    Camera camera(glm::vec3(-5, 5, -5), window.getWidth()/window.getHeight());
+    Camera camera(glm::vec3(0, 0, -5), window.getWidth()/window.getHeight());
 
     shader.use();
     texture.use(shader);
@@ -30,8 +30,12 @@ int main()
         window.clear();
         mesh.draw(shader);
         if(lastTime) {
+            float dt = glfwGetTime() - lastTime;
+
+            camera.processInput(window, dt);
+
             camera.update(shader);
-            window.update(glfwGetTime() - lastTime);
+            window.update();
         }
         lastTime = glfwGetTime();
     }

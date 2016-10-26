@@ -14,7 +14,7 @@ This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.s
   - [x] Modern way to load a mesh (with buffers & vertex arrays)
   - [ ] Mesh loading (.obj format)
   - [x] Textures
-  - [ ] Cameras
+  - [x] Camera
   - [x] Coordinate system
   - [ ] Lighting ([Phong](https://en.wikipedia.org/wiki/Phong_shading))
   - [ ] Material system
