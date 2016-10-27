@@ -21,8 +21,14 @@ This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.s
   - [x] Lighting ([Phong](https://en.wikipedia.org/wiki/Phong_shading))
   - [ ] Material system
   - [ ] Mesh loading with skeleton ([.sls format](https://github.com/massile/sls-blender-exporter))
-  - [ ] Advanced lighting ([CookTorrance](http://www.codinglabs.net/article_physically_based_rendering_cook_torrance.aspx))
+  - [x] Advanced lighting ([CookTorrance](http://www.codinglabs.net/article_physically_based_rendering_cook_torrance.aspx))
   - [ ] Shadow mapping
   - [ ] Normal mapping
-    
- ![](http://i.giphy.com/l2JhIzFcDRPdDjn0I.gif)
+ 
+#### Rough material
+ 
+ ![](http://i.giphy.com/3o7TKCYxNPmsgPdrUY.gif)
+ 
+#### Shiny material
+ 
+ ![](http://i.giphy.com/3o7TKwjOiEQPrRYWOI.gif)

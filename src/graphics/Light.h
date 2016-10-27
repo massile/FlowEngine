@@ -2,6 +2,7 @@
 
 #include <glm/glm.hpp>
 #include "Shader.h"
+#include "../ui/Window.h"
 
 class Light
 {
@@ -11,4 +12,5 @@ private:
 public:
     Light(const glm::vec3& position);
     void update(Shader& shader);
+    void processInput(const Window& window, float dt);
 };

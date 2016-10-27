@@ -15,7 +15,7 @@ int main()
     Shader shader = Shader(ROOT_DIR + "/resources/shaders/basic.vert", ROOT_DIR + "/resources/shaders/basic.frag");
     Mesh mesh = ObjParser(ROOT_DIR + "/resources/meshes/sphere.obj").parse();
     Camera camera(glm::vec3(0, 0, -5), window.getWidth()/window.getHeight());
-    Light light(glm::vec3(0, 100, 100));
+    Light light(glm::vec3(0, 5, -4));
 
     float lastTime = 0;
     while(!window.shouldClose()) {
@@ -26,6 +26,7 @@ int main()
             float dt = glfwGetTime() - lastTime;
 
             camera.processInput(window, dt);
+            light.processInput(window, dt);
             camera.update(shader);
             light.update(shader);
             window.update();
