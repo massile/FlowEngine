@@ -1,7 +1,9 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const Texture& texture, const std::vector<Vertex> &vertices, const std::vector<GLuint> &indices)
-        : m_vertices(vertices), m_indices(indices), m_texture(texture)
+#define RESOURCE_DIR std::string("/home/tessellator/ClionProjects/FlowEngine/resources")
+
+Mesh::Mesh(const std::vector<Vertex> &vertices, const std::vector<GLuint> &indices)
+        : m_vertices(vertices), m_indices(indices), m_texture(Texture("tex", RESOURCE_DIR + "/textures/floor.png"))
 {
     glGenVertexArrays(1, &m_vertexArrayObjectId);
     glBindVertexArray(m_vertexArrayObjectId);
@@ -22,6 +24,12 @@ Mesh::Mesh(const Texture& texture, const std::vector<Vertex> &vertices, const st
 
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+Mesh::Mesh(const Texture& texture, const std::vector<Vertex> &vertices, const std::vector<GLuint> &indices)
+        : Mesh(vertices, indices)
+{
+    m_texture = texture;
 }
 
 

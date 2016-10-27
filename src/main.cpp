@@ -3,23 +3,16 @@
 #include "graphics/Shader.h"
 #include "graphics/Mesh.h"
 #include "graphics/Camera.h"
+#include "parse/ObjParser.h"
 
 #define ROOT_DIR std::string("/home/tessellator/ClionProjects/FlowEngine")
 
 int main()
 {
     Window window("OpenGL", 800, 800);
-    std::vector<Vertex> vertices = {
-        {{-2, -2, 0}, {0.0, 0.0}},
-        {{ 0, 2, 0}, {0.5, 1.0}},
-        {{ 2, -2, 0}, {1.0, 0.0}}
-    };
-    std::vector<GLuint> indices = {0, 1, 2};
 
     Shader shader = Shader(ROOT_DIR + "/resources/shaders/basic.vert", ROOT_DIR + "/resources/shaders/basic.frag");
-    Texture texture("tex", ROOT_DIR + "/resources/textures/floor.png");
-    Mesh mesh = Mesh(texture, vertices, indices);
-
+    Mesh mesh = ObjParser(ROOT_DIR + "/resources/meshes/cube.obj").parse();
     Camera camera(glm::vec3(0, 0, -5), window.getWidth()/window.getHeight());
 
     float lastTime = 0;

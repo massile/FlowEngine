@@ -25,6 +25,7 @@ private:
     Texture m_texture;
 
 public:
+    Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices);
     Mesh(const Texture& texture, const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices);
     ~Mesh();
 
