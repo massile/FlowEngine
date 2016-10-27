@@ -2,25 +2,26 @@
 
 in Vertex {
     vec2 uv;
-    vec3 normal;
-    vec3 fragPosition;
+    vec3 tangentFragPos;
+    vec3 tangentViewPos;
+    vec3 tangentLightPos;
 } vertex;
 
 out vec4 color;
 
-uniform sampler2D tex;
-uniform vec3 viewPos;
-uniform vec3 lightPos;
+uniform sampler2D diffuseMap;
+uniform sampler2D normalMap;
+uniform sampler2D specularMap;
 
-float computeSpecular(float NdotL, vec3 lightDirection)
+float computeSpecular(float NdotL, vec3 lightDirection, vec3 normal)
 {
-    float roughnessStrength = 0.5;
-    float F0 = 2.0;
+    float roughnessStrength = 0.4;
+    float F0 = 1.5;
 
-    vec3 viewDirection = normalize(viewPos - vertex.fragPosition);
+    vec3 viewDirection = normalize(vertex.tangentViewPos - vertex.tangentFragPos);
     vec3 halfVector = normalize(lightDirection + viewDirection);
-    float NdotH = max(dot(vertex.normal, halfVector), 0.0);
-    float NdotV = max(dot(vertex.normal, viewDirection), 0.0);
+    float NdotH = max(dot(normal, halfVector), 0.0);
+    float NdotV = max(dot(normal, viewDirection), 0.0);
     float VdotH = max(dot(viewDirection, halfVector), 0.0);
     float rSquare = roughnessStrength * roughnessStrength;
 
@@ -36,25 +37,26 @@ float computeSpecular(float NdotL, vec3 lightDirection)
 
     // Schlick approximation
     float fresnel = (1.0 - F0) * pow(1.0 - VdotH, 5.0) + F0;
-    return (fresnel * geoAtt * roughness) / (NdotV * NdotL * 3.14);
+    return max((fresnel * geoAtt * roughness) / (NdotV * NdotL * 3.14), 0.0);
 }
 
 void main()
 {
     float k = 0.2;
-    vec3 lightColor = vec3(1.0, 1.0, 1.0);
-    vec3 lightDirection = normalize(lightPos - vertex.fragPosition);
+    vec3 lightColor = vec3(1.0, 0.8, 0.75);
+    vec3 lightDirection = normalize(vertex.tangentLightPos - vertex.tangentFragPos);
+    vec3 normal = normalize(texture(normalMap, vertex.uv).rbg);
 
-    float NdotL = max(dot(vertex.normal, lightDirection), 0.0);
+    float NdotL = max(dot(normal, lightDirection), 0.0);
 
     float specular;
     if(NdotL > 0.0f)
-        specular = computeSpecular(NdotL, lightDirection);
+        specular = computeSpecular(NdotL, lightDirection, normal);
     else
         specular = 0.0f;
 
-    vec3 spec = texture(tex, vertex.uv).xyz * lightColor * NdotL * (k + specular * (1.0 - k));
-    vec3 diffuse = texture(tex, vertex.uv).xyz  * vec3(0.2f, 0.2f, 0.2f);
+    vec3 spec = texture(specularMap, vertex.uv).xyz * lightColor * NdotL * (k + specular * (1.0 - k));
+    vec3 diffuse = texture(diffuseMap, vertex.uv).xyz  * vec3(0.02f, 0.05f, 0.1f);
 
     gl_FragColor = vec4(spec + diffuse, 1.0);
 }

@@ -49,6 +49,7 @@ Mesh ObjParser::parse()
 
         std::getline(file, val);
     }
+    generateTangentSpace(vertices);
 
     return Mesh(vertices, indices);
 }
@@ -56,4 +57,26 @@ Mesh ObjParser::parse()
 ObjParser::~ObjParser()
 {}
 
+void ObjParser::generateTangentSpace(std::vector<Vertex> &vertices)
+{
+    for ( int i=0; i < vertices.size(); i += 3) {
+        Vertex v0 = vertices[i];
+        Vertex v1 = vertices[i + 1];
+        Vertex v2 = vertices[i + 2];
 
+        glm::vec3 deltaPos1 = v1.position - v0.position;
+        glm::vec3 deltaPos2 = v2.position - v0.position;
+
+        glm::vec2 deltaUV1 = v1.uv - v0.uv;
+        glm::vec2 deltaUV2 = v2.uv - v0.uv;
+
+        float r = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV1.y * deltaUV2.x);
+        glm::vec3 tangent = (deltaPos1 * deltaUV2.y   - deltaPos2 * deltaUV1.y)*r;
+        glm::vec3 bitangent = (deltaPos2 * deltaUV1.x   - deltaPos1 * deltaUV2.x)*r;
+
+        for(int j=0; j<3; j++) {
+            vertices[i + j].tangent = tangent;
+            vertices[i + j].bitangent = bitangent;
+        }
+    }
+}

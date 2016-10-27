@@ -10,4 +10,7 @@ public:
     ~ObjParser();
 
     Mesh parse() override;
+
+private:
+    void generateTangentSpace(std::vector<Vertex> &vertices);
 };

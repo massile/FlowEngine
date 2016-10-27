@@ -3,7 +3,9 @@
 #define RESOURCE_DIR std::string("/home/tessellator/ClionProjects/FlowEngine/resources")
 
 Mesh::Mesh(const std::vector<Vertex> &vertices, const std::vector<GLuint> &indices)
-        : m_vertices(vertices), m_indices(indices), m_texture(Texture("tex", RESOURCE_DIR + "/textures/floor.png"))
+        : m_vertices(vertices),
+          m_indices(indices),
+          m_diffuseMap(new Texture("tex", RESOURCE_DIR + "/textures/floor.png"))
 {
     glGenVertexArrays(1, &m_vertexArrayObjectId);
     glBindVertexArray(m_vertexArrayObjectId);
@@ -25,14 +27,20 @@ Mesh::Mesh(const std::vector<Vertex> &vertices, const std::vector<GLuint> &indic
     glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
     glEnableVertexAttribArray(2);
 
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, tangent));
+    glEnableVertexAttribArray(3);
+
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, bitangent));
+    glEnableVertexAttribArray(4);
+
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-Mesh::Mesh(const Texture& texture, const std::vector<Vertex> &vertices, const std::vector<GLuint> &indices)
+Mesh::Mesh(Texture* diffuse, const std::vector<Vertex> &vertices, const std::vector<GLuint> &indices)
         : Mesh(vertices, indices)
 {
-    m_texture = texture;
+    m_diffuseMap = diffuse;
 }
 
 
@@ -48,7 +56,9 @@ Mesh::~Mesh()
 void Mesh::draw(Shader &shader)
 {
     shader.use();
-    m_texture.use(shader);
+    m_diffuseMap->use(shader);
+    m_specularMap->use(shader);
+    m_normalMap->use(shader);
 
     shader.uniform("model", m_modelMatrix);
     glBindVertexArray(m_vertexArrayObjectId);

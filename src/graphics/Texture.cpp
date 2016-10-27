@@ -1,13 +1,14 @@
 #include "Texture.h"
 #include <SOIL/SOIL.h>
 
-Texture::Texture(const std::string& name)
-        : m_name(name)
+Texture::Texture(const std::string& name, const Type type)
+        : m_name(name), m_type(type)
 {
     glGenTextures(1, &m_textureId);
 }
 
-Texture::Texture(const std::string& name, const std::string &filename) : Texture(name)
+Texture::Texture(const std::string& name, const std::string &filename, const Type type)
+        : Texture(name, type)
 {
     load(filename, m_name);
 }
@@ -37,8 +38,9 @@ void Texture::load(const std::string &filename, const std::string& name)
 
 void Texture::use(Shader& shader) const
 {
+    glActiveTexture(m_type);
     glBindTexture(GL_TEXTURE_2D, m_textureId);
-    shader.uniform(m_name, 0);
+    shader.uniform(m_name, m_type - GL_TEXTURE0);
 }
 
 

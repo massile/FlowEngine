@@ -23,12 +23,14 @@ This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.s
   - [ ] Mesh loading with skeleton ([.sls format](https://github.com/massile/sls-blender-exporter))
   - [x] Advanced lighting ([CookTorrance](http://www.codinglabs.net/article_physically_based_rendering_cook_torrance.aspx))
   - [ ] Shadow mapping
-  - [ ] Normal mapping
+  - [x] Normal mapping
  
 #### Rough material
  
- ![](http://i.giphy.com/3o7TKCYxNPmsgPdrUY.gif)
+ ![](http://i.giphy.com/3o7TKPeFE27xeKs57W.gif)
  
 #### Shiny material
  
- ![](http://i.giphy.com/3o7TKwjOiEQPrRYWOI.gif)
+ ![](http://i.giphy.com/3o7TKOyWwHPgEAB7q0.gif)
+
+Sorry for the laggy gifs..
