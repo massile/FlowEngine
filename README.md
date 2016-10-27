@@ -24,7 +24,9 @@ This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.s
   - [x] Advanced lighting ([CookTorrance](http://www.codinglabs.net/article_physically_based_rendering_cook_torrance.aspx))
   - [ ] Shadow mapping
   - [x] Normal mapping
- 
+
+![](http://image.noelshack.com/fichiers/2016/43/1477550211-capture-du-2016-10-27-08-36-02.png)
+
 #### Rough material
  
  ![](http://i.giphy.com/3o7TKPeFE27xeKs57W.gif)
