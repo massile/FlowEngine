@@ -13,4 +13,6 @@ public:
     Light(const glm::vec3& position);
     void update(Shader& shader);
     void processInput(const Window& window, float dt);
+
+    inline glm::vec3 getPosition() const { return m_position; }
 };

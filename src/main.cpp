@@ -10,7 +10,7 @@
 
 int main()
 {
-    Window window("OpenGL", 400, 400);
+    Window window("OpenGL", 800, 800);
 
     Shader shader = Shader(ROOT_DIR + "/resources/shaders/basic.vert", ROOT_DIR + "/resources/shaders/basic.frag");
     Mesh mesh = ObjParser(ROOT_DIR + "/resources/meshes/sphere.obj").parse();
@@ -19,7 +19,7 @@ int main()
     mesh.setNormalTexture(new Texture("normalMap", ROOT_DIR + "/resources/textures/rock-normal.jpg", Texture::NORMAL_MAP));
 
     Camera camera(glm::vec3(0, 0, -5), window.getWidth()/window.getHeight());
-    Light light(glm::vec3(0, 5, 0));
+    Light light(glm::vec3(0, 0, 0));
 
     float lastTime = 0;
     while(!window.shouldClose()) {
