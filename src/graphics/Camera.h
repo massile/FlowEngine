@@ -29,6 +29,8 @@ public:
     void update(Shader& shader);
     void processInput(const Window& window, float dt);
 
+    inline glm::vec3 getPosition() const { return m_position; }
+
 private:
     void processKeyboardInput(const Window &window, float dt);
     void processCursorInput(const Window& window, float dt);

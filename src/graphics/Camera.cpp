@@ -21,6 +21,7 @@ void Camera::update(Shader &shader)
     shader.use();
     shader.uniform("view", m_view);
     shader.uniform("projection", m_projection);
+    shader.uniform("viewPos", m_position);
 }
 
 void Camera::processInput(const Window &window, float dt)
@@ -42,6 +43,9 @@ void Camera::processKeyboardInput(const Window &window, float dt)
         m_position += speed * right;
     if(window.isKeyPressed('A'))
         m_position -= speed * right;
+    if(window.isKeyPressed(GLFW_KEY_SPACE))
+        m_position += speed * m_up;
+
 }
 
 void Camera::processCursorInput(const Window &window, float dt)

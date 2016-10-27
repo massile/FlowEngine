@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <glm/detail/type_mat.hpp>
+#include <glm/glm.hpp>
 
 class Shader
 {
@@ -17,6 +18,7 @@ public:
 
     void uniform(const std::string& name, int value);
     void uniform(const std::string& name, const glm::mat4& value);
+    void uniform(const std::string& name, const glm::vec3& value);
 
     inline void use() const { glUseProgram(m_id); }
     inline GLuint getId() const { return m_id; }
