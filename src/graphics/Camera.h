@@ -17,6 +17,7 @@ private:
     vec3 m_position = vec3(0.0f, 0.0f, -1.0f);
     vec3 m_front = vec3(0.0f, 0.0f, 1.0f);
     vec3 m_up = vec3(0.0f, 1.0f, 0.0f);
+    vec3 m_translate = vec3(0.0f, 0.0f, 0.0f);
 
     GLfloat m_yaw = 90.0f;
     GLfloat m_pitch = 0.0f;
