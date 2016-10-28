@@ -25,14 +25,14 @@ This project uses [GLFW 3](http://www.glfw.org/index.html), [GLEW](http://glew.s
   - [ ] Shadow mapping
   - [x] Normal mapping
 
-![](http://image.noelshack.com/fichiers/2016/43/1477570575-capture-du-2016-10-27-14-15-50.png)
+![](documentation/main.gif)
 
 #### Rough material
  
- ![](http://i.giphy.com/3o7TKPeFE27xeKs57W.gif)
+ ![](documentation/rough.gif)
  
 #### Shiny material
  
- ![](http://i.giphy.com/3o7TKOyWwHPgEAB7q0.gif)
+ ![](documentation/shiny.gif)
 
 Sorry for the laggy gifs..
