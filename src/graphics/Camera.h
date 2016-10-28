@@ -4,7 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <GL/glew.h>
 #include "Shader.h"
-#include "../ui/Window.h"
+#include "../services/ui/Window.h"
 
 using namespace glm;
 
@@ -28,11 +28,11 @@ public:
     ~Camera();
 
     void update(Shader& shader);
-    void processInput(const Window& window, float dt);
+    void processInput(IWindow* window, float dt);
 
     inline glm::vec3 getPosition() const { return m_position; }
 
 private:
-    void processKeyboardInput(const Window &window, float dt);
-    void processCursorInput(const Window& window, float dt);
+    void processKeyboardInput(IWindow* window, float dt);
+    void processCursorInput(IWindow* window, float dt);
 };

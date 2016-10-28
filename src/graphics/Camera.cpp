@@ -26,33 +26,33 @@ void Camera::update(Shader &shader)
     shader.uniform("viewPos", m_position);
 }
 
-void Camera::processInput(const Window &window, float dt)
+void Camera::processInput(IWindow* window, float dt)
 {
     processKeyboardInput(window, dt);
     processCursorInput(window, dt);
 }
 
-void Camera::processKeyboardInput(const Window &window, float dt)
+void Camera::processKeyboardInput(IWindow* window, float dt)
 {
     GLfloat speed = 8.0f * dt;
     vec3 right = normalize(cross(m_front, m_up));
 
-    if(window.isKeyPressed('W'))
+    if(window->isKeyPressed('W'))
         m_translate = speed * m_front;
-    if(window.isKeyPressed('S'))
+    if(window->isKeyPressed('S'))
         m_translate = -speed * m_front;
-    if(window.isKeyPressed('D'))
+    if(window->isKeyPressed('D'))
         m_translate = speed * right;
-    if(window.isKeyPressed('A'))
+    if(window->isKeyPressed('A'))
         m_translate = -speed * right;
-    if(window.isKeyPressed(GLFW_KEY_SPACE))
+    if(window->isKeyPressed(GLFW_KEY_SPACE))
         m_translate = speed * m_up;
 
 }
 
-void Camera::processCursorInput(const Window &window, float dt)
+void Camera::processCursorInput(IWindow* window, float dt)
 {
-    vec2 offset = m_sensitivity * window.getCursorPositionOffset();
+    vec2 offset = m_sensitivity * window->getCursorPositionOffset();
 
     m_yaw   += dt * offset.x;
     m_pitch += dt * offset.y;

@@ -92,4 +92,12 @@ void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
     win->m_mouse_buttons[button] = action != GLFW_RELEASE;
 }
 
+glm::vec2 Window::getCursorPositionOffset() const
+{
+    return glm::vec2(
+            m_cursor_position.x - m_previous_cursor_position.x,
+            m_previous_cursor_position.y - m_cursor_position.y
+    );
+}
+
 

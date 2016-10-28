@@ -4,11 +4,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/vec2.hpp>
+#include "IWindow.h"
 
-#define MAX_KEYS 500
-#define MAX_BUTTONS 8
-
-class Window
+class Window : public IWindow
 {
 private:
     std::string m_title;
@@ -23,24 +21,19 @@ private:
 
 public:
     Window(const std::string& title, int width, int height);
-    ~Window();
+    virtual ~Window();
 
-    inline bool shouldClose() const { return glfwWindowShouldClose(m_window) == 1; }
-    inline int getWidth() const { return m_width; }
-    inline int getHeight() const { return m_height; }
+    bool shouldClose() const override { return glfwWindowShouldClose(m_window) == 1; }
+    int getWidth() const override { return m_width; }
+    int getHeight() const override { return m_height; }
 
-    void clear() const;
-    void update();
+    void clear() const override;
+    void update() override;
 
-    inline bool isKeyPressed(int key) const { return m_keys[key]; }
-    inline bool isMouseButtonPressed(int button) const { return m_mouse_buttons[button]; }
-    inline glm::vec2 getCursorPosition() const { return m_cursor_position; }
-    inline glm::vec2 getCursorPositionOffset() const {
-        return glm::vec2(
-            m_cursor_position.x - m_previous_cursor_position.x,
-            m_previous_cursor_position.y - m_cursor_position.y
-        );
-    }
+    bool isKeyPressed(int key) const override { return m_keys[key]; }
+    bool isMouseButtonPressed(int button) const override { return m_mouse_buttons[button]; }
+    glm::vec2 getCursorPosition() const override { return m_cursor_position; }
+    glm::vec2 getCursorPositionOffset() const override;
 
     friend void key_callback(GLFWwindow* window, int key, int scanCode, int action, int mods);
     friend void cursor_position_callback(GLFWwindow* window, double x, double y);

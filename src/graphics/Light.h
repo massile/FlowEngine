@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 #include "Shader.h"
-#include "../ui/Window.h"
+#include "../services/ui/Window.h"
 
 class Light
 {
@@ -12,7 +12,7 @@ private:
 public:
     Light(const glm::vec3& position);
     void update(Shader& shader);
-    void processInput(const Window& window, float dt);
+    void processInput(IWindow* window, float dt);
 
     inline glm::vec3 getPosition() const { return m_position; }
 };

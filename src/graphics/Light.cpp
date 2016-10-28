@@ -12,21 +12,21 @@ void Light::update(Shader &shader)
     shader.uniform("lightPos", m_position);
 }
 
-void Light::processInput(const Window &window, float dt)
+void Light::processInput(IWindow* window, float dt)
 {
     using namespace glm;
 
     GLfloat speed = 50.0f * dt;
-    if(window.isKeyPressed('I'))
+    if(window->isKeyPressed('I'))
         m_position += speed * vec3(0, 1, 0);
-    if(window.isKeyPressed('K'))
+    if(window->isKeyPressed('K'))
         m_position -= speed * vec3(0, 1, 0);
-    if(window.isKeyPressed('L'))
+    if(window->isKeyPressed('L'))
         m_position -= speed * vec3(1, 0, 0);
-    if(window.isKeyPressed('J'))
+    if(window->isKeyPressed('J'))
         m_position += speed * vec3(1, 0, 0);
-    if(window.isKeyPressed('O'))
+    if(window->isKeyPressed('O'))
         m_position += speed * vec3(0, 0, 1);
-    if(window.isKeyPressed('U'))
+    if(window->isKeyPressed('U'))
         m_position -= speed * vec3(0, 0, 1);
 }
