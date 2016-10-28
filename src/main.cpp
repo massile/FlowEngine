@@ -10,15 +10,15 @@
 
 int main()
 {
-    Window window("OpenGL", 800, 800);
+    Window window("OpenGL", 1000, 1000);
 
     Shader shader = Shader(ROOT_DIR + "/resources/shaders/basic.vert", ROOT_DIR + "/resources/shaders/basic.frag");
     Mesh mesh = ObjParser(ROOT_DIR + "/resources/meshes/sphere.obj").parse();
-    mesh.setDiffuseTexture(new Texture("diffuseMap", ROOT_DIR + "/resources/textures/rock-diffuse.jpg", Texture::DIFFUSE));
-    mesh.setSpecularTexture(new Texture("specularMap", ROOT_DIR + "/resources/textures/rock-specstrength.jpg", Texture::SPECULAR_MAP));
-    mesh.setNormalTexture(new Texture("normalMap", ROOT_DIR + "/resources/textures/rock-normal.jpg", Texture::NORMAL_MAP));
+    mesh.setDiffuseTexture(new Texture("diffuseMap", ROOT_DIR + "/resources/textures/rocks-diffuse.jpg", Texture::DIFFUSE));
+    mesh.setSpecularTexture(new Texture("specularMap", ROOT_DIR + "/resources/textures/rocks-spec.jpg", Texture::SPECULAR_MAP));
+    mesh.setNormalTexture(new Texture("normalMap", ROOT_DIR + "/resources/textures/rocks-normal.jpg", Texture::NORMAL_MAP));
 
-    Camera camera(glm::vec3(0, 0, -5), window.getWidth()/window.getHeight());
+    Camera camera(glm::vec3(0.8, 1.2, -2), window.getWidth()/window.getHeight());
     Light light(glm::vec3(0, 0, 0));
 
     float lastTime = 0;
