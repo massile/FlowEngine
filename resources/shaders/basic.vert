@@ -24,14 +24,15 @@ void main()
 {
     vertex.uv = vec2(uv.x, 1.0 - uv.y);
 
-    vec3 T = normalize(tangent);
-    vec3 B = normalize(bitangent);
-    vec3 N = normalize(normal);
+    mat3 mat = transpose(inverse(mat3(model)));
+    vec3 T = normalize(mat * tangent);
+    vec3 B = normalize(mat * bitangent);
+    vec3 N = normalize(mat * normal);
 
     mat3 TBN = transpose(mat3(T, B, N));
     vertex.tangentLightPos = TBN * lightPos;
     vertex.tangentViewPos  = TBN * viewPos;
-    vertex.tangentFragPos  = TBN * position;
+    vertex.tangentFragPos  = TBN * vec3(model * vec4(position, 1.0));
 
 	gl_Position = projection * view * model * vec4(position, 1.0);
 }

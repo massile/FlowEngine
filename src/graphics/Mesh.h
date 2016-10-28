@@ -24,7 +24,9 @@ private:
     GLuint m_vbo;
     GLuint m_ebo;
 
-    glm::mat4 m_modelMatrix = glm::mat4x4();
+    glm::vec3 m_position = glm::vec3(0, 0, 0);
+    glm::vec3 m_rotation = glm::vec3(0, 0, 0);
+
     Texture* m_diffuseMap = nullptr;
     Texture* m_specularMap = nullptr;
     Texture* m_normalMap = nullptr;
@@ -35,6 +37,8 @@ public:
     ~Mesh();
 
     void draw(Shader& shader);
+    void translate(glm::vec3 offset);
+    void rotate(glm::vec3 offset);
 
     inline void setDiffuseTexture(Texture *texture)
     {

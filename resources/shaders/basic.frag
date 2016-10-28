@@ -15,7 +15,7 @@ uniform sampler2D specularMap;
 
 float computeSpecular(float NdotL, vec3 lightDirection, vec3 normal)
 {
-    float roughnessStrength = 0.6;
+    float roughnessStrength = 0.35;
     float F0 = 0.8;
 
     vec3 viewDirection = normalize(vertex.tangentViewPos - vertex.tangentFragPos);
@@ -42,7 +42,7 @@ float computeSpecular(float NdotL, vec3 lightDirection, vec3 normal)
 
 void main()
 {
-    float k = 0.1;
+    float k = 0.4;
     vec3 lightColor = vec3(1.0, 1.0, 0.95);
     vec3 lightDirection = normalize(vertex.tangentLightPos - vertex.tangentFragPos);
     vec3 normalM = texture(normalMap, vertex.uv).rgb;

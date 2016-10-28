@@ -29,6 +29,22 @@ int main()
         if(lastTime) {
             float dt = glfwGetTime() - lastTime;
 
+            if(window.isKeyPressed(GLFW_KEY_KP_8)) {
+                mesh.rotate(dt * glm::vec3(0, 0.4f, 0));
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_KP_5)) {
+                mesh.translate(dt * glm::vec3(0, -1.0f, 0));
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_KP_4)) {
+                mesh.translate(dt * glm::vec3(1.0f, 0, 0));
+            }
+
+            if(window.isKeyPressed(GLFW_KEY_KP_6)) {
+                mesh.translate(dt * glm::vec3(-1.0f, 0, 0));
+            }
+
             camera.processInput(window, dt);
             light.processInput(window, dt);
             camera.update(shader);
