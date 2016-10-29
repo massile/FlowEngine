@@ -12,6 +12,9 @@
 #include "graphics/Light.h"
 
 #include "parse/ObjParser.h"
+#include "components/input/CameraInputComponent.h"
+#include "components/physics/CameraPhysicsComponent.h"
+#include "components/shader/CameraShaderComponent.h"
 
 #define ROOT_DIR std::string("/home/tessellator/ClionProjects/FlowEngine")
 
@@ -32,7 +35,11 @@ int main()
     mesh.setSpecularTexture(new Texture("specularMap", ROOT_DIR + "/resources/textures/rocks-spec.jpg", Texture::SPECULAR_MAP));
     mesh.setNormalTexture(new Texture("normalMap", ROOT_DIR + "/resources/textures/rocks-normal.jpg", Texture::NORMAL_MAP));
 
-    Camera camera(glm::vec3(0.8, 1.2, -2));
+    Camera camera(
+        new CameraInputComponent(),
+        new CameraPhysicsComponent(),
+        new CameraShaderComponent()
+    );
     Light light(glm::vec3(0, 0, 0));
 
     float lastTime = 0;
@@ -42,23 +49,6 @@ int main()
 
         if(lastTime) {
             float dt = glfwGetTime() - lastTime;
-
-            if(keyboard->isKeyPressed(GLFW_KEY_KP_8)) {
-                mesh.rotate(dt * glm::vec3(0, 0.4f, 0));
-            }
-
-            if(keyboard->isKeyPressed(GLFW_KEY_KP_5)) {
-                mesh.translate(dt * glm::vec3(0, -1.0f, 0));
-            }
-
-            if(keyboard->isKeyPressed(GLFW_KEY_KP_4)) {
-                mesh.translate(dt * glm::vec3(1.0f, 0, 0));
-            }
-
-            if(keyboard->isKeyPressed(GLFW_KEY_KP_6)) {
-                mesh.translate(dt * glm::vec3(-1.0f, 0, 0));
-            }
-
             light.processInput(dt);
             camera.update(shader, dt);
             light.update(shader);

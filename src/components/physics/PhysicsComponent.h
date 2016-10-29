@@ -1,8 +1,8 @@
 #pragma once
 
-class Camera;
+class Object;
 class PhysicsComponent
 {
 public:
-    void update(Camera& camera);
+    virtual void update(Object* object) = 0;
 };

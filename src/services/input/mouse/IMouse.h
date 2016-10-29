@@ -3,6 +3,7 @@
 #include <glm/vec2.hpp>
 
 #define MAX_BUTTONS 8
+#define SENSITIVITY 5.0f
 
 class IMouse
 {
