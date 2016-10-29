@@ -32,7 +32,7 @@ int main()
     mesh.setSpecularTexture(new Texture("specularMap", ROOT_DIR + "/resources/textures/rocks-spec.jpg", Texture::SPECULAR_MAP));
     mesh.setNormalTexture(new Texture("normalMap", ROOT_DIR + "/resources/textures/rocks-normal.jpg", Texture::NORMAL_MAP));
 
-    Camera camera(glm::vec3(0.8, 1.2, -2), window->getWidth()/window->getHeight());
+    Camera camera(glm::vec3(0.8, 1.2, -2));
     Light light(glm::vec3(0, 0, 0));
 
     float lastTime = 0;
@@ -59,13 +59,13 @@ int main()
                 mesh.translate(dt * glm::vec3(-1.0f, 0, 0));
             }
 
-            camera.processInput(dt);
             light.processInput(dt);
-            camera.update(shader);
+            camera.update(shader, dt);
             light.update(shader);
             window->update();
         }
 
+        Input::getMouse()->update();
         lastTime = glfwGetTime();
     }
 

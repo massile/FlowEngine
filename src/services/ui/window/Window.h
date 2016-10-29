@@ -21,6 +21,7 @@ public:
     bool shouldClose() const override { return glfwWindowShouldClose(m_window) == 1; }
     int getWidth() const override { return m_width; }
     int getHeight() const override { return m_height; }
+    float getAspectRatio() const override { return (float)getWidth()/getHeight(); }
 
     void clear() const override;
     void update() override;

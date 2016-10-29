@@ -13,6 +13,7 @@ public:
     virtual bool shouldClose() const = 0;
     virtual int getWidth() const = 0;
     virtual int getHeight() const = 0;
+    virtual float getAspectRatio() const = 0;
 
     virtual void clear() const = 0;
     virtual void update() = 0;

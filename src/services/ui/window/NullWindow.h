@@ -14,6 +14,7 @@ public:
     bool shouldClose() const override { return false; }
     int getWidth() const override { return 0; }
     int getHeight() const override { return 0; }
+    float getAspectRatio() const override { return 1; }
 
     void clear() const override {}
     void update() override {}
