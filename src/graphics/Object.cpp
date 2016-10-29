@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Object.h"
 
 Object::Object(InputComponent *inputComponent, PhysicsComponent *physicsComponent, ShaderComponent *shaderComponent)
@@ -15,8 +16,13 @@ void Object::update(Shader &shader, float dt)
 
 void Object::setVelocity(const glm::vec3 &velocity)
 {
-    glm::vec3 right = normalize(cross(m_front, m_up));
-    m_velocity = velocity.x * right + velocity.y * m_up + velocity.z * m_front;
+    m_velocity = velocity;
+}
+
+void Object::setVelocityLocal(const glm::vec3 &velocity)
+{
+    glm::vec3 right = normalize(cross(m_up, m_front));
+    m_velocity = velocity.z * m_front + velocity.y * m_up + velocity.x * right;
 }
 
 void Object::setYaw(const GLfloat yaw) { m_yaw = yaw; }

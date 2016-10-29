@@ -8,19 +8,19 @@ void CameraInputComponent::update(Object* object, float dt)
     using namespace glm;
     Camera* camera = static_cast<Camera*>(object);
 
-    GLfloat speed = 8.0f * dt;
+    GLfloat speed = 5.0f * dt;
 
     IKeyboard* keyboard = Input::getKeyboard();
     if(keyboard->isKeyPressed('W'))
-        camera->setVelocity(vec3(0, 0, speed));
+        camera->setVelocityLocal(vec3(0, 0, speed));
     if(keyboard->isKeyPressed('S'))
-        camera->setVelocity(vec3(0, 0, -speed));
+        camera->setVelocityLocal(vec3(0, 0, -speed));
     if(keyboard->isKeyPressed('A'))
-        camera->setVelocity(vec3(speed, 0, 0));
+        camera->setVelocityLocal(vec3(speed, 0, 0));
     if(keyboard->isKeyPressed('D'))
-        camera->setVelocity(vec3(-speed, 0, 0));
+        camera->setVelocityLocal(vec3(-speed, 0, 0));
     if(keyboard->isKeyPressed(GLFW_KEY_SPACE))
-        camera->setVelocity(vec3(0, speed, 0));
+        camera->setVelocityLocal(vec3(0, speed, 0));
 
     camera->translate(camera->getVelocity());
 

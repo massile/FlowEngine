@@ -37,7 +37,8 @@ public:
     void setFront(const glm::vec3& front);
     void setPitch(const GLfloat pitch);
     void setYaw(const GLfloat yaw);
-    void setVelocity(const glm::vec3& velocity);
+    void setVelocityLocal(const glm::vec3 &velocity);
+    void setVelocity(const glm::vec3 &velocity);
 
     void update(Shader& shader, float dt);
 };

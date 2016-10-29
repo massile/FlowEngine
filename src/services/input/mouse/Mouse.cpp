@@ -1,7 +1,10 @@
 #include "Mouse.h"
 #include "../Input.h"
+#include "../../ui/Ui.h"
 
 Mouse::Mouse()
+    : m_cursor_position(Ui::getWindow()->getWidth()/2, Ui::getWindow()->getHeight()/2),
+      m_previous_cursor_position(m_cursor_position)
 {
 
 }

@@ -21,10 +21,10 @@
 int main()
 {
     IWindow* win = new Window("OpenGL", 1000, 1000);
+    Ui::provide(win);
+
     IKeyboard* keyboard = new Keyboard();
     IMouse* mouse = new Mouse();
-
-    Ui::provide(win);
     Input::provide(keyboard, mouse);
 
     IWindow* window = Ui::getWindow();
