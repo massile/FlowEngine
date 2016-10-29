@@ -13,8 +13,10 @@
 
 #include "parse/ObjParser.h"
 #include "components/input/CameraInputComponent.h"
+#include "components/input/LightInputComponent.h"
 #include "components/physics/CameraPhysicsComponent.h"
 #include "components/shader/CameraShaderComponent.h"
+#include "components/shader/LightShaderComponent.h"
 
 #define ROOT_DIR std::string("/home/tessellator/ClionProjects/FlowEngine")
 
@@ -40,7 +42,11 @@ int main()
         new CameraPhysicsComponent(),
         new CameraShaderComponent()
     );
-    Light light(glm::vec3(0, 0, 0));
+    Light light(
+        new LightInputComponent(),
+        nullptr,
+        new LightShaderComponent()
+    );
 
     float lastTime = 0;
     while(!window->shouldClose()) {
@@ -49,9 +55,8 @@ int main()
 
         if(lastTime) {
             float dt = glfwGetTime() - lastTime;
-            light.processInput(dt);
             camera.update(shader, dt);
-            light.update(shader);
+            light.update(shader, dt);
             window->update();
         }
 
