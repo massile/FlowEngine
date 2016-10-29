@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include <GL/glew.h>
+#include <vector>
 #include <glm/glm.hpp>
 #include "Shader.h"
 #include "Texture.h"

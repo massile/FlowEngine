@@ -1,11 +1,10 @@
-#include <GL/glew.h>
 #include "Window.h"
+#include "../../input/mouse/Mouse.h"
+#include "../../input/keyboard/Keyboard.h"
 #include <iostream>
 
 Window::Window(const std::string &title, int width, int height)
-        : m_height(height), m_width(width), m_title(title),
-          m_cursor_position(width/2, height/2),
-          m_previous_cursor_position(m_cursor_position)
+        : m_height(height), m_width(width), m_title(title)
 {
     if(!glfwInit()) {
         std::cout << "Can't initialize GLFW" << std::endl;
@@ -52,7 +51,6 @@ bool Window::initWindowPointer()
         return false;
     }
     glfwMakeContextCurrent(m_window);
-    glfwSetWindowUserPointer(m_window, this);
 
     return true;
 }
@@ -66,38 +64,9 @@ void Window::clear() const
 void Window::update()
 {
     glfwSwapBuffers(m_window);
-    m_previous_cursor_position = m_cursor_position;
 }
 
 void error_callback(int error, const char *description)
 {
     std::cout << "Error#" << error << ": " << description << std::endl;
 }
-
-void key_callback(GLFWwindow *window, int key, int scanCode, int action, int mods)
-{
-    Window* win = (Window*) glfwGetWindowUserPointer(window);
-    win->m_keys[key] = action != GLFW_RELEASE;
-}
-
-void cursor_position_callback(GLFWwindow *window, double x, double y)
-{
-    Window* win = (Window*) glfwGetWindowUserPointer(window);
-    win->m_cursor_position = glm::vec2(x, y);
-}
-
-void mouse_button_callback(GLFWwindow *window, int button, int action, int mods)
-{
-    Window* win = (Window*) glfwGetWindowUserPointer(window);
-    win->m_mouse_buttons[button] = action != GLFW_RELEASE;
-}
-
-glm::vec2 Window::getCursorPositionOffset() const
-{
-    return glm::vec2(
-            m_cursor_position.x - m_previous_cursor_position.x,
-            m_previous_cursor_position.y - m_cursor_position.y
-    );
-}
-
-

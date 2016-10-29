@@ -1,7 +1,7 @@
 #pragma once
 
-#include <string>
 #include <GL/glew.h>
+#include <string>
 #include <GLFW/glfw3.h>
 #include <glm/vec2.hpp>
 #include "IWindow.h"
@@ -17,9 +17,4 @@ public:
 
     void clear() const override {}
     void update() override {}
-
-    bool isKeyPressed(int key) const override { return false; }
-    bool isMouseButtonPressed(int button) const override { return false; }
-    glm::vec2 getCursorPosition() const override { return glm::vec2(); }
-    glm::vec2 getCursorPositionOffset() const override { return glm::vec2(); }
 };

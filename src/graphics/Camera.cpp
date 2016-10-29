@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Camera.h"
+#include "../services/input/Input.h"
 
 Camera::Camera(const vec3 &position, GLfloat windowRatio)
         : m_position(position),
@@ -26,33 +27,34 @@ void Camera::update(Shader &shader)
     shader.uniform("viewPos", m_position);
 }
 
-void Camera::processInput(IWindow* window, float dt)
+void Camera::processInput(float dt)
 {
-    processKeyboardInput(window, dt);
-    processCursorInput(window, dt);
+    processKeyboardInput(dt);
+    processCursorInput(dt);
 }
 
-void Camera::processKeyboardInput(IWindow* window, float dt)
+void Camera::processKeyboardInput(float dt)
 {
     GLfloat speed = 8.0f * dt;
     vec3 right = normalize(cross(m_front, m_up));
 
-    if(window->isKeyPressed('W'))
+    IKeyboard* keyboard = Input::getKeyboard();
+    if(keyboard->isKeyPressed('W'))
         m_translate = speed * m_front;
-    if(window->isKeyPressed('S'))
+    if(keyboard->isKeyPressed('S'))
         m_translate = -speed * m_front;
-    if(window->isKeyPressed('D'))
+    if(keyboard->isKeyPressed('D'))
         m_translate = speed * right;
-    if(window->isKeyPressed('A'))
+    if(keyboard->isKeyPressed('A'))
         m_translate = -speed * right;
-    if(window->isKeyPressed(GLFW_KEY_SPACE))
+    if(keyboard->isKeyPressed(GLFW_KEY_SPACE))
         m_translate = speed * m_up;
 
 }
 
-void Camera::processCursorInput(IWindow* window, float dt)
+void Camera::processCursorInput(float dt)
 {
-    vec2 offset = m_sensitivity * window->getCursorPositionOffset();
+    vec2 offset = m_sensitivity * Input::getMouse()->getCursorPositionOffset();
 
     m_yaw   += dt * offset.x;
     m_pitch += dt * offset.y;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "IWindow.h"
-#include "NullWindow.h"
+#include "window/IWindow.h"
+#include "window/NullWindow.h"
 
 class Ui
 {

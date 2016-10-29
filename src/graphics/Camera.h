@@ -1,10 +1,10 @@
 #pragma once
 
+#include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <GL/glew.h>
 #include "Shader.h"
-#include "../services/ui/Window.h"
+#include "../services/ui/window/Window.h"
 
 using namespace glm;
 
@@ -28,11 +28,11 @@ public:
     ~Camera();
 
     void update(Shader& shader);
-    void processInput(IWindow* window, float dt);
+    void processInput(float dt);
 
     inline glm::vec3 getPosition() const { return m_position; }
 
 private:
-    void processKeyboardInput(IWindow* window, float dt);
-    void processCursorInput(IWindow* window, float dt);
+    void processKeyboardInput(float dt);
+    void processCursorInput(float dt);
 };
