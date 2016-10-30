@@ -33,9 +33,9 @@ int main()
 
     Shader shader = Shader(ROOT_DIR + "/resources/shaders/basic.vert", ROOT_DIR + "/resources/shaders/basic.frag");
     Mesh mesh = ObjParser(ROOT_DIR + "/resources/meshes/sphere.obj").parse();
-    mesh.setDiffuseTexture(new Texture("diffuseMap", ROOT_DIR + "/resources/textures/rocks-diffuse.jpg", Texture::DIFFUSE));
-    mesh.setSpecularTexture(new Texture("specularMap", ROOT_DIR + "/resources/textures/rocks-spec.jpg", Texture::SPECULAR_MAP));
-    mesh.setNormalTexture(new Texture("normalMap", ROOT_DIR + "/resources/textures/rocks-normal.jpg", Texture::NORMAL_MAP));
+    Texture diffuseMap = Texture("diffuseMap", ROOT_DIR + "/resources/textures/rocks-diffuse.jpg", Texture::DIFFUSE);
+    Texture specularMap = Texture("specularMap", ROOT_DIR + "/resources/textures/rocks-spec.jpg", Texture::SPECULAR_MAP);
+    Texture normalMap = Texture("normalMap", ROOT_DIR + "/resources/textures/rocks-normal.jpg", Texture::NORMAL_MAP);
 
     Camera camera(
         new CameraInputComponent(),
@@ -51,7 +51,11 @@ int main()
     float lastTime = 0;
     while(!window->shouldClose()) {
         window->clear();
-        mesh.draw(shader);
+
+        diffuseMap.use(shader);
+        specularMap.use(shader);
+        normalMap.use(shader);
+        mesh.draw();
 
         if(lastTime) {
             float dt = glfwGetTime() - lastTime;

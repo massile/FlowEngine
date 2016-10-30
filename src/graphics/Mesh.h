@@ -15,51 +15,22 @@ struct Vertex
     glm::vec3 bitangent;
 };
 
+typedef GLuint Index;
+typedef std::vector<Vertex> Vertices;
+typedef std::vector<Index> Indices;
+
 class Mesh
 {
 private:
-    std::vector<Vertex> m_vertices;
-    std::vector<GLuint> m_indices;
+    Vertices m_vertices;
+    Indices m_indices;
     GLuint m_vertexArrayObjectId;
     GLuint m_vbo;
     GLuint m_ebo;
 
-    glm::vec3 m_position = glm::vec3(0, 0, 0);
-    glm::vec3 m_rotation = glm::vec3(0, 0, 0);
-
-    Texture* m_diffuseMap = nullptr;
-    Texture* m_specularMap = nullptr;
-    Texture* m_normalMap = nullptr;
-
 public:
-    Mesh(const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices);
-    Mesh(Texture* diffuse, const std::vector<Vertex>& vertices, const std::vector<GLuint>& indices);
+    Mesh(const Vertices& vertices, const Indices& indices);
     ~Mesh();
 
-    void draw(Shader& shader);
-    void translate(glm::vec3 offset);
-    void rotate(glm::vec3 offset);
-
-    inline void setDiffuseTexture(Texture *texture)
-    {
-        if(texture->getType() != Texture::DIFFUSE)
-            throw "Wrong type of texture, should be a diffuse map";
-        m_diffuseMap = texture;
-    }
-    inline void setSpecularTexture(Texture *texture)
-    {
-        if(texture->getType() != Texture::SPECULAR_MAP)
-            throw "Wrong type of texture, should be a specular map";
-        m_specularMap = texture;
-    }
-    inline void setNormalTexture(Texture *texture)
-    {
-        if(texture->getType() != Texture::NORMAL_MAP)
-            throw "Wrong type of texture, should be a normal map";
-        m_normalMap = texture;
-    }
-
-    inline Texture* getDiffuseTexture() const { return m_diffuseMap; }
-    inline Texture* getSpecularTexture() const { return m_specularMap; }
-    inline Texture* getNormalTexture() const { return m_normalMap; }
+    void draw();
 };

@@ -13,7 +13,7 @@ out Vertex {
     vec3 tangentLightPos;
 } vertex;
 
-uniform mat4 model;
+uniform mat4 model = mat4(1.0);
 uniform mat4 view;
 uniform mat4 projection;
 
