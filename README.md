@@ -28,10 +28,12 @@ OS targeted : Windows / Linux
 
 ## Expectations for this release
  
-  - [x] Separate input handler and Window management
-  - [x] Use Window, Input as services (Service-Locator pattern)
-  - [x] Use a component based system (Component pattern)
-  - [ ] Batch renderable objects (FlyWeight pattern)
+### Lights !
+
+ - [ ] Gamma correction
+ - [ ] Shadow mapping
+ - [ ] Different kinds of lights (point light, spot light, directional light)
+ - [ ] Multiple lights in one shader
   
 
 <img src="documentation/main.gif" width="500"/>
