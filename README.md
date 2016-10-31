@@ -30,7 +30,7 @@ OS targeted : Windows / Linux
  
 ### Lights !
 
- - [ ] Gamma correction
+ - [x] Gamma correction
  - [ ] Shadow mapping
  - [ ] Different kinds of lights (point light, spot light, directional light)
  - [ ] Multiple lights in one shader

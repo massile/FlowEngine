@@ -15,7 +15,7 @@ uniform sampler2D specularMap;
 
 float computeSpecular(float NdotL, vec3 lightDirection, vec3 normal)
 {
-    float roughnessStrength = 0.1;
+    float roughnessStrength = 0.2;
     float F0 = 0.8;
 
     vec3 viewDirection = normalize(vertex.tangentViewPos - vertex.tangentFragPos);
@@ -42,7 +42,7 @@ float computeSpecular(float NdotL, vec3 lightDirection, vec3 normal)
 
 void main()
 {
-    float k = 0.1;
+    float k = 0.4;
     vec3 lightColor = vec3(1.0, 1.0, 0.95);
     vec3 lightDirection = normalize(vertex.tangentLightPos - vertex.tangentFragPos);
     vec3 normalM = texture(normalMap, vertex.uv).rgb;
@@ -59,5 +59,10 @@ void main()
     vec3 spec = texture(specularMap, vertex.uv).xyz * lightColor * NdotL * (k + specular * (1.0 - k));
     vec3 diffuse = NdotL * texture(diffuseMap, vertex.uv).xyz  * vec3(1.0f, 1.0, 1.0);
 
-    gl_FragColor = vec4(spec + diffuse, 1.0);
+    float distance = length(vertex.tangentLightPos - vertex.tangentFragPos);
+    float attenuation = 1.0/(distance * distance);
+
+    vec3 color = attenuation*(spec + diffuse);
+    color = pow(color, vec3(1.0/2.2));
+    gl_FragColor = vec4(color, 1.0);
 }

@@ -8,7 +8,7 @@ void LightInputComponent::update(Object* object, float dt)
     using namespace glm;
     Light* light = static_cast<Light*>(object);
 
-    GLfloat speed = 50.0f * dt;
+    GLfloat speed = 30.0f * dt;
 
     IKeyboard* keyboard = Input::getKeyboard();
     if(keyboard->isKeyPressed('I'))
