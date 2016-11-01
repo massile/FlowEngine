@@ -8,7 +8,7 @@ void CameraInputComponent::update(Object* object, float dt)
     using namespace glm;
     Camera* camera = static_cast<Camera*>(object);
 
-    GLfloat speed = 5.0f * dt;
+    GLfloat speed = 1.0f * dt;
 
     IKeyboard* keyboard = Input::getKeyboard();
     if(keyboard->isKeyPressed('W'))
