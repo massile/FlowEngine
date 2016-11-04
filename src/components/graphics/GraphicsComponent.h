@@ -7,5 +7,5 @@ class Object;
 class GraphicsComponent
 {
 public:
-    virtual void update(Object* object, World* world, Graphics* graphics) = 0;
+    virtual void update(Object* object, IWorld* world, Graphics* graphics) = 0;
 };

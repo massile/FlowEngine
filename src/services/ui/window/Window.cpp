@@ -23,7 +23,7 @@ Window::Window(const std::string &title, int width, int height)
     glewInit();
     glewExperimental = true;
 
-    glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    //glfwSetInputMode(m_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetCursorPos(m_window, width/2, height/2);
     glEnable(GL_DEPTH_TEST);
 

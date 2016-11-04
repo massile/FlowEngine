@@ -1,13 +1,6 @@
 #include <iostream>
 
-#include "services/ui/Ui.h"
-#include "services/ui/window/Window.h"
-#include "services/input/keyboard/Keyboard.h"
-#include "services/input/mouse/Mouse.h"
-#include "services/input/Input.h"
-
 #include "graphics/Shader.h"
-#include "graphics/Mesh.h"
 #include "graphics/Camera.h"
 #include "graphics/Light.h"
 
@@ -18,34 +11,27 @@
 #include "components/shader/LightShaderComponent.h"
 #include "services/environment/Environment.h"
 #include "components/graphics/MeshGraphicsComponent.h"
-
-#define ROOT_DIR std::string("/home/tessellator/ClionProjects/FlowEngine")
+#include "providers/AppProvider.h"
 
 int main()
 {
-    IWindow* win = new Window("OpenGL", 1000, 1000);
-    Ui::provide(win);
+    AppProvider provider = AppProvider();
+    provider.record();
 
-    IKeyboard* keyboard = new Keyboard();
-    IMouse* mouse = new Mouse();
-    Input::provide(keyboard, mouse);
+    Shader* shader = Environment::getWorld()->getShader("shader");
 
-    Graphics* graphics = new Graphics();
-    World* world = new World();
-    Environment::provide(world, graphics);
-
-    IWindow* window = Ui::getWindow();
-
-    Camera camera(
+    Camera* cam = new Camera(
         new CameraInputComponent(),
         new CameraPhysicsComponent(),
         new CameraShaderComponent()
     );
+
     Light light(
         new LightInputComponent(),
         nullptr,
         new LightShaderComponent()
     );
+
     Object rock(
         nullptr,
         nullptr,
@@ -53,23 +39,11 @@ int main()
         new MeshGraphicsComponent()
     );
 
-    Shader* shader = Environment::getWorld()->getMeshShader();
-    float lastTime = 0;
-    while(!window->shouldClose()) {
-        window->clear();
+    provider.registerCamera(cam);
+    provider.registerLight(light);
+    provider.registerPerFrame(rock);
 
-        rock.update(*shader, 0);
-
-        if(lastTime) {
-            float dt = glfwGetTime() - lastTime;
-            camera.update(*shader, dt);
-            light.update(*shader, dt);
-            window->update();
-        }
-
-        Input::getMouse()->update();
-        lastTime = glfwGetTime();
-    }
+    provider.run(*shader);
 
  	return 0;
 }

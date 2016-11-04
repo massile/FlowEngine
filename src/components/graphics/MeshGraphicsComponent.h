@@ -7,5 +7,5 @@ class MeshGraphicsComponent : public GraphicsComponent
 {
 public:
     MeshGraphicsComponent() {}
-    virtual void update(Object *object, World* world, Graphics* graphics) override;
+    virtual void update(Object *object, IWorld* world, Graphics* graphics) override;
 };

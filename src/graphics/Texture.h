@@ -28,3 +28,18 @@ public:
 
     inline Type getType() const { return m_type; }
 };
+
+struct TextureMap {
+    Texture* diffuse;
+    Texture* specular;
+    Texture* normal;
+
+    TextureMap(Texture* diff, Texture* spec, Texture* norm)
+            : diffuse(diff), specular(spec), normal(norm) {}
+
+    void use(Shader& shader) {
+        diffuse->use(shader);
+        specular->use(shader);
+        normal->use(shader);
+    }
+};
