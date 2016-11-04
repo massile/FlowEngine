@@ -16,7 +16,7 @@ void Object::update(Shader &shader, float dt)
     if(m_physics) m_physics->update(this);
     if(m_input) m_input->update(this, dt);
     if(m_shader) m_shader->update(this, &shader);
-    if(m_graphics) m_graphics->update(this, Environment::getGraphics());
+    if(m_graphics) m_graphics->update(this, Environment::getWorld(), Environment::getGraphics());
 }
 
 void Object::setVelocity(const glm::vec3 &velocity)

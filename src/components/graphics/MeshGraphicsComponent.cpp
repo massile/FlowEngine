@@ -1,7 +1,10 @@
 #include "MeshGraphicsComponent.h"
-#include "../../services/environment/Environment.h"
 
-void MeshGraphicsComponent::update(Object *object, Graphics* graphics)
+void MeshGraphicsComponent::update(Object *object, World* world, Graphics* graphics)
 {
-    graphics->render(Environment::getWorld()->getRock());
+    TextureMap* rocksTexture = world->getRocksTexture();
+    Shader* shader = world->getMeshShader();
+
+    rocksTexture->use(*shader);
+    graphics->render(world->getRock());
 }

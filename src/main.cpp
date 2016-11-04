@@ -36,11 +36,6 @@ int main()
 
     IWindow* window = Ui::getWindow();
 
-    Shader shader = Shader(ROOT_DIR + "/resources/shaders/basic.vert", ROOT_DIR + "/resources/shaders/basic.frag");
-    Texture diffuseMap = Texture("diffuseMap", ROOT_DIR + "/resources/textures/rocks-diffuse.jpg", Texture::DIFFUSE);
-    Texture specularMap = Texture("specularMap", ROOT_DIR + "/resources/textures/rocks-spec.jpg", Texture::SPECULAR_MAP);
-    Texture normalMap = Texture("normalMap", ROOT_DIR + "/resources/textures/rocks-normal.jpg", Texture::NORMAL_MAP);
-
     Camera camera(
         new CameraInputComponent(),
         new CameraPhysicsComponent(),
@@ -58,19 +53,17 @@ int main()
         new MeshGraphicsComponent()
     );
 
+    Shader* shader = Environment::getWorld()->getMeshShader();
     float lastTime = 0;
     while(!window->shouldClose()) {
         window->clear();
 
-        diffuseMap.use(shader);
-        specularMap.use(shader);
-        normalMap.use(shader);
-        rock.update(shader, 0);
+        rock.update(*shader, 0);
 
         if(lastTime) {
             float dt = glfwGetTime() - lastTime;
-            camera.update(shader, dt);
-            light.update(shader, dt);
+            camera.update(*shader, dt);
+            light.update(*shader, dt);
             window->update();
         }
 
