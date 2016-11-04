@@ -1,9 +1,14 @@
 #include "Object.h"
+#include "../services/environment/Environment.h"
 
-Object::Object(InputComponent *inputComponent, PhysicsComponent *physicsComponent, ShaderComponent *shaderComponent)
+Object::Object(InputComponent *inputComponent,
+               PhysicsComponent *physicsComponent,
+               ShaderComponent *shaderComponent,
+               GraphicsComponent *graphicsComponent)
         : m_input(inputComponent),
           m_physics(physicsComponent),
-          m_shader(shaderComponent)
+          m_shader(shaderComponent),
+          m_graphics(graphicsComponent)
 {}
 
 void Object::update(Shader &shader, float dt)
@@ -11,6 +16,7 @@ void Object::update(Shader &shader, float dt)
     if(m_physics) m_physics->update(this);
     if(m_input) m_input->update(this, dt);
     if(m_shader) m_shader->update(this, &shader);
+    if(m_graphics) m_graphics->update(this, Environment::getGraphics());
 }
 
 void Object::setVelocity(const glm::vec3 &velocity)

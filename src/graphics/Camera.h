@@ -12,7 +12,7 @@ private:
 
 public:
     Camera(InputComponent *inputComponent, PhysicsComponent *physicsComponent, ShaderComponent *shaderComponent)
-        : Object(inputComponent, physicsComponent, shaderComponent) {
+        : Object(inputComponent, physicsComponent, shaderComponent, nullptr) {
         m_position = glm::vec3(0, 0, -5);
     }
     ~Camera() {}

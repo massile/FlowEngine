@@ -17,6 +17,8 @@
 #include "components/physics/CameraPhysicsComponent.h"
 #include "components/shader/CameraShaderComponent.h"
 #include "components/shader/LightShaderComponent.h"
+#include "services/environment/Environment.h"
+#include "components/graphics/MeshGraphicsComponent.h"
 
 #define ROOT_DIR std::string("/home/tessellator/ClionProjects/FlowEngine")
 
@@ -28,6 +30,9 @@ int main()
     IKeyboard* keyboard = new Keyboard();
     IMouse* mouse = new Mouse();
     Input::provide(keyboard, mouse);
+
+    Graphics* graphics = new Graphics();
+    Environment::provide(graphics);
 
     IWindow* window = Ui::getWindow();
 
@@ -47,6 +52,12 @@ int main()
         nullptr,
         new LightShaderComponent()
     );
+    Object rock(
+        nullptr,
+        nullptr,
+        nullptr,
+        new MeshGraphicsComponent(&mesh)
+    );
 
     float lastTime = 0;
     while(!window->shouldClose()) {
@@ -55,7 +66,7 @@ int main()
         diffuseMap.use(shader);
         specularMap.use(shader);
         normalMap.use(shader);
-        mesh.draw();
+        rock.update(shader, 0);
 
         if(lastTime) {
             float dt = glfwGetTime() - lastTime;

@@ -5,6 +5,7 @@
 #include "../components/shader/ShaderComponent.h"
 #include "../components/input/InputComponent.h"
 #include "../components/physics/PhysicsComponent.h"
+#include "../components/graphics/GraphicsComponent.h"
 
 class Object
 {
@@ -21,9 +22,13 @@ protected:
     InputComponent* m_input;
     PhysicsComponent* m_physics;
     ShaderComponent* m_shader;
+    GraphicsComponent* m_graphics;
 
 public:
-    Object(InputComponent* inputComponent, PhysicsComponent* physicsComponent, ShaderComponent* shaderComponent);
+    Object(InputComponent* inputComponent,
+           PhysicsComponent* physicsComponent,
+           ShaderComponent* shaderComponent,
+           GraphicsComponent* graphicsComponent);
     virtual ~Object() {}
 
     void translate(const glm::vec3& offset) { m_position += offset; }
