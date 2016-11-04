@@ -17,7 +17,7 @@ protected:
 public:
     Parser(const std::string& filepath, FileFormat format) : m_filepath(filepath), m_fileFormat(format) {}
     virtual ~Parser() {}
-    virtual T parse() = 0;
+    virtual T* parse() = 0;
 
     inline FileFormat getFormat() const { return m_fileFormat; }
 };

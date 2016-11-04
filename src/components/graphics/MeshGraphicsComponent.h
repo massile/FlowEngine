@@ -4,9 +4,7 @@
 
 class MeshGraphicsComponent : public GraphicsComponent
 {
-private:
-    Mesh* m_mesh;
 public:
-    MeshGraphicsComponent(Mesh* mesh): m_mesh(mesh) {}
+    MeshGraphicsComponent() {}
     virtual void update(Object *object, Graphics* graphics) override;
 };

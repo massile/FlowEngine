@@ -7,7 +7,7 @@ ObjParser::ObjParser(const std::string &filepath)
         : Parser(filepath, FileFormat::OBJ)
 {}
 
-Mesh ObjParser::parse()
+Mesh* ObjParser::parse()
 {
     std::ifstream file(m_filepath);
     std::string val;
@@ -51,7 +51,7 @@ Mesh ObjParser::parse()
     }
     generateTangentSpace(vertices);
 
-    return Mesh(vertices, indices);
+    return new Mesh(vertices, indices);
 }
 
 ObjParser::~ObjParser()

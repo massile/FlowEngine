@@ -9,7 +9,7 @@ public:
     ObjParser(const std::string &filepath);
     ~ObjParser();
 
-    Mesh parse() override;
+    Mesh* parse() override;
 
 private:
     void generateTangentSpace(std::vector<Vertex> &vertices);

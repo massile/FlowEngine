@@ -11,7 +11,6 @@
 #include "graphics/Camera.h"
 #include "graphics/Light.h"
 
-#include "parse/ObjParser.h"
 #include "components/input/CameraInputComponent.h"
 #include "components/input/LightInputComponent.h"
 #include "components/physics/CameraPhysicsComponent.h"
@@ -32,12 +31,12 @@ int main()
     Input::provide(keyboard, mouse);
 
     Graphics* graphics = new Graphics();
-    Environment::provide(graphics);
+    World* world = new World();
+    Environment::provide(world, graphics);
 
     IWindow* window = Ui::getWindow();
 
     Shader shader = Shader(ROOT_DIR + "/resources/shaders/basic.vert", ROOT_DIR + "/resources/shaders/basic.frag");
-    Mesh mesh = ObjParser(ROOT_DIR + "/resources/meshes/sphere.obj").parse();
     Texture diffuseMap = Texture("diffuseMap", ROOT_DIR + "/resources/textures/rocks-diffuse.jpg", Texture::DIFFUSE);
     Texture specularMap = Texture("specularMap", ROOT_DIR + "/resources/textures/rocks-spec.jpg", Texture::SPECULAR_MAP);
     Texture normalMap = Texture("normalMap", ROOT_DIR + "/resources/textures/rocks-normal.jpg", Texture::NORMAL_MAP);
@@ -56,7 +55,7 @@ int main()
         nullptr,
         nullptr,
         nullptr,
-        new MeshGraphicsComponent(&mesh)
+        new MeshGraphicsComponent()
     );
 
     float lastTime = 0;
