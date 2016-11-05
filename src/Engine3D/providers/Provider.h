@@ -19,7 +19,7 @@ private:
     Camera* m_camera;
 
 public:
-    Provider(Window* window);
+    Provider(window* window);
 
     virtual void record() = 0;
 

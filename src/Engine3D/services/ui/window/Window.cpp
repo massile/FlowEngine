@@ -3,7 +3,7 @@
 #include "../../input/keyboard/Keyboard.h"
 #include <iostream>
 
-Window::Window(const std::string &title, int width, int height)
+window::window(const std::string &title, int width, int height)
         : m_height(height), m_width(width), m_title(title)
 {
     if(!glfwInit()) {
@@ -30,13 +30,13 @@ Window::Window(const std::string &title, int width, int height)
     setCallbacks();
 }
 
-Window::~Window()
+window::~window()
 {
     glfwDestroyWindow(m_window);
     glfwTerminate();
 }
 
-void Window::setCallbacks()
+void window::setCallbacks()
 {
     glfwSetErrorCallback(error_callback);
     glfwSetKeyCallback(m_window, key_callback);
@@ -44,7 +44,7 @@ void Window::setCallbacks()
     glfwSetMouseButtonCallback(m_window, mouse_button_callback);
 }
 
-bool Window::initWindowPointer()
+bool window::initWindowPointer()
 {
     m_window = glfwCreateWindow(m_width, m_height, m_title.c_str(), nullptr, nullptr);
     if(!m_window) {
@@ -55,13 +55,13 @@ bool Window::initWindowPointer()
     return true;
 }
 
-void Window::clear() const
+void window::clear() const
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glfwPollEvents();
 }
 
-void Window::update()
+void window::update()
 {
     glfwSwapBuffers(m_window);
 }

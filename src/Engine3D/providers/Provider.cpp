@@ -1,6 +1,6 @@
 #include "Provider.h"
 
-Provider::Provider(Window *window)
+Provider::Provider(window *window)
 {
     Ui::provide(window);
     Input::provide(new Keyboard(), new Mouse());

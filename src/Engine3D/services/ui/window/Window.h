@@ -6,7 +6,7 @@
 #include <glm/vec2.hpp>
 #include "IWindow.h"
 
-class Window : public IWindow
+class window : public IWindow
 {
 private:
     std::string m_title;
@@ -15,8 +15,8 @@ private:
     GLFWwindow* m_window = nullptr;
 
 public:
-    Window(const std::string& title, int width, int height);
-    virtual ~Window();
+    window(const std::string& title, int width, int height);
+    virtual ~window();
 
     bool shouldClose() const override { return glfwWindowShouldClose(m_window) == 1; }
     int getWidth() const override { return m_width; }

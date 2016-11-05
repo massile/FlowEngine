@@ -26,17 +26,21 @@ To build the core and graphics engine faster, I rely on these other libraries:
 In the long run, these libraries will be replaced by custom ones.
 OS targeted : Windows / Linux
 
-## Expectations for this release
- 
-### Lights !
+## 3D Engine 
 
- - [x] Gamma correction
- - [ ] Shadow mapping
- - [ ] Different kinds of lights (point light, spot light, directional light)
- - [ ] Multiple lights in one shader
-  
+The 3D engine has the following features: 
+    - window system
+    - camera handling (movements)
+    - point lights (CookTorrance)
+    - model loading (.obj)
+    - component based entities
+    - mesh factory
+    - material system
+
+Check the [release notes](https://github.com/massile/FlowEngine/releases) for more details.
 
 <img src="documentation/main.gif" width="500"/>
+
 
 #### Rough material
  
@@ -46,4 +50,9 @@ OS targeted : Windows / Linux
  
  ![](documentation/shiny.gif)
 
-Sorry for the laggy gifs..
+## 2D Engine
+
+The 2D Engine has the following features
+   - Window system
+   
+[In progress...]
