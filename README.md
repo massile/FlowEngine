@@ -30,7 +30,8 @@ OS targeted : Windows / Linux
 
 The 3D engine has the following features: 
     - window system
-    - camera handling (movements)
+    - keyboard and mouse event system
+    - camera handling (translation, orientation)
     - point lights (CookTorrance)
     - model loading (.obj)
     - component based entities
@@ -54,5 +55,6 @@ Check the [release notes](https://github.com/massile/FlowEngine/releases) for mo
 
 The 2D Engine has the following features
    - Window system
+   - Basic shader loading
    
-[In progress...]
+![](documentation/2d.gif)
