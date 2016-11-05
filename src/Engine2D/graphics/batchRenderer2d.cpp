@@ -23,8 +23,8 @@ namespace FlowEngine { namespace Graphics {
             glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
             glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
             glEnableVertexAttribArray(SHADER_COLOR_INDEX);
-            glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)0);
-            glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)(3 * sizeof(GLfloat)));
+            glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::position));
+            glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::color));
             glBindBuffer(GL_ARRAY_BUFFER, 0);
 
             GLuint* indices = new GLuint[RENDERER_INDICES_SIZE];
@@ -32,7 +32,7 @@ namespace FlowEngine { namespace Graphics {
             int offset = 0;
             for (int i = 0; i < RENDERER_INDICES_SIZE; i += 6)
             {
-                indices[  i  ] = offset + 0;
+                indices[i] = offset + 0;
                 indices[i + 1] = offset + 1;
                 indices[i + 2] = offset + 2;
 
@@ -58,22 +58,23 @@ namespace FlowEngine { namespace Graphics {
         {
             const glm::vec3& position = renderable->getPosition();
             const glm::vec2& size = renderable->getSize();
-            const glm::vec4& color = renderable->getColor();
+            const glm::vec4& color = 255.0f * renderable->getColor();
+            GLuint c = (int)color.a << 24 | (int)color.b << 16 | (int)color.g << 8 | (int)color.r;
 
-            m_Buffer->vertex = position;
-            m_Buffer->color = color;
+            m_Buffer->position = position;
+            m_Buffer->color = c;
             m_Buffer++;
 
-            m_Buffer->vertex = glm::vec3(position.x, position.y + size.y, position.z);
-            m_Buffer->color = color;
+            m_Buffer->position = glm::vec3(position.x, position.y + size.y, position.z);
+            m_Buffer->color = c;
             m_Buffer++;
 
-            m_Buffer->vertex = glm::vec3(position.x + size.x, position.y + size.y, position.z);
-            m_Buffer->color = color;
+            m_Buffer->position = glm::vec3(position.x + size.x, position.y + size.y, position.z);
+            m_Buffer->color = c;
             m_Buffer++;
 
-            m_Buffer->vertex = glm::vec3(position.x + size.x, position.y, position.z);
-            m_Buffer->color = color;
+            m_Buffer->position = glm::vec3(position.x + size.x, position.y, position.z);
+            m_Buffer->color = c;
             m_Buffer++;
 
             m_IndexCount += 6;

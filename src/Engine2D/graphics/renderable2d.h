@@ -9,8 +9,8 @@
 namespace FlowEngine { namespace Graphics {
     struct VertexData
     {
-        glm::vec3 vertex;
-        glm::vec4 color;
+        glm::vec3 position;
+        GLuint color;
     };
 
     class Renderable2D

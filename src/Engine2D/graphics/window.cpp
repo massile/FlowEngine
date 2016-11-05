@@ -40,6 +40,8 @@ namespace FlowEngine { namespace Graphics {
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
         glfwMakeContextCurrent(m_Window);
+        glfwSwapInterval(0.0);
+
         glfwSetWindowUserPointer(m_Window, this);
         glfwSetKeyCallback(m_Window, key_callback);
         glfwSetMouseButtonCallback(m_Window, mouse_button_callback);
