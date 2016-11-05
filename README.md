@@ -56,5 +56,6 @@ Check the [release notes](https://github.com/massile/FlowEngine/releases) for mo
 The 2D Engine has the following features
    - Window system
    - Basic shader loading
+   - Object oriented buffer & vertex arrays
    
 ![](documentation/2d.gif)

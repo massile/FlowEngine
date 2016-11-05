@@ -12,7 +12,14 @@ find_package(glfw3 3.2 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_library(SOIL_LIBRARY SOIL REQUIRED)
 
-add_executable(FlowEngine src/Engine2D/graphics/shader.cpp src/Engine2D/graphics/shader.h src/Engine2D/utils/fileutils.h src/Engine2D/graphics/window.cpp src/Engine2D/graphics/window.h src/Engine2D/main.cpp)
+add_executable(FlowEngine
+                src/Engine2D/graphics/shader.cpp src/Engine2D/graphics/shader.h
+                src/Engine2D/utils/fileutils.h
+                src/Engine2D/graphics/window.cpp src/Engine2D/graphics/window.h
+                src/Engine2D/graphics/buffer/vertexBuffer.h src/Engine2D/graphics/buffer/vertexBuffer.cpp
+                src/Engine2D/graphics/buffer/vertexArray.h src/Engine2D/graphics/buffer/vertexArray.cpp
+                src/Engine2D/graphics/buffer/indexBuffer.h src/Engine2D/graphics/buffer/indexBuffer.cpp
+                src/Engine2D/main.cpp)
 target_link_libraries(FlowEngine ${GLEW_LIBRARIES})
 target_link_libraries(FlowEngine ${OPENGL_gl_LIBRARY})
 target_link_libraries(FlowEngine ${SOIL_LIBRARY})
