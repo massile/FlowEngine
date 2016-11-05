@@ -19,6 +19,8 @@ add_executable(FlowEngine
                 src/Engine2D/graphics/buffer/vertexBuffer.h src/Engine2D/graphics/buffer/vertexBuffer.cpp
                 src/Engine2D/graphics/buffer/vertexArray.h src/Engine2D/graphics/buffer/vertexArray.cpp
                 src/Engine2D/graphics/buffer/indexBuffer.h src/Engine2D/graphics/buffer/indexBuffer.cpp
+                src/Engine2D/graphics/sprite.h src/Engine2D/graphics/sprite.cpp
+                src/Engine2D/graphics/batchRenderer2d.h src/Engine2D/graphics/batchRenderer2d.cpp
                 src/Engine2D/main.cpp)
 target_link_libraries(FlowEngine ${GLEW_LIBRARIES})
 target_link_libraries(FlowEngine ${OPENGL_gl_LIBRARY})
