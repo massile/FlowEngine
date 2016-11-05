@@ -23,12 +23,22 @@ namespace FlowEngine { namespace Graphics {
             std::cout << "Failed to initialize GLFW!" << std::endl;
             return false;
         }
+
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
         m_Window = glfwCreateWindow(m_Width, m_Height, m_Title, NULL, NULL);
         if (!m_Window)
         {
             std::cout << "Failed to create GLFW window!" << std::endl;
             return false;
         }
+
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
         glfwMakeContextCurrent(m_Window);
         glfwSetWindowUserPointer(m_Window, this);
         glfwSetKeyCallback(m_Window, key_callback);
