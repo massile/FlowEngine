@@ -2,6 +2,7 @@
 
 #include "renderer2d.h"
 #include "buffer/indexBuffer.h"
+#include "renderable2d.h"
 
 namespace FlowEngine { namespace Graphics {
 

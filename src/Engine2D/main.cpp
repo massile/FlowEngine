@@ -4,9 +4,8 @@
 #include "graphics/sprite.h"
 #include "graphics/batchRenderer2d.h"
 #include "graphics/layers/tileLayer.h"
+#include "graphics/layers/group.h"
 #include <glm/gtc/matrix_transform.hpp>
-#include <stdlib.h>
-#include <time.h>
 
 int main()
 {
@@ -15,18 +14,22 @@ int main()
     using namespace glm;
 
     Window window("OpenGL", 400, 400*9/16);
-    srand(time(NULL));
 
     Shader shader1("resources/shaders/basic_2d.vert", "resources/shaders/basic_2d.frag");
     shader1.enable();
     shader1.uniform("pr_matrix", ortho(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
 
     TileLayer layer1(&shader1);
-    for (float y = -9.0f; y < 9.0f; y += 0.1) {
-        for (float x = -16.0f; x < 16.0f; x += 0.1) {
-            layer1.add(new Sprite(x, y, 0.09f, 0.09f, vec4(0.5, rand() % 1000 / 1000.0f, 1, 1)));
-        }
-    }
+
+    Group* group = new Group(translate(mat4(), vec3(-15.0f, 5.0f, 0.0f)));
+    group->add(new Sprite(0, 0, 6, 3, vec4(1, 1, 1, 1)));
+
+    Group* button = new Group(translate(mat4(), vec3(0.5f, 0.5f, 0.0f)));
+    button->add(new Sprite(0, 0, 5.0f, 2.0f, vec4(1, 0, 1, 1)));
+    button->add(new Sprite(0.5f, 0.5f, 3.0f, 1.0f, vec4(0.2f, 0.3f, 0.8f, 1)));
+    group->add(button);
+
+    layer1.add(group);
 
     Shader shader2("resources/shaders/basic_2d.vert", "resources/shaders/basic_2d.frag");
     shader2.enable();
@@ -36,7 +39,7 @@ int main()
     TileLayer layer2(&shader2);
     layer2.add(new Sprite(-2, -2, 4, 4, vec4(1, 0, 1, 1)));
 
-    float timer = 0.0f, start = glfwGetTime(), elapsed = 0.0f;
+    float timer = 0.0f, start = glfwGetTime(), elapsed;
     unsigned int frames = 0;
     while (!window.closed())
     {

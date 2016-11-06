@@ -5,6 +5,7 @@
 #include "buffer/vertexArray.h"
 
 #include "shader.h"
+#include "renderer2d.h"
 
 namespace FlowEngine { namespace Graphics {
     struct VertexData
@@ -19,6 +20,10 @@ namespace FlowEngine { namespace Graphics {
         glm::vec3 m_Position;
         glm::vec2 m_Size;
         glm::vec4 m_Color;
+
+    protected:
+        Renderable2D() {}
+
     public:
         Renderable2D(glm::vec3 position, glm::vec2 size, glm::vec4 color)
                 : m_Position(position), m_Size(size), m_Color(color)
@@ -26,6 +31,7 @@ namespace FlowEngine { namespace Graphics {
 
         virtual ~Renderable2D() { }
 
+        virtual void submit(Renderer2D* renderer) const { renderer->submit(this); }
         inline const glm::vec3& getPosition() const { return m_Position; }
         inline const glm::vec2& getSize() const { return m_Size; }
         inline const glm::vec4& getColor() const { return m_Color; }

@@ -56,24 +56,24 @@ namespace FlowEngine { namespace Graphics {
 
         void BatchRenderer2D::submit(const Renderable2D* renderable)
         {
-            const glm::vec3& position = renderable->getPosition();
+            const glm::vec3& pos = renderable->getPosition();
             const glm::vec2& size = renderable->getSize();
             const glm::vec4& color = 255.0f * renderable->getColor();
             GLuint c = (int)color.a << 24 | (int)color.b << 16 | (int)color.g << 8 | (int)color.r;
 
-            m_Buffer->position = position;
+            m_Buffer->position = (*m_TransformationBack) * glm::vec4(pos, 1.0f);
             m_Buffer->color = c;
             m_Buffer++;
 
-            m_Buffer->position = glm::vec3(position.x, position.y + size.y, position.z);
+            m_Buffer->position = (*m_TransformationBack) * glm::vec4(pos.x, pos.y + size.y, pos.z, 1.0f);
             m_Buffer->color = c;
             m_Buffer++;
 
-            m_Buffer->position = glm::vec3(position.x + size.x, position.y + size.y, position.z);
+            m_Buffer->position = (*m_TransformationBack) * glm::vec4(pos.x + size.x, pos.y + size.y, pos.z, 1.0f);
             m_Buffer->color = c;
             m_Buffer++;
 
-            m_Buffer->position = glm::vec3(position.x + size.x, position.y, position.z);
+            m_Buffer->position = (*m_TransformationBack) * glm::vec4(pos.x + size.x, pos.y, pos.z, 1.0f);
             m_Buffer->color = c;
             m_Buffer++;
 
