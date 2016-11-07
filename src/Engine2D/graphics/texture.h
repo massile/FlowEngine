@@ -21,6 +21,8 @@ namespace FlowEngine { namespace Graphics {
 
         inline const GLuint getWidth() const { return m_width; }
         inline const GLuint getHeight() const { return m_height; }
+        inline const GLuint getId() const { return m_id; }
+
     private:
         GLuint load();
     };

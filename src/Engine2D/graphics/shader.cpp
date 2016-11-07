@@ -113,4 +113,9 @@ namespace FlowEngine { namespace Graphics {
     {
         glUseProgram(0);
     }
+
+    void Shader::uniform(const GLchar* name, int* value, int count)
+    {
+        glUniform1iv(getUniformLocation(name), count, value);
+    }
 }}

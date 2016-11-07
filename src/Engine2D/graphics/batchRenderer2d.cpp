@@ -25,10 +25,12 @@ namespace FlowEngine { namespace Graphics {
             glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
             glEnableVertexAttribArray(SHADER_COLOR_INDEX);
             glEnableVertexAttribArray(SHADER_UV_INDEX);
+            glEnableVertexAttribArray(SHADER_TID_INDEX);
 
             glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::position));
             glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::color));
             glVertexAttribPointer(SHADER_UV_INDEX, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::uv));
+            glVertexAttribPointer(SHADER_TID_INDEX, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::tid));
             glBindBuffer(GL_ARRAY_BUFFER, 0);
 
             GLuint* indices = new GLuint[RENDERER_INDICES_SIZE];
@@ -64,26 +66,55 @@ namespace FlowEngine { namespace Graphics {
             const glm::vec2& size = renderable->getSize();
             const glm::vec4& color = 255.0f * renderable->getColor();
             const std::vector<glm::vec2>& uvs = renderable->getUvs();
-            GLuint c = (int)color.a << 24 | (int)color.b << 16 | (int)color.g << 8 | (int)color.r;
+            const GLuint tid = renderable->getTId();
 
+            GLuint c = 0;
+            float ts = 0.0f;
+
+            if (tid > 0) {
+                bool found = false;
+                for (int i = 0; i < m_TextureSlots.size(); i++) {
+                    if (m_TextureSlots[i] == tid) {
+                        ts = i + 1;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    m_TextureSlots.push_back(tid);
+                    ts = m_TextureSlots.size();
+                    if (ts >= 32) {
+                        end();
+                        flush();
+                        begin();
+                    }
+                }
+            }
+            else {
+                c = (int)color.a << 24 | (int)color.b << 16 | (int)color.g << 8 | (int)color.r;
+            }
             m_Buffer->position = (*m_TransformationBack) * glm::vec4(pos, 1.0f);
             m_Buffer->color = c;
             m_Buffer->uv = uvs[0];
+            m_Buffer->tid = ts;
             m_Buffer++;
 
             m_Buffer->position = (*m_TransformationBack) * glm::vec4(pos.x, pos.y + size.y, pos.z, 1.0f);
             m_Buffer->color = c;
             m_Buffer->uv = uvs[1];
+            m_Buffer->tid = ts;
             m_Buffer++;
 
             m_Buffer->position = (*m_TransformationBack) * glm::vec4(pos.x + size.x, pos.y + size.y, pos.z, 1.0f);
             m_Buffer->color = c;
             m_Buffer->uv = uvs[2];
+            m_Buffer->tid = ts;
             m_Buffer++;
 
             m_Buffer->position = (*m_TransformationBack) * glm::vec4(pos.x + size.x, pos.y, pos.z, 1.0f);
             m_Buffer->color = c;
             m_Buffer->uv = uvs[3];
+            m_Buffer->tid = ts;
             m_Buffer++;
 
             m_IndexCount += 6;
@@ -97,6 +128,11 @@ namespace FlowEngine { namespace Graphics {
 
         void BatchRenderer2D::flush()
         {
+            for(int i=0; i<m_TextureSlots.size(); i++) {
+                glActiveTexture(GL_TEXTURE0 + i);
+                glBindTexture(GL_TEXTURE_2D, m_TextureSlots[i]);
+            }
+
             glBindVertexArray(m_VAO);
             m_IBO->bind();
 

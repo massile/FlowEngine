@@ -6,6 +6,7 @@
 
 #include "shader.h"
 #include "renderer2d.h"
+#include "texture.h"
 
 namespace FlowEngine { namespace Graphics {
     struct VertexData
@@ -13,6 +14,7 @@ namespace FlowEngine { namespace Graphics {
         glm::vec3 position;
         GLuint color;
         glm::vec2 uv;
+        float tid;
     };
 
     class Renderable2D
@@ -22,6 +24,7 @@ namespace FlowEngine { namespace Graphics {
         glm::vec2 m_Size;
         glm::vec4 m_Color;
         std::vector<glm::vec2> m_Uvs;
+        Texture* m_Texture = nullptr;
 
     protected:
         Renderable2D() {}
@@ -38,6 +41,7 @@ namespace FlowEngine { namespace Graphics {
         inline const glm::vec2& getSize() const { return m_Size; }
         inline const glm::vec4& getColor() const { return m_Color; }
         inline const std::vector<glm::vec2>& getUvs() const { return m_Uvs; }
+        inline const float getTId() const { return m_Texture ? m_Texture->getId() : 0; }
 
     private:
         void setDefaultUv()

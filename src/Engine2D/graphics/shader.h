@@ -27,6 +27,9 @@ namespace FlowEngine { namespace Graphics {
 
         void enable() const;
         void disable() const;
+
+        void uniform(const GLchar* name, int* value, int count);
+
     private:
         GLuint load();
         GLint getUniformLocation(const GLchar* name);
