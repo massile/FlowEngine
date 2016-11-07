@@ -26,6 +26,7 @@ add_executable(FlowEngine
                 src/Engine2D/graphics/layers/layer.h src/Engine2D/graphics/layers/layer.cpp
                 src/Engine2D/graphics/layers/tileLayer.h src/Engine2D/graphics/layers/tileLayer.cpp
                 src/Engine2D/graphics/layers/group.h src/Engine2D/graphics/layers/group.cpp
+                src/Engine2D/graphics/texture.h src/Engine2D/graphics/texture.cpp
                 src/Engine2D/main.cpp)
 target_link_libraries(FlowEngine ${GLEW_LIBRARIES})
 target_link_libraries(FlowEngine ${OPENGL_gl_LIBRARY})
