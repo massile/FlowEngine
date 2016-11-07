@@ -24,6 +24,9 @@ int main()
     TileLayer layer(&shader);
     layer.add(new Sprite(-2, -2, 4, 4, vec4(1, 0, 0, 1)));
 
+    Texture texture("resources/textures/brick-diffuse.jpg");
+    texture.bind();
+
     float timer = 0.0f, start = glfwGetTime(), elapsed;
     unsigned int frames = 0;
     while (!window.closed())
@@ -35,17 +38,6 @@ int main()
         shader.enable();
         shader.uniform("light_pos", vec2((float)(x * 32.0f / window.getWidth() - 16.0f), (float)(9.0f - y * 18.0f / window.getHeight())));
         layer.render();
-
-        glBegin(GL_QUADS);
-        glTexCoord2f(0, 0);
-        glVertex2f(0, 0);
-        glTexCoord2f(0, 1);
-        glVertex2f(0, 4);
-        glTexCoord2f(1, 1);
-        glVertex2f(4, 4);
-        glTexCoord2f(1, 0);
-        glVertex2f(4, 0);
-        glEnd();
 
         window.update();
 
