@@ -1,4 +1,4 @@
-![OpenGL](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Opengl-logo.svg/2000px-Opengl-logo.svg.png)
+<img src="https://s18.postimg.org/qwf247hll/Screenshot_from_2016_11_08_22_25_50.png"/>
 
 # Flow Engine
 
