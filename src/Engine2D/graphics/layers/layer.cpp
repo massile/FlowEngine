@@ -7,6 +7,11 @@ namespace FlowEngine { namespace Graphics {
         {
             m_Shader->enable();
             m_Shader->uniform("pr_matrix", m_ProjectionMatrix);
+
+            std::vector<int> texIds;
+            for(int i=0; i<32; i++)
+                texIds.push_back(i);
+            m_Shader->uniform("textures", texIds.data(), 32);
             m_Shader->disable();
         }
 

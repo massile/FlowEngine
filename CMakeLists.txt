@@ -13,7 +13,7 @@ find_package(glfw3 3.2 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_library(SOIL_LIBRARY SOIL REQUIRED)
 
-add_executable(FlowEngine
+add_library(FlowEngine STATIC
                 src/Engine2D/graphics/shader.cpp src/Engine2D/graphics/shader.h
                 src/Engine2D/utils/fileutils.h
                 src/Engine2D/graphics/window.cpp src/Engine2D/graphics/window.h
@@ -25,10 +25,9 @@ add_executable(FlowEngine
                 src/Engine2D/graphics/renderable2d.h
                 src/Engine2D/graphics/batchRenderer2d.h src/Engine2D/graphics/batchRenderer2d.cpp
                 src/Engine2D/graphics/layers/layer.h src/Engine2D/graphics/layers/layer.cpp
-                src/Engine2D/graphics/layers/tileLayer.h src/Engine2D/graphics/layers/tileLayer.cpp
                 src/Engine2D/graphics/layers/group.h src/Engine2D/graphics/layers/group.cpp
                 src/Engine2D/graphics/texture.h src/Engine2D/graphics/texture.cpp
-                src/Engine2D/main.cpp)
+                src/Engine2D/flow.h src/Engine2D/flow.cpp)
 target_link_libraries(FlowEngine ${GLEW_LIBRARIES})
 target_link_libraries(FlowEngine ${OPENGL_gl_LIBRARY})
 target_link_libraries(FlowEngine ${SOIL_LIBRARY})

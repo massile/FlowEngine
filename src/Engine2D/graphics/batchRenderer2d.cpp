@@ -81,7 +81,7 @@ namespace FlowEngine { namespace Graphics {
                 if (!found) {
                     m_TextureSlots.push_back(tid);
                     ts = m_TextureSlots.size();
-                    if (ts >= 32) {
+                    if (ts >= RENDERER_MAX_TEXTURES) {
                         end();
                         flush();
                         begin();
