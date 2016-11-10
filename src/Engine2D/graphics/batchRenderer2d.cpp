@@ -64,13 +64,11 @@ namespace FlowEngine { namespace Graphics {
         {
             const glm::vec3& pos = renderable->getPosition();
             const glm::vec2& size = renderable->getSize();
-            const glm::vec4& color = 255.0f * renderable->getColor();
+            const GLuint color = renderable->getColor();
             const std::vector<glm::vec2>& uvs = renderable->getUvs();
             const GLuint tid = renderable->getTId();
 
-            GLuint c = 0;
             float ts = 0.0f;
-
             if (tid > 0) {
                 bool found = false;
                 for (int i = 0; i < m_TextureSlots.size(); i++) {
@@ -90,29 +88,27 @@ namespace FlowEngine { namespace Graphics {
                     }
                 }
             }
-            else {
-                c = (int)color.a << 24 | (int)color.b << 16 | (int)color.g << 8 | (int)color.r;
-            }
+
             m_Buffer->position = (*m_TransformationBack) * glm::vec4(pos, 1.0f);
-            m_Buffer->color = c;
+            m_Buffer->color = color;
             m_Buffer->uv = uvs[0];
             m_Buffer->tid = ts;
             m_Buffer++;
 
             m_Buffer->position = (*m_TransformationBack) * glm::vec4(pos.x, pos.y + size.y, pos.z, 1.0f);
-            m_Buffer->color = c;
+            m_Buffer->color = color;
             m_Buffer->uv = uvs[1];
             m_Buffer->tid = ts;
             m_Buffer++;
 
             m_Buffer->position = (*m_TransformationBack) * glm::vec4(pos.x + size.x, pos.y + size.y, pos.z, 1.0f);
-            m_Buffer->color = c;
+            m_Buffer->color = color;
             m_Buffer->uv = uvs[2];
             m_Buffer->tid = ts;
             m_Buffer++;
 
             m_Buffer->position = (*m_TransformationBack) * glm::vec4(pos.x + size.x, pos.y, pos.z, 1.0f);
-            m_Buffer->color = c;
+            m_Buffer->color = color;
             m_Buffer->uv = uvs[3];
             m_Buffer->tid = ts;
             m_Buffer++;

@@ -22,7 +22,7 @@ namespace FlowEngine { namespace Graphics {
     protected:
         glm::vec3 m_Position;
         glm::vec2 m_Size;
-        glm::vec4 m_Color;
+        GLuint m_Color;
         std::vector<glm::vec2> m_Uvs;
         Texture* m_Texture = nullptr;
 
@@ -30,7 +30,7 @@ namespace FlowEngine { namespace Graphics {
         Renderable2D() {}
 
     public:
-        Renderable2D(glm::vec3 position, glm::vec2 size, glm::vec4 color)
+        Renderable2D(glm::vec3 position, glm::vec2 size, GLuint color)
                 : m_Position(position), m_Size(size), m_Color(color)
         { setDefaultUv(); }
 
@@ -39,7 +39,12 @@ namespace FlowEngine { namespace Graphics {
         virtual void submit(Renderer2D* renderer) const { renderer->submit(this); }
         inline const glm::vec3& getPosition() const { return m_Position; }
         inline const glm::vec2& getSize() const { return m_Size; }
-        inline const glm::vec4& getColor() const { return m_Color; }
+        inline GLuint getColor() const { return m_Color; }
+        void setColor(const glm::vec4& color)
+        {
+            glm::vec4 col = 255.0f * color;
+            m_Color = (int)col.a << 24 | (int)col.b << 16 | (int)col.g << 8 | (int)col.r;
+        }
         inline const std::vector<glm::vec2>& getUvs() const { return m_Uvs; }
         inline const float getTId() const { return m_Texture ? m_Texture->getId() : 0; }
 

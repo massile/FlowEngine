@@ -22,6 +22,7 @@ add_executable(FlowEngine
                 src/Engine2D/graphics/buffer/indexBuffer.h src/Engine2D/graphics/buffer/indexBuffer.cpp
                 src/Engine2D/graphics/sprite.h src/Engine2D/graphics/sprite.cpp
                 src/Engine2D/graphics/renderer2d.h src/Engine2D/graphics/renderer2d.cpp
+                src/Engine2D/graphics/renderable2d.h
                 src/Engine2D/graphics/batchRenderer2d.h src/Engine2D/graphics/batchRenderer2d.cpp
                 src/Engine2D/graphics/layers/layer.h src/Engine2D/graphics/layers/layer.cpp
                 src/Engine2D/graphics/layers/tileLayer.h src/Engine2D/graphics/layers/tileLayer.cpp

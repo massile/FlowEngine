@@ -29,7 +29,7 @@ int main()
     for (float y = -9.0f; y < 9.0f; y++) {
         for (float x = -16.0f; x < 16.0f; x++) {
             if (rand() % 4 == 0)
-                layer.add(new Sprite(x, y, 0.9f, 0.9f, vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+                layer.add(new Sprite(x, y, 0.9f, 0.9f, 0xffffff));
             else
                 layer.add(new Sprite(x, y, 0.9f, 0.9f, textures[rand() % 2]));
         }
