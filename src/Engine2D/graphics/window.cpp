@@ -1,4 +1,5 @@
 #include "window.h"
+#include "../textureManager.h"
 
 namespace FlowEngine { namespace Graphics {
 
@@ -13,6 +14,8 @@ namespace FlowEngine { namespace Graphics {
 
     Window::~Window()
     {
+        TextureManager::clean();
+        glfwDestroyWindow(mWindow);
         glfwTerminate();
     }
 

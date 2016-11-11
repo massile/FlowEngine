@@ -3,7 +3,8 @@
 
 namespace FlowEngine { namespace Graphics {
 
-    Texture::Texture(const std::string &filename) : mFilename(filename)
+    Texture::Texture(const std::string& name, const std::string &filename)
+            : mFilename(filename), mName(name)
     {
         load();
     }
@@ -22,7 +23,6 @@ namespace FlowEngine { namespace Graphics {
 
     GLuint Texture::load()
     {
-
         unsigned char* pixels = SOIL_load_image(mFilename.c_str(), &mWidth, &mHeight, nullptr, 0);
         glGenTextures(1, &mID);
         bind();

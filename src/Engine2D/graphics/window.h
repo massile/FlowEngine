@@ -16,7 +16,6 @@ namespace FlowEngine { namespace Graphics {
         std::string mTitle;
         int m_Width, mHeight;
         GLFWwindow *mWindow;
-        bool mClosed;
 
         bool mKeys[MAX_KEYS];
         bool mMouseButtons[MAX_BUTTONS];
