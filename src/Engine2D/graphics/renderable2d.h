@@ -15,7 +15,9 @@ namespace FlowEngine { namespace Graphics {
         glm::vec3 position;
         GLuint color;
         glm::vec2 uv;
+        glm::vec2 maskUv;
         float tid;
+        float mid;
     };
 
     class Renderable2D
@@ -41,6 +43,7 @@ namespace FlowEngine { namespace Graphics {
         inline GLuint getColor() const { return mColor; }
         inline const std::vector<glm::vec2>& getUvs() const { return mUVs; }
         inline const float getTId() const { return mTexture ? mTexture->getId() : 0; }
+        inline Texture* getTexture() const { return mTexture; }
 
         void setColor(const glm::vec4& color);
 

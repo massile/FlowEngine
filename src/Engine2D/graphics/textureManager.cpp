@@ -2,7 +2,7 @@
 
 namespace FlowEngine { namespace Graphics {
 
-    std::vector<Texture*> mTextures;
+    std::vector<Texture*> TextureManager::mTextures;
 
     void TextureManager::add(FlowEngine::Graphics::Texture *texture)
     {

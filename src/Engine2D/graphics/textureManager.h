@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "graphics/texture.h"
+#include "texture.h"
 
 namespace FlowEngine { namespace Graphics {
 

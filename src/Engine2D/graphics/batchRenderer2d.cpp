@@ -1,4 +1,5 @@
 #include "batchRenderer2d.h"
+#include "../utils/math.h"
 
 namespace FlowEngine { namespace Graphics {
 
@@ -22,15 +23,19 @@ namespace FlowEngine { namespace Graphics {
         glBindBuffer(GL_ARRAY_BUFFER, mVBO);
         glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
 
-        glEnableVertexAttribArray(SHADER_VERTEX_INDEX);
-        glEnableVertexAttribArray(SHADER_COLOR_INDEX);
-        glEnableVertexAttribArray(SHADER_UV_INDEX);
-        glEnableVertexAttribArray(SHADER_TID_INDEX);
+        glEnableVertexAttribArray(ShaderIndex::POSITION);
+        glEnableVertexAttribArray(ShaderIndex::COLOR);
+        glEnableVertexAttribArray(ShaderIndex::UV);
+        glEnableVertexAttribArray(ShaderIndex::MASK_UV);
+        glEnableVertexAttribArray(ShaderIndex::TID);
+        glEnableVertexAttribArray(ShaderIndex::MID);
 
-        glVertexAttribPointer(SHADER_VERTEX_INDEX, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::position));
-        glVertexAttribPointer(SHADER_COLOR_INDEX, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::color));
-        glVertexAttribPointer(SHADER_UV_INDEX, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::uv));
-        glVertexAttribPointer(SHADER_TID_INDEX, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (const GLvoid*)offsetof(VertexData, VertexData::tid));
+        glVertexAttribPointer(ShaderIndex::POSITION, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (GLvoid*)offsetof(VertexData, position));
+        glVertexAttribPointer(ShaderIndex::COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (GLvoid*)offsetof(VertexData, color));
+        glVertexAttribPointer(ShaderIndex::UV, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (GLvoid*)offsetof(VertexData, uv));
+        glVertexAttribPointer(ShaderIndex::MASK_UV, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (GLvoid*)offsetof(VertexData, maskUv));
+        glVertexAttribPointer(ShaderIndex::TID, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (GLvoid*)offsetof(VertexData, tid));
+        glVertexAttribPointer(ShaderIndex::MID, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (GLvoid*)offsetof(VertexData, mid));
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
         GLuint* indices = new GLuint[RENDERER_INDICES_SIZE];
@@ -60,6 +65,37 @@ namespace FlowEngine { namespace Graphics {
         mBuffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
 
+
+    float BatchRenderer2D::submitTexture(GLuint textureID)
+    {
+        float textureSlot;
+        bool found = false;
+        for (int i = 0; i < mTextureSlots.size(); i++) {
+            if (mTextureSlots[i] == textureID) {
+                textureSlot = i + 1;
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            mTextureSlots.push_back(textureID);
+            textureSlot = mTextureSlots.size();
+            if (textureSlot >= RENDERER_MAX_TEXTURES) {
+                end();
+                flush();
+                begin();
+            }
+        }
+
+        return textureSlot;
+    }
+
+
+    float BatchRenderer2D::submitTexture(Texture *texture)
+    {
+        return submitTexture(texture->getId());
+    }
+
     void BatchRenderer2D::submit(const Renderable2D* renderable)
     {
         const glm::vec3& pos = renderable->getPosition();
@@ -67,50 +103,43 @@ namespace FlowEngine { namespace Graphics {
         const GLuint color = renderable->getColor();
         const std::vector<glm::vec2>& uvs = renderable->getUvs();
         const GLuint tid = renderable->getTId();
+        const GLuint mid = mMask->texture->getId();
 
-        float ts = 0.0f;
-        if (tid > 0) {
-            bool found = false;
-            for (int i = 0; i < mTextureSlots.size(); i++) {
-                if (mTextureSlots[i] == tid) {
-                    ts = i + 1;
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                mTextureSlots.push_back(tid);
-                ts = mTextureSlots.size();
-                if (ts >= RENDERER_MAX_TEXTURES) {
-                    end();
-                    flush();
-                    begin();
-                }
-            }
-        }
+        float textureSlot = tid > 0 ? submitTexture(renderable->getTexture()) : 0.0f;
+        float maskSlot = mid > 0 ? submitTexture(mMask->texture) : 0.0f;
+
+        glm::mat4 maskTransform = mMask ? glm::inverse(mMask->transform) : glm::mat4(1.0f);
 
         mBuffer->position = (*mTransformationBack) * glm::vec4(pos, 1.0f);
         mBuffer->color = color;
         mBuffer->uv = uvs[0];
-        mBuffer->tid = ts;
+        mBuffer->maskUv = maskTransform * mBuffer->position;
+        mBuffer->tid = textureSlot;
+        mBuffer->mid = maskSlot;
         mBuffer++;
 
         mBuffer->position = (*mTransformationBack) * glm::vec4(pos.x, pos.y + size.y, pos.z, 1.0f);
         mBuffer->color = color;
         mBuffer->uv = uvs[1];
-        mBuffer->tid = ts;
+        mBuffer->maskUv = maskTransform * mBuffer->position;
+        mBuffer->tid = textureSlot;
+        mBuffer->mid = maskSlot;
         mBuffer++;
 
         mBuffer->position = (*mTransformationBack) * glm::vec4(pos.x + size.x, pos.y + size.y, pos.z, 1.0f);
         mBuffer->color = color;
         mBuffer->uv = uvs[2];
-        mBuffer->tid = ts;
+        mBuffer->maskUv = maskTransform * mBuffer->position;
+        mBuffer->tid = textureSlot;
+        mBuffer->mid = maskSlot;
         mBuffer++;
 
         mBuffer->position = (*mTransformationBack) * glm::vec4(pos.x + size.x, pos.y, pos.z, 1.0f);
         mBuffer->color = color;
         mBuffer->uv = uvs[3];
-        mBuffer->tid = ts;
+        mBuffer->maskUv = maskTransform * mBuffer->position;
+        mBuffer->tid = textureSlot;
+        mBuffer->mid = maskSlot;
         mBuffer++;
 
         mIndexCount += 6;
@@ -132,7 +161,7 @@ namespace FlowEngine { namespace Graphics {
         glBindVertexArray(mVAO);
         mIBO->bind();
 
-        glDrawElements(GL_TRIANGLES, mIndexCount, GL_UNSIGNED_INT, NULL);
+        glDrawElements(GL_TRIANGLES, mIndexCount, GL_UNSIGNED_INT, nullptr);
 
         mIBO->unbind();
         glBindVertexArray(0);

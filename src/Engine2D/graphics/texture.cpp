@@ -3,6 +3,8 @@
 
 namespace FlowEngine { namespace Graphics {
 
+    TextureWrap Texture::sWrapMode;
+
     Texture::Texture(const std::string& name, const std::string &filename)
             : mFilename(filename), mName(name)
     {
@@ -28,6 +30,8 @@ namespace FlowEngine { namespace Graphics {
         bind();
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, sWrapMode);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, sWrapMode);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, mWidth, mHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
         SOIL_free_image_data(pixels);
         unbind();

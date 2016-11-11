@@ -1,5 +1,5 @@
 #include "window.h"
-#include "../textureManager.h"
+#include "textureManager.h"
 
 namespace FlowEngine { namespace Graphics {
 
