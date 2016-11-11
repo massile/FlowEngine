@@ -8,10 +8,10 @@ namespace FlowEngine { namespace Graphics {
     class Texture
     {
     private:
-        std::string m_filename;
-        GLuint m_id;
-        int m_width;
-        int m_height;
+        std::string mFilename;
+        GLuint mID;
+        int mWidth;
+        int mHeight;
     public:
         Texture(const std::string& filename);
         ~Texture();
@@ -19,9 +19,9 @@ namespace FlowEngine { namespace Graphics {
         void bind() const;
         void unbind() const;
 
-        inline const GLuint getWidth() const { return m_width; }
-        inline const GLuint getHeight() const { return m_height; }
-        inline const GLuint getId() const { return m_id; }
+        inline const GLuint getWidth() const { return mWidth; }
+        inline const GLuint getHeight() const { return mHeight; }
+        inline const GLuint getId() const { return mID; }
 
     private:
         GLuint load();

@@ -2,39 +2,39 @@
 
 namespace FlowEngine { namespace Graphics {
 
-        VertexArray::VertexArray()
-        {
-            glGenVertexArrays(1, &m_ArrayID);
-        }
+    VertexArray::VertexArray()
+    {
+        glGenVertexArrays(1, &mArrayID);
+    }
 
-        VertexArray::~VertexArray()
-        {
-            for (int i = 0; i < m_Buffers.size(); i++)
-                delete m_Buffers[i];
-        }
+    VertexArray::~VertexArray()
+    {
+        for (int i = 0; i < mBuffers.size(); i++)
+            delete mBuffers[i];
+    }
 
-        void VertexArray::addBuffer(VertexBuffer* buffer, GLuint index)
-        {
-            bind();
-            buffer->bind();
+    void VertexArray::addBuffer(VertexBuffer* buffer, GLuint index)
+    {
+        bind();
+        buffer->bind();
 
-            glEnableVertexAttribArray(index);
-            glVertexAttribPointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);
+        glEnableVertexAttribArray(index);
+        glVertexAttribPointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);
 
-            buffer->unbind();
-            unbind();
+        buffer->unbind();
+        unbind();
 
-            m_Buffers.push_back(buffer);
-        }
+        mBuffers.push_back(buffer);
+    }
 
-        void VertexArray::bind() const
-        {
-            glBindVertexArray(m_ArrayID);
-        }
+    void VertexArray::bind() const
+    {
+        glBindVertexArray(mArrayID);
+    }
 
-        void VertexArray::unbind() const
-        {
-            glBindVertexArray(0);
-        }
+    void VertexArray::unbind() const
+    {
+        glBindVertexArray(0);
+    }
 
-    } }
+}}

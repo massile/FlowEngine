@@ -1,21 +1,22 @@
+
 #include "flow.h"
 
 namespace FlowEngine {
 
-    Flow::Flow() : m_FramesPerSecond(0), m_UpdatesPerSecond(0)
+    Flow::Flow()
     {
 
     }
 
     Flow::~Flow()
     {
-        delete m_Window;
+
     }
 
     Graphics::Window *Flow::createWindow(const char *name, int width, int height)
     {
-        m_Window = new Graphics::Window(name, width, height);
-        return m_Window;
+        mWindow = new Graphics::Window(name, width, height);
+        return mWindow;
     }
 
     void Flow::start()
@@ -32,9 +33,9 @@ namespace FlowEngine {
         unsigned int updates = 0;
 
         float timer = 0.0f, start = glfwGetTime(), elapsed = 0.0f;
-        while (!m_Window->closed())
+        while (!mWindow->closed())
         {
-            m_Window->clear();
+            mWindow->clear();
             if (elapsed - updateTimer > updateTick) {
                 update();
                 updates++;
@@ -42,16 +43,17 @@ namespace FlowEngine {
             }
             render();
             frames++;
-            m_Window->update();
+            mWindow->update();
             if (elapsed - timer > 1.0f) {
                 tick();
                 timer += 1.0f;
-                m_FramesPerSecond = frames;
-                m_UpdatesPerSecond = updates;
+                mFramesPerSecond = frames;
+                mUpdatesPerSecond = updates;
                 frames = 0;
                 updates = 0;
             }
             elapsed = glfwGetTime() - start;
         }
     }
+
 }

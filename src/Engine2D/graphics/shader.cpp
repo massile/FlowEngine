@@ -3,15 +3,15 @@
 
 namespace FlowEngine { namespace Graphics {
 
-    Shader::Shader(const char* vertPath, const char* fragPath)
-            : m_VertPath(vertPath), m_FragPath(fragPath)
+    Shader::Shader(const std::string& vertPath, const std::string& fragPath)
+            : mVertPath(vertPath), mFragPath(fragPath)
     {
-        m_ShaderID = load();
+        mShaderID = load();
     }
 
     Shader::~Shader()
     {
-        glDeleteProgram(m_ShaderID);
+        glDeleteProgram(mShaderID);
     }
 
     GLuint Shader::load()
@@ -20,8 +20,8 @@ namespace FlowEngine { namespace Graphics {
         GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
         GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
 
-        std::string vertSourceString = FileUtils::read_file(m_VertPath);
-        std::string fragSourceString = FileUtils::read_file(m_FragPath);
+        std::string vertSourceString = FileUtils::read_file(mVertPath.c_str());
+        std::string fragSourceString = FileUtils::read_file(mFragPath.c_str());
 
         const char* vertSource = vertSourceString.c_str();
         const char* fragSource = fragSourceString.c_str();
@@ -71,7 +71,7 @@ namespace FlowEngine { namespace Graphics {
 
     GLint Shader::getUniformLocation(const GLchar* name)
     {
-        return glGetUniformLocation(m_ShaderID, name);
+        return glGetUniformLocation(mShaderID, name);
     }
 
     void Shader::uniform(const GLchar* name, float value)
@@ -106,7 +106,7 @@ namespace FlowEngine { namespace Graphics {
 
     void Shader::enable() const
     {
-        glUseProgram(m_ShaderID);
+        glUseProgram(mShaderID);
     }
 
     void Shader::disable() const

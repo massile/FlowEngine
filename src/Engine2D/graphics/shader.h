@@ -8,14 +8,15 @@
 #include "../utils/fileutils.h"
 
 namespace FlowEngine { namespace Graphics {
+
     class Shader
     {
     private:
-        GLuint m_ShaderID;
-        const char* m_VertPath;
-        const char* m_FragPath;
+        GLuint mShaderID;
+        const std::string& mVertPath;
+        const std::string& mFragPath;
     public:
-        Shader(const char* vertPath, const char* fragPath);
+        Shader(const std::string& vertPath, const std::string& fragPath);
         ~Shader();
 
         void uniform(const GLchar* name, float value);
@@ -34,4 +35,5 @@ namespace FlowEngine { namespace Graphics {
         GLuint load();
         GLint getUniformLocation(const GLchar* name);
     };
+
 }}

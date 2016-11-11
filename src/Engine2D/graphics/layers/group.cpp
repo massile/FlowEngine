@@ -4,22 +4,23 @@
 namespace FlowEngine { namespace Graphics {
 
     Group::Group(const glm::mat4& transform)
-            : m_TransformationMatrix(transform)
+            : mTransformationMatrix(transform)
     {
     }
 
     void Group::add(Renderable2D* renderable)
     {
-        m_Renderables.push_back(renderable);
+        mRenderables.push_back(renderable);
     }
 
     void Group::submit(Renderer2D* renderer) const
     {
-        renderer->push(m_TransformationMatrix);
+        renderer->push(mTransformationMatrix);
 
-        for (const Renderable2D* renderable : m_Renderables)
+        for (const Renderable2D* renderable : mRenderables)
             renderable->submit(renderer);
 
         renderer->pop();
     }
+
 }}

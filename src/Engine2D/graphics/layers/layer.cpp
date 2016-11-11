@@ -2,43 +2,43 @@
 
 namespace FlowEngine { namespace Graphics {
 
-        Layer::Layer(Renderer2D* renderer, Shader* shader, glm::mat4 projectionMatrix)
-                : m_Renderer(renderer), m_Shader(shader), m_ProjectionMatrix(projectionMatrix)
-        {
-            m_Shader->enable();
-            m_Shader->uniform("pr_matrix", m_ProjectionMatrix);
+    Layer::Layer(Renderer2D* renderer, Shader* shader, glm::mat4 projectionMatrix)
+            : mRenderer(renderer), mShader(shader), mProjectionMatrix(projectionMatrix)
+    {
+        mShader->enable();
+        mShader->uniform("pr_matrix", mProjectionMatrix);
 
-            std::vector<int> texIds;
-            for(int i=0; i<32; i++)
-                texIds.push_back(i);
-            m_Shader->uniform("textures", texIds.data(), 32);
-            m_Shader->disable();
-        }
+        std::vector<int> texIds;
+        for(int i=0; i<32; i++)
+            texIds.push_back(i);
+        mShader->uniform("textures", texIds.data(), 32);
+        mShader->disable();
+    }
 
-        Layer::~Layer()
-        {
-            delete m_Shader;
-            delete m_Renderer;
+    Layer::~Layer()
+    {
+        delete mShader;
+        delete mRenderer;
 
-            for (int i = 0; i < m_Renderables.size(); i++)
-                delete m_Renderables[i];
-        }
+        for (int i = 0; i < mRenderables.size(); i++)
+            delete mRenderables[i];
+    }
 
-        void Layer::add(Renderable2D* renderable)
-        {
-            m_Renderables.push_back(renderable);
-        }
+    void Layer::add(Renderable2D* renderable)
+    {
+        mRenderables.push_back(renderable);
+    }
 
-        void Layer::render()
-        {
-            m_Shader->enable();
+    void Layer::render()
+    {
+        mShader->enable();
 
-            m_Renderer->begin();
-            for (const Renderable2D* renderable : m_Renderables)
-                renderable->submit(m_Renderer);
-            m_Renderer->end();
+        mRenderer->begin();
+        for (const Renderable2D* renderable : mRenderables)
+            renderable->submit(mRenderer);
+        mRenderer->end();
 
-            m_Renderer->flush();
-        }
+        mRenderer->flush();
+    }
 
-    } }
+}}

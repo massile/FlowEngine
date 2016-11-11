@@ -6,11 +6,12 @@
 #include "vertexBuffer.h"
 
 namespace FlowEngine { namespace Graphics {
+
     class VertexArray
     {
     private:
-        GLuint m_ArrayID;
-        std::vector<VertexBuffer*> m_Buffers;
+        GLuint mArrayID;
+        std::vector<VertexBuffer*> mBuffers;
     public:
         VertexArray();
         ~VertexArray();
@@ -19,4 +20,5 @@ namespace FlowEngine { namespace Graphics {
         void bind() const;
         void unbind() const;
     };
+
 }}

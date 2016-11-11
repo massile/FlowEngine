@@ -3,17 +3,19 @@
 #include <GL/glew.h>
 
 namespace FlowEngine { namespace Graphics {
+
     class VertexBuffer
     {
     private:
-        GLuint m_BufferID;
-        GLuint m_ComponentCount;
+        GLuint mBufferID;
+        GLuint mComponentCount;
     public:
         VertexBuffer(GLfloat* data, GLsizei count, GLuint componentCount);
 
         void bind() const;
         void unbind() const;
 
-        inline GLuint getComponentCount() const { return m_ComponentCount; }
+        inline GLuint getComponentCount() const { return mComponentCount; }
     };
+
 }}

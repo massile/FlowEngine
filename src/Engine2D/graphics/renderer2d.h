@@ -10,8 +10,8 @@ namespace FlowEngine { namespace Graphics {
     class Renderer2D
     {
     protected:
-        std::vector<glm::mat4> m_TransformationStack;
-        const glm::mat4* m_TransformationBack;
+        std::vector<glm::mat4> mTransformationStack;
+        const glm::mat4* mTransformationBack;
 
     public:
         Renderer2D();
@@ -23,4 +23,5 @@ namespace FlowEngine { namespace Graphics {
         virtual void flush() = 0;
         virtual void end() = 0;
     };
+
 }}

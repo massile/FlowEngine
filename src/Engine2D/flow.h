@@ -11,14 +11,13 @@ namespace FlowEngine {
     class Flow
     {
     private:
-        Graphics::Window* m_Window;
-        unsigned int m_FramesPerSecond, m_UpdatesPerSecond;
+        Graphics::Window* mWindow;
+        unsigned int mFramesPerSecond, mUpdatesPerSecond;
     protected:
         Flow();
         virtual ~Flow();
 
         Graphics::Window* createWindow(const char *name, int width, int height);
-
     public:
         void start();
 
@@ -28,8 +27,8 @@ namespace FlowEngine {
         virtual void update() {}
         virtual void render() = 0;
 
-        const unsigned int getFPS() const { return m_FramesPerSecond; }
-        const unsigned int getUPS() const { return m_UpdatesPerSecond; }
+        const unsigned int getFPS() const { return mFramesPerSecond; }
+        const unsigned int getUPS() const { return mUpdatesPerSecond; }
 
     private:
         void run();

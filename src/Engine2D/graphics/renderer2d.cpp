@@ -4,21 +4,21 @@ namespace FlowEngine { namespace Graphics {
 
     Renderer2D::Renderer2D()
     {
-        m_TransformationStack.push_back(glm::mat4(1.0f));
-        m_TransformationBack = &m_TransformationStack.back();
+        mTransformationStack.push_back(glm::mat4(1.0f));
+        mTransformationBack = &mTransformationStack.back();
     }
 
     void Renderer2D::push(const glm::mat4 &matrix, bool override)
     {
-        m_TransformationStack.push_back(override ? matrix : m_TransformationStack.back() * matrix);
-        m_TransformationBack = &m_TransformationStack.back();
+        mTransformationStack.push_back(override ? matrix : mTransformationStack.back() * matrix);
+        mTransformationBack = &mTransformationStack.back();
     }
 
     void Renderer2D::pop()
     {
-        if (m_TransformationStack.size() > 1)
-            m_TransformationStack.pop_back();
-        m_TransformationBack = &m_TransformationStack.back();
+        if (mTransformationStack.size() > 1)
+            mTransformationStack.pop_back();
+        mTransformationBack = &mTransformationStack.back();
     }
 
 }}
