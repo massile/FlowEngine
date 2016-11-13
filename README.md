@@ -11,7 +11,6 @@ The API is completely open source, so you are free to do whatever you want with 
 It will also be the basis for another project I'm working on ([a custom file format dedicated to Blender](https://github.com/massile/sls-blender-exporter))
 it will be a good opportunity to test if the models load correctly.
 
-
 ## Libraries
 
 As I am developing on Linux, the graphics library I use for this projet is OpenGL 3.3.
@@ -42,20 +41,25 @@ Check the [release notes](https://github.com/massile/FlowEngine/releases) for mo
 
 <img src="documentation/main.gif" width="500"/>
 
+ Here are some examples:
 
-#### Rough material
- 
  ![](documentation/rough.gif)
- 
-#### Shiny material
- 
  ![](documentation/shiny.gif)
 
 ## 2D Engine
 
-The 2D Engine has the following features
-   - Window system
+The renderer can render up to 60 000 sprites on the screen at 500 fps with the following features:
    - Basic shader loading
    - Object oriented buffer & vertex arrays
+   - Texture loading and texture arrays (32 textures on the array)
+   - Mask texture rendering (only one, taking the entire screen)
+   - Multiple layers of sprite
+   - Scene graphs
+   - Multiple render targets (screen or buffer)
+
+   Here are some examples:
    
 ![](documentation/2d.gif)
+![](documentation/2d-mask.gif)
+
+Check the [release notes](https://github.com/massile/FlowEngine/releases) for more details.
