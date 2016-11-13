@@ -20,6 +20,7 @@ namespace FlowEngine { namespace Graphics {
         virtual void render();
 
         inline const std::vector<Renderable2D*>& getRenderables() const { return mRenderables; }
+        inline const Renderer2D* getRenderer() const { return mRenderer; }
         void setMask(const Mask* mask) const { mRenderer->setMask(mask); }
     };
 

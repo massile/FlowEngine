@@ -29,7 +29,7 @@ add_library(FlowEngine STATIC
                 src/Engine2D/graphics/texture.h src/Engine2D/graphics/texture.cpp
                 src/Engine2D/flow.h src/Engine2D/flow.cpp src/Engine2D/graphics/renderable2d.cpp
                 src/Engine2D/graphics/textureManager.cpp src/Engine2D/graphics/textureManager.h
-                src/Engine2D/graphics/mask.h src/Engine2D/utils/math.h)
+                src/Engine2D/graphics/mask.h src/Engine2D/utils/math.h src/Engine2D/factories/MeshFactory.cpp src/Engine2D/factories/MeshFactory.h src/Engine2D/graphics/frameBuffer.cpp src/Engine2D/graphics/frameBuffer.h)
 target_link_libraries(FlowEngine ${GLEW_LIBRARIES})
 target_link_libraries(FlowEngine ${OPENGL_gl_LIBRARY})
 target_link_libraries(FlowEngine ${SOIL_LIBRARY})

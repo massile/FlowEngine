@@ -41,6 +41,7 @@ namespace FlowEngine { namespace Graphics {
         mRenderer->end();
 
         mRenderer->flush();
+        mShader->disable();
     }
 
 }}

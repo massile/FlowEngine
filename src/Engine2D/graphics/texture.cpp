@@ -11,6 +11,12 @@ namespace FlowEngine { namespace Graphics {
         load();
     }
 
+    Texture::Texture(int width, int height)
+        : mWidth(width), mHeight(height)
+    {
+        load();
+    }
+
     Texture::~Texture()
     {
         if(mID) {
@@ -25,7 +31,10 @@ namespace FlowEngine { namespace Graphics {
 
     GLuint Texture::load()
     {
-        unsigned char* pixels = SOIL_load_image(mFilename.c_str(), &mWidth, &mHeight, nullptr, 0);
+        unsigned char* pixels = nullptr;
+        if(mFilename != "") {
+            pixels = SOIL_load_image(mFilename.c_str(), &mWidth, &mHeight, nullptr, 0);
+        }
         glGenTextures(1, &mID);
         bind();
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -33,7 +42,9 @@ namespace FlowEngine { namespace Graphics {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, sWrapMode);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, sWrapMode);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, mWidth, mHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-        SOIL_free_image_data(pixels);
+        if(mFilename != "") {
+            SOIL_free_image_data(pixels);
+        }
         unbind();
     }
 

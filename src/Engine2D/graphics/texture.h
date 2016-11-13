@@ -18,7 +18,7 @@ namespace FlowEngine { namespace Graphics {
     private:
         static TextureWrap sWrapMode;
     private:
-        std::string mFilename;
+        std::string mFilename = "";
         std::string mName;
 
         GLuint mID;
@@ -26,6 +26,7 @@ namespace FlowEngine { namespace Graphics {
         int mHeight;
     public:
         Texture(const std::string& name, const std::string& filename);
+        Texture(int width, int height);
         ~Texture();
 
         void bind() const;
