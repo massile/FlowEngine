@@ -22,14 +22,25 @@ add_library(FlowEngine STATIC
                 src/Engine2D/graphics/buffer/indexBuffer.h src/Engine2D/graphics/buffer/indexBuffer.cpp
                 src/Engine2D/graphics/sprite.h src/Engine2D/graphics/sprite.cpp
                 src/Engine2D/graphics/renderer2d.h src/Engine2D/graphics/renderer2d.cpp
-                src/Engine2D/graphics/renderable2d.h
+                src/Engine2D/graphics/renderable2d.h src/Engine2D/graphics/renderable2d.cpp
                 src/Engine2D/graphics/batchRenderer2d.h src/Engine2D/graphics/batchRenderer2d.cpp
                 src/Engine2D/graphics/layers/layer.h src/Engine2D/graphics/layers/layer.cpp
                 src/Engine2D/graphics/layers/group.h src/Engine2D/graphics/layers/group.cpp
                 src/Engine2D/graphics/texture.h src/Engine2D/graphics/texture.cpp
-                src/Engine2D/flow.h src/Engine2D/flow.cpp src/Engine2D/graphics/renderable2d.cpp
+                src/Engine2D/flow.h src/Engine2D/flow.cpp
                 src/Engine2D/graphics/textureManager.cpp src/Engine2D/graphics/textureManager.h
-                src/Engine2D/graphics/mask.h src/Engine2D/utils/math.h src/Engine2D/factories/MeshFactory.cpp src/Engine2D/factories/MeshFactory.h src/Engine2D/graphics/frameBuffer.cpp src/Engine2D/graphics/frameBuffer.h src/Engine2D/graphics/PostEffect.cpp src/Engine2D/graphics/PostEffect.h src/Engine2D/graphics/PostEffectPass.cpp src/Engine2D/graphics/PostEffectPass.h)
+                src/Engine2D/graphics/mask.h src/Engine2D/utils/math.h
+                src/Engine2D/factories/MeshFactory.cpp src/Engine2D/factories/MeshFactory.h
+                src/Engine2D/graphics/frameBuffer.cpp src/Engine2D/graphics/frameBuffer.h
+                src/Engine2D/graphics/PostEffect.cpp src/Engine2D/graphics/PostEffect.h
+                src/Engine2D/graphics/PostEffectPass.cpp src/Engine2D/graphics/PostEffectPass.h
+                src/Engine2D/events/Event.cpp src/Engine2D/events/Event.h
+                src/Engine2D/events/IEventListener.h src/Engine2D/events/KeyEvent.cpp src/Engine2D/events/KeyEvent.h
+                src/Engine2D/events/KeyEvent.cpp src/Engine2D/events/KeyEvent.h
+                src/Engine2D/events/MouseEvent.cpp src/Engine2D/events/MouseEvent.h)
+
+add_definitions(-Dinterface=class)
+
 target_link_libraries(FlowEngine ${GLEW_LIBRARIES})
 target_link_libraries(FlowEngine ${OPENGL_gl_LIBRARY})
 target_link_libraries(FlowEngine ${SOIL_LIBRARY})

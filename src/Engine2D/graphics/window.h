@@ -18,7 +18,14 @@ namespace FlowEngine { namespace Graphics {
         GLFWwindow *mWindow;
 
         bool mKeys[MAX_KEYS];
+        bool mKeyStates[MAX_KEYS];
+        bool mKeyTyped[MAX_KEYS];
+
         bool mMouseButtons[MAX_BUTTONS];
+        bool mMouseStates[MAX_BUTTONS];
+        bool mMouseClicked[MAX_BUTTONS];
+        bool mMouseGrabbed;
+
         glm::vec2 mMousePosition;
 
     public:
@@ -29,8 +36,12 @@ namespace FlowEngine { namespace Graphics {
         bool closed() const;
 
         bool isKeyPressed(unsigned int keycode) const;
+        bool isKeyTyped(unsigned int keycode) const;
         bool isMouseButtonPressed(unsigned int button) const;
-        inline const glm::vec2& getMousePosition() const { return mMousePosition; }
+        bool isMouseButtonClicked(unsigned int button) const;
+
+        const glm::vec2& getMousePosition() const;
+        const bool isMouseGrabbed() const;
 
         inline int getWidth() const { return m_Width; }
         inline int getHeight() const { return mHeight; }

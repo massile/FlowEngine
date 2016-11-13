@@ -25,6 +25,11 @@ namespace FlowEngine { namespace Graphics {
             delete mRenderables[i];
     }
 
+    bool Layer::onEvent(const Events::Event &event)
+    {
+        return false;
+    }
+
     Renderable2D* Layer::add(Renderable2D* renderable)
     {
         mRenderables.push_back(renderable);

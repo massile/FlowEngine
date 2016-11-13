@@ -61,6 +61,30 @@ namespace FlowEngine { namespace Graphics {
         return true;
     }
 
+    bool Window::isMouseButtonPressed(unsigned int button) const
+    {
+        if (button >= MAX_BUTTONS)
+            return false;
+        return mMouseButtons[button];
+    }
+
+    const glm::vec2 &Window::getMousePosition() const
+    {
+        return mMousePosition;
+    }
+
+    bool Window::isMouseButtonClicked(unsigned int button) const
+    {
+        if (button >= MAX_BUTTONS)
+            return false;
+        return mMouseClicked[button];
+    }
+
+    const bool Window::isMouseGrabbed() const
+    {
+        return mMouseGrabbed;
+    }
+
     bool Window::isKeyPressed(unsigned int keycode) const
     {
         if (keycode >= MAX_KEYS)
@@ -68,12 +92,11 @@ namespace FlowEngine { namespace Graphics {
         return mKeys[keycode];
     }
 
-    bool Window::isMouseButtonPressed(unsigned int button) const
+    bool Window::isKeyTyped(unsigned int keycode) const
     {
-        if (button >= MAX_BUTTONS)
+        if (keycode >= MAX_KEYS)
             return false;
-
-        return mMouseButtons[button];
+        return mKeyTyped[keycode];
     }
 
     void Window::clear() const
