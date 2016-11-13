@@ -23,6 +23,8 @@ namespace FlowEngine { namespace Graphics {
         void clean() const;
 
         inline Texture* getTexture() const { return mTexture; }
+        inline int getWidth() const { return mTexture->getWidth(); }
+        inline int getHeight() const { return mTexture->getHeight(); }
     };
 
 }}

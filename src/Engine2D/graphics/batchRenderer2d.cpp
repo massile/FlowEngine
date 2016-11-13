@@ -8,8 +8,9 @@ namespace FlowEngine { namespace Graphics {
         : mScreenSize(screenSize),
           mFrameBuffer(new FrameBuffer(screenSize.x, screenSize.y)),
           mScreenQuad(MeshFactory::generateQuad(0, 0, mScreenSize.x, mScreenSize.y)),
-          mFramebufferShader(new Shader("resources/shaders/framebuffer.vert", "resources/shaders/framebuffer.frag"))
-
+          mFramebufferShader(new Shader("resources/shaders/framebuffer.vert", "resources/shaders/framebuffer.frag")),
+          mPostEffect(new PostEffect),
+          mPostEffectBuffer(new FrameBuffer(screenSize.x, screenSize.y))
     {
         glGenVertexArrays(1, &mVAO);
         glGenBuffers(1, &mVBO);
@@ -56,13 +57,12 @@ namespace FlowEngine { namespace Graphics {
 
     void BatchRenderer2D::begin()
     {
-        if(mTarget == BUFFER) {
-            mFrameBuffer->bind();
-            mFrameBuffer->clean();
-        } else {
-            glBindFramebuffer(GL_FRAMEBUFFER, 0);
-            glViewport(0, 0, mScreenSize.x, mScreenSize.y);
-        }
+        mPostEffectBuffer->bind();
+        mPostEffectBuffer->clean();
+
+        mFrameBuffer->bind();
+        mFrameBuffer->clean();
+
         glBindBuffer(GL_ARRAY_BUFFER, mVBO);
         mBuffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
@@ -164,21 +164,24 @@ namespace FlowEngine { namespace Graphics {
         mIBO->unbind();
         glBindVertexArray(0);
 
-        if(mTarget == BUFFER) {
-            glBindFramebuffer(GL_FRAMEBUFFER, 0);
-            glViewport(0, 0, mScreenSize.x, mScreenSize.y);
+        mIndexCount = 0;
+        mTextureSlots.clear();
 
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, mFrameBuffer->getTexture()->getId());
+        mPostEffect->render(mFrameBuffer, mPostEffectBuffer, mScreenQuad, mIBO);
 
-            mFramebufferShader->enable();
-            glBindVertexArray(mScreenQuad);
-            mIBO->bind();
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-            mIBO->unbind();
-            glBindVertexArray(0);
-            mFramebufferShader->disable();
-        }
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glViewport(0, 0, mScreenSize.x, mScreenSize.y);
+
+        glActiveTexture(GL_TEXTURE0);
+        mPostEffectBuffer->getTexture()->bind();
+
+        mFramebufferShader->enable();
+        glBindVertexArray(mScreenQuad);
+        mIBO->bind();
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        mIBO->unbind();
+        glBindVertexArray(0);
+        mFramebufferShader->disable();
     }
 
 }}

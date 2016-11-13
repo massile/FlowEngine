@@ -4,6 +4,7 @@
 #include "buffer/indexBuffer.h"
 #include "renderable2d.h"
 #include "frameBuffer.h"
+#include "PostEffect.h"
 
 namespace FlowEngine { namespace Graphics {
 
@@ -15,7 +16,6 @@ namespace FlowEngine { namespace Graphics {
 #define RENDERER_INDICES_SIZE	RENDERER_MAX_SPRITES * 6
 
     enum ShaderIndex { POSITION, COLOR, UV, MASK_UV, TID, MID, FIRST=0, LAST=MID };
-    enum RenderTarget { SCREEN, BUFFER };
 
     class BatchRenderer2D : public Renderer2D
     {
@@ -29,9 +29,12 @@ namespace FlowEngine { namespace Graphics {
 
         Shader* mFramebufferShader;
         FrameBuffer* mFrameBuffer;
+        FrameBuffer* mPostEffectBuffer;
+
+        PostEffect* mPostEffect;
+
         glm::vec2 mScreenSize;
         GLuint mScreenQuad;
-        RenderTarget mTarget = SCREEN;
     public:
         BatchRenderer2D(const glm::vec2& screenSize);
         ~BatchRenderer2D();
@@ -41,9 +44,9 @@ namespace FlowEngine { namespace Graphics {
         void end() override;
         void flush() override;
 
-        void setTarget(RenderTarget target) { mTarget = target; }
+        inline void addPostEffectPass(PostEffectPass* pass) { mPostEffect->push(pass); }
+
     private:
-        void init();
         float submitTexture(GLuint textureID);
         float submitTexture(Texture* texture);
     };
