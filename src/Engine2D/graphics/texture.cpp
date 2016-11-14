@@ -19,38 +19,35 @@ namespace FlowEngine { namespace Graphics {
 
     Texture::~Texture()
     {
-        if(mID) {
-            glDeleteTextures(1, &mID);
-        }
+        if(mID)
+            API::freeTexture(mID);
     }
 
     void Texture::bind() const
     {
-        glBindTexture(GL_TEXTURE_2D, mID);
+        API::bindTexture(GL_TEXTURE_2D, mID);
     }
 
     GLuint Texture::load()
     {
         unsigned char* pixels = nullptr;
-        if(mFilename != "") {
+        if(mFilename != "")
             pixels = SOIL_load_image(mFilename.c_str(), &mWidth, &mHeight, nullptr, 0);
-        }
-        glGenTextures(1, &mID);
+        mID = API::createTexture();
         bind();
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, sWrapMode);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, sWrapMode);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, mWidth, mHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-        if(mFilename != "") {
-            SOIL_free_image_data(pixels);
-        }
+        API::setTextureParameter(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        API::setTextureParameter(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        API::setTextureParameter(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, sWrapMode);
+        API::setTextureParameter(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, sWrapMode);
+        API::setTextureData(GL_TEXTURE_2D, mWidth, mHeight, GL_RGB, GL_RGB, GL_UNSIGNED_BYTE, pixels);
         unbind();
+        if(mFilename != "")
+            SOIL_free_image_data(pixels);
     }
 
     void Texture::unbind() const
     {
-        glBindTexture(GL_TEXTURE_2D, 0);
+        API::unbindTextures(GL_TEXTURE_2D);
     }
 
 }}

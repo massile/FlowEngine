@@ -2,6 +2,7 @@
 
 #include <string>
 #include <GL/glew.h>
+#include "../api/API.h"
 
 namespace FlowEngine { namespace Graphics {
 
@@ -21,7 +22,7 @@ namespace FlowEngine { namespace Graphics {
         std::string mFilename = "";
         std::string mName;
 
-        GLuint mID;
+        uint mID;
         int mWidth;
         int mHeight;
     public:
@@ -32,16 +33,16 @@ namespace FlowEngine { namespace Graphics {
         void bind() const;
         void unbind() const;
 
-        inline const GLuint getWidth() const { return mWidth; }
-        inline const GLuint getHeight() const { return mHeight; }
-        inline const GLuint getId() const { return mID; }
+        inline const uint getWidth() const { return mWidth; }
+        inline const uint getHeight() const { return mHeight; }
+        inline const uint getId() const { return mID; }
         inline const std::string& getName() const { return mName; }
 
     public:
         static void setWrapMode(TextureWrap wrap) { sWrapMode = wrap; }
 
     private:
-        GLuint load();
+        uint load();
     };
 
 }}

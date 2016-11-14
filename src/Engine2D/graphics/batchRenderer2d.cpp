@@ -12,21 +12,21 @@ namespace FlowEngine { namespace Graphics {
           mPostEffect(new PostEffect),
           mPostEffectBuffer(new FrameBuffer(screenSize.x, screenSize.y))
     {
-        glGenVertexArrays(1, &mVAO);
-        glGenBuffers(1, &mVBO);
-        glBindVertexArray(mVAO);
-        glBindBuffer(GL_ARRAY_BUFFER, mVBO);
-        glBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, NULL, GL_DYNAMIC_DRAW);
+        mVAO = API::createVertexArray();
+        mVBO = API::createBuffer();
+        API::bindVertexArray(mVAO);
+        API::bindBuffer(GL_ARRAY_BUFFER, mVBO);
+        API::setBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, nullptr, GL_DYNAMIC_DRAW);
 
         for(int i=ShaderIndex::FIRST; i<=ShaderIndex::LAST; i++)
-            glEnableVertexAttribArray(i);
-        glVertexAttribPointer(POSITION, 3, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (GLvoid*)offsetof(VertexData, position));
-        glVertexAttribPointer(COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, RENDERER_VERTEX_SIZE, (GLvoid*)offsetof(VertexData, color));
-        glVertexAttribPointer(UV, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (GLvoid*)offsetof(VertexData, uv));
-        glVertexAttribPointer(MASK_UV, 2, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (GLvoid*)offsetof(VertexData, maskUv));
-        glVertexAttribPointer(TID, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (GLvoid*)offsetof(VertexData, tid));
-        glVertexAttribPointer(MID, 1, GL_FLOAT, GL_FALSE, RENDERER_VERTEX_SIZE, (GLvoid*)offsetof(VertexData, mid));
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+            API::enableVertexAttribute(i);
+        API::setVertexAttributePointer(POSITION, 3, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, position));
+        API::setVertexAttributePointer(COLOR, 4, GL_UNSIGNED_BYTE, true, RENDERER_VERTEX_SIZE, offsetof(VertexData, color));
+        API::setVertexAttributePointer(UV, 2, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, uv));
+        API::setVertexAttributePointer(MASK_UV, 2, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, maskUv));
+        API::setVertexAttributePointer(TID, 1, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, tid));
+        API::setVertexAttributePointer(MID, 1, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, mid));
+        API::unbindBuffers(GL_ARRAY_BUFFER);
 
         GLuint* indices = new GLuint[RENDERER_INDICES_SIZE];
         for(int i=0, offset=0; i < RENDERER_INDICES_SIZE; i+=6, offset+=4)
@@ -40,7 +40,7 @@ namespace FlowEngine { namespace Graphics {
         }
 
         mIBO = new IndexBuffer(indices, RENDERER_INDICES_SIZE);
-        glBindVertexArray(0);
+        API::unbindVertexArrays();
 
         mFramebufferShader->enable();
         mFramebufferShader->uniform("tex", 0);
@@ -51,8 +51,8 @@ namespace FlowEngine { namespace Graphics {
     BatchRenderer2D::~BatchRenderer2D()
     {
         delete mIBO;
-        glDeleteVertexArrays(1, &mVAO);
-        glDeleteBuffers(1, &mVBO);
+        API::freeVertexArray(mVAO);
+        API::freeBuffer(mVBO);
     }
 
     void BatchRenderer2D::begin()
@@ -63,11 +63,11 @@ namespace FlowEngine { namespace Graphics {
         mFrameBuffer->bind();
         mFrameBuffer->clean();
 
-        glBindBuffer(GL_ARRAY_BUFFER, mVBO);
+        API::bindBuffer(GL_ARRAY_BUFFER, mVBO);
         mBuffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
 
-    float BatchRenderer2D::submitTexture(GLuint textureID)
+    float BatchRenderer2D::submitTexture(uint textureID)
     {
         float textureSlot;
         bool found = false;
@@ -148,39 +148,39 @@ namespace FlowEngine { namespace Graphics {
     void BatchRenderer2D::end()
     {
         glUnmapBuffer(GL_ARRAY_BUFFER);
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        API::unbindBuffers(GL_ARRAY_BUFFER);
     }
 
     void BatchRenderer2D::flush()
     {
         for(int i=0; i<mTextureSlots.size(); i++) {
-            glActiveTexture(GL_TEXTURE0 + i);
-            glBindTexture(GL_TEXTURE_2D, mTextureSlots[i]);
+            API::setActiveTexture(GL_TEXTURE0 + i);
+            API::bindTexture(GL_TEXTURE_2D, mTextureSlots[i]);
         }
 
-        glBindVertexArray(mVAO);
+        API::bindVertexArray(mVAO);
         mIBO->bind();
-        glDrawElements(GL_TRIANGLES, mIndexCount, GL_UNSIGNED_INT, nullptr);
+        API::drawElements(GL_TRIANGLES, mIndexCount, GL_UNSIGNED_INT, nullptr);
         mIBO->unbind();
-        glBindVertexArray(0);
+        API::unbindVertexArrays();
 
         mIndexCount = 0;
         mTextureSlots.clear();
 
         mPostEffect->render(mFrameBuffer, mPostEffectBuffer, mScreenQuad, mIBO);
 
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glViewport(0, 0, mScreenSize.x, mScreenSize.y);
+        API::bindFrameBuffer(GL_FRAMEBUFFER, 0);
+        API::setViewport(0, 0, mScreenSize.x, mScreenSize.y);
 
-        glActiveTexture(GL_TEXTURE0);
+        API::setActiveTexture(GL_TEXTURE0);
         mPostEffectBuffer->getTexture()->bind();
 
         mFramebufferShader->enable();
-        glBindVertexArray(mScreenQuad);
+        API::bindVertexArray(mScreenQuad);
         mIBO->bind();
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        API::drawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
         mIBO->unbind();
-        glBindVertexArray(0);
+        API::bindVertexArray(0);
         mFramebufferShader->disable();
     }
 

@@ -14,7 +14,7 @@ namespace FlowEngine { namespace Graphics {
         PostEffect();
         ~PostEffect();
 
-        void render(FrameBuffer* src, FrameBuffer* dest, GLuint quad, IndexBuffer* ibo);
+        void render(FrameBuffer* src, FrameBuffer* dest, uint quad, IndexBuffer* ibo);
 
         void push(PostEffectPass* pass);
         void pop();

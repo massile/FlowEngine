@@ -37,7 +37,8 @@ add_library(FlowEngine STATIC
                 src/Engine2D/events/Event.cpp src/Engine2D/events/Event.h
                 src/Engine2D/events/IEventListener.h src/Engine2D/events/KeyEvent.cpp src/Engine2D/events/KeyEvent.h
                 src/Engine2D/events/KeyEvent.cpp src/Engine2D/events/KeyEvent.h
-                src/Engine2D/events/MouseEvent.cpp src/Engine2D/events/MouseEvent.h)
+                src/Engine2D/events/MouseEvent.cpp src/Engine2D/events/MouseEvent.h
+                src/Engine2D/api/API.cpp src/Engine2D/api/API.h)
 
 add_definitions(-Dinterface=class)
 

@@ -17,7 +17,7 @@ namespace FlowEngine { namespace Graphics {
     {
         mShader->enable();
         mShader->uniform("pr_matrix", glm::ortho(0.0f, (float)target->getWidth(), (float)target->getHeight(), 0.0f, -1.0f, 1.0f));
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        API::drawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
         mShader->disable();
     }
 

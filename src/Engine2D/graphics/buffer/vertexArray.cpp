@@ -1,10 +1,11 @@
 #include "vertexArray.h"
+#include "../../api/API.h"
 
 namespace FlowEngine { namespace Graphics {
 
     VertexArray::VertexArray()
     {
-        glGenVertexArrays(1, &mArrayID);
+        mArrayID = API::createVertexArray();
     }
 
     VertexArray::~VertexArray()
@@ -18,8 +19,8 @@ namespace FlowEngine { namespace Graphics {
         bind();
         buffer->bind();
 
-        glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);
+        API::enableVertexAttribute(index);
+        API::setVertexAttributePointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);
 
         buffer->unbind();
         unbind();
@@ -29,12 +30,12 @@ namespace FlowEngine { namespace Graphics {
 
     void VertexArray::bind() const
     {
-        glBindVertexArray(mArrayID);
+        API::bindVertexArray(mArrayID);
     }
 
     void VertexArray::unbind() const
     {
-        glBindVertexArray(0);
+        API::unbindVertexArrays();
     }
 
 }}

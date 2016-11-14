@@ -5,32 +5,32 @@ namespace FlowEngine { namespace Graphics {
     FrameBuffer::FrameBuffer(int width, int height)
         : mTexture(new Texture(width, height))
     {
-        glGenRenderbuffers(1, &mData.renderBuffer);
-        glBindRenderbuffer(GL_RENDERBUFFER, mData.renderBuffer);
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
+        mData.renderBuffer = API::createRenderBuffer();
+        API::bindRenderBuffer(GL_RENDERBUFFER, mData.renderBuffer);
+        API::renderBufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, width, height);
 
-        glGenFramebuffers(1, &mData.frameBuffer);
-        glBindFramebuffer(GL_FRAMEBUFFER, mData.frameBuffer);
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mTexture->getId(), 0);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, mData.renderBuffer);
+        mData.frameBuffer = API::createFrameBuffer();
+        API::bindFrameBuffer(GL_FRAMEBUFFER, mData.frameBuffer);
+        API::frameBufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mTexture->getId(), 0);
+        API::frameBufferRenderBuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, mData.renderBuffer);
     }
 
     FrameBuffer::~FrameBuffer()
     {
-        glDeleteFramebuffers(1, &mData.frameBuffer);
-        glDeleteRenderbuffers(1, &mData.renderBuffer);
+        API::freeFrameBuffer(mData.frameBuffer);
+        API::freeRenderBuffer(mData.renderBuffer);
     }
 
     void FrameBuffer::bind() const
     {
-        glBindFramebuffer(GL_FRAMEBUFFER, mData.frameBuffer);
-        glViewport(0, 0, mTexture->getWidth(), mTexture->getHeight());
+        API::bindFrameBuffer(GL_FRAMEBUFFER, mData.frameBuffer);
+        API::setViewport(0, 0, mTexture->getWidth(), mTexture->getHeight());
     }
 
     void FrameBuffer::clean() const
     {
-        glClearColor(0, 0, 0, 1);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        API::setClearColor(0, 0, 0, 1);
+        API::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
 }}

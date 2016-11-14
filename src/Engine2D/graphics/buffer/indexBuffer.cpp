@@ -1,33 +1,32 @@
 #include "indexBuffer.h"
+#include "../../api/API.h"
 
 namespace FlowEngine { namespace Graphics {
 
     IndexBuffer::IndexBuffer(GLushort* data, GLsizei count)
-            : mCount(count)
+            : mCount(count), mBufferID(API::createBuffer())
     {
-        glGenBuffers(1, &mBufferID);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mBufferID);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(GLushort), data, GL_STATIC_DRAW);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        bind();
+        API::setBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(GLushort), data, GL_STATIC_DRAW);
+        unbind();
     }
 
     IndexBuffer::IndexBuffer(GLuint *data, GLsizei count)
-            : mCount(count)
+            : mCount(count), mBufferID(API::createBuffer())
     {
-        glGenBuffers(1, &mBufferID);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mBufferID);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(GLuint), data, GL_STATIC_DRAW);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        bind();
+        API::setBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(GLuint), data, GL_STATIC_DRAW);
+        unbind();
     }
 
     void IndexBuffer::bind() const
     {
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mBufferID);
+        API::bindBuffer(GL_ELEMENT_ARRAY_BUFFER, mBufferID);
     }
 
     void IndexBuffer::unbind() const
     {
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        API::unbindBuffers(GL_ELEMENT_ARRAY_BUFFER);
     }
 
 }}

@@ -2,7 +2,7 @@
 
 namespace FlowEngine { namespace Graphics {
 
-    Renderable2D::Renderable2D(glm::vec3 position, glm::vec2 size, GLuint color)
+    Renderable2D::Renderable2D(glm::vec3 position, glm::vec2 size, uint color)
             : mPosition(position), mSize(size), mColor(color)
     {
         setDefaultUv();

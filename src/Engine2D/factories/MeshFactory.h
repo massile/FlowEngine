@@ -1,12 +1,13 @@
 #pragma once
 
 #include <GL/glew.h>
+#include "../api/API.h"
 
 namespace FlowEngine { namespace Graphics {
 
     namespace MeshFactory
     {
-        GLuint generateQuad(float x, float y, float width, float height);
+        uint generateQuad(float x, float y, float width, float height);
     };
 
 }}

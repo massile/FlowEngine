@@ -20,12 +20,12 @@ namespace FlowEngine { namespace Graphics {
     class BatchRenderer2D : public Renderer2D
     {
     private:
-        GLuint mVAO;
-        GLuint mVBO;
+        uint mVAO;
+        uint mVBO;
         IndexBuffer* mIBO;
-        GLsizei mIndexCount;
+        uint mIndexCount;
         VertexData* mBuffer;
-        std::vector<GLuint> mTextureSlots;
+        std::vector<uint> mTextureSlots;
 
         Shader* mFramebufferShader;
         FrameBuffer* mFrameBuffer;
@@ -34,7 +34,7 @@ namespace FlowEngine { namespace Graphics {
         PostEffect* mPostEffect;
 
         glm::vec2 mScreenSize;
-        GLuint mScreenQuad;
+        uint mScreenQuad;
     public:
         BatchRenderer2D(const glm::vec2& screenSize);
         ~BatchRenderer2D();

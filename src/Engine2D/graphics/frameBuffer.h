@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include "texture.h"
+#include "../api/API.h"
 
 namespace FlowEngine { namespace Graphics {
 
@@ -9,8 +10,8 @@ namespace FlowEngine { namespace Graphics {
     {
     private:
         struct {
-            GLuint frameBuffer;
-            GLuint renderBuffer;
+            uint frameBuffer;
+            uint renderBuffer;
         } mData;
 
         Texture* mTexture;

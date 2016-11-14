@@ -101,7 +101,7 @@ namespace FlowEngine { namespace Graphics {
 
     void Window::clear() const
     {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        API::clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     void Window::update()
@@ -120,7 +120,7 @@ namespace FlowEngine { namespace Graphics {
         Window* win = (Window*)glfwGetWindowUserPointer(window);
         win->m_Width = width;
         win->mHeight = height;
-        glViewport(0, 0, width, height);
+        API::setViewport(0, 0, width, height);
     }
 
     void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
