@@ -19,20 +19,17 @@ namespace FlowEngine { namespace Graphics {
         quad[3].position = {x, y + height, 0.0f};
         quad[3].uv = {0.0f, 0.0f};
 
-        uint bufferID = API::createBuffer();
+        VertexBuffer buffer(GL_ARRAY_BUFFER, GL_DYNAMIC_DRAW);
+        buffer.setData(Renderer2D::SPRITE_BYTE_SIZE, quad);
+        buffer.setAttribute<glm::vec3>(POSITION);
+        buffer.setAttribute<uint>(COLOR, 4, true);
+        buffer.setAttribute<glm::vec2>(UV);
+        buffer.setAttribute<glm::vec2>(MASK_UV);
+        buffer.setAttribute<float>(TID);
+        buffer.setAttribute<float>(MID);
+
         VertexArray* vertexArray = new VertexArray;
-
-        vertexArray->bind();
-        API::bindBuffer(GL_ARRAY_BUFFER, bufferID);
-        API::setBufferData(GL_ARRAY_BUFFER, Renderer2D::SPRITE_BYTE_SIZE, quad, GL_STATIC_DRAW);
-
-        API::enableVertexAttribute(POSITION);
-        API::enableVertexAttribute(UV);
-
-        API::setVertexAttributePointer(POSITION, 3, GL_FLOAT, false, Renderer2D::VERTEX_BYTE_SIZE, offsetof(VertexData, position));
-        API::setVertexAttributePointer(UV, 2, GL_FLOAT, false, Renderer2D::VERTEX_BYTE_SIZE, offsetof(VertexData, uv));
-        API::unbindBuffers(GL_ARRAY_BUFFER);
-        vertexArray->unbind();
+        vertexArray->addBuffer(&buffer);
 
         return vertexArray;
     }
