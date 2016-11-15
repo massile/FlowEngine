@@ -14,18 +14,21 @@ namespace FlowEngine { namespace Graphics {
             delete mBuffers[i];
     }
 
-    void VertexArray::addBuffer(VertexBuffer* buffer, GLuint index)
+    void VertexArray::addBuffer(VertexBuffer* buffer)
     {
+        mBuffers.push_back(buffer);
+
         bind();
         buffer->bind();
 
-        API::enableVertexAttribute(index);
-        API::setVertexAttributePointer(index, buffer->getComponentCount(), GL_FLOAT, GL_FALSE, 0, 0);
+        for(BufferAttribute attribute : buffer->getAttributes()) {
+            API::enableVertexAttribute(attribute.index);
+            API::setVertexAttributePointer(attribute.index, attribute.componentCount, attribute.type,
+                                           attribute.normalized, buffer->getAttributeStride(), attribute.offset);
+        }
 
         buffer->unbind();
         unbind();
-
-        mBuffers.push_back(buffer);
     }
 
     void VertexArray::bind() const

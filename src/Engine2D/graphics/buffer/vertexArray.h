@@ -16,7 +16,7 @@ namespace FlowEngine { namespace Graphics {
         VertexArray();
         ~VertexArray();
 
-        void addBuffer(VertexBuffer* buffer, GLuint index);
+        void addBuffer(VertexBuffer* buffer);
         void bind() const;
         void unbind() const;
     };

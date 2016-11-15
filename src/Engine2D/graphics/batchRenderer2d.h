@@ -15,15 +15,13 @@ namespace FlowEngine { namespace Graphics {
 #define RENDERER_BUFFER_SIZE	RENDERER_SPRITE_SIZE * RENDERER_MAX_SPRITES
 #define RENDERER_INDICES_SIZE	RENDERER_MAX_SPRITES * 6
 
-    enum ShaderIndex { POSITION, COLOR, UV, MASK_UV, TID, MID, FIRST=0, LAST=MID };
-
     class BatchRenderer2D : public Renderer2D
     {
     private:
         VertexArray* mVAO = new VertexArray;
         VertexArray* mScreenQuad;
 
-        uint mVBO = API::createBuffer();
+        VertexBuffer* mVBO = new VertexBuffer(GL_ARRAY_BUFFER, GL_DYNAMIC_DRAW);
         IndexBuffer* mIBO;
         uint mIndexCount;
         VertexData* mBuffer;

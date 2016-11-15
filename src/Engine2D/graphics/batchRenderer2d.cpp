@@ -10,19 +10,16 @@ namespace FlowEngine { namespace Graphics {
           mScreenQuad(MeshFactory::generateQuad(0, 0, screenSize.x, screenSize.y)),
           mPostEffectBuffer(new FrameBuffer(screenSize.x, screenSize.y))
     {
-        mVAO->bind();
-        API::bindBuffer(GL_ARRAY_BUFFER, mVBO);
-        API::setBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, nullptr, GL_DYNAMIC_DRAW);
+        mVBO->resize(RENDERER_BUFFER_SIZE);
 
-        for(int i=ShaderIndex::FIRST; i<=ShaderIndex::LAST; i++)
-            API::enableVertexAttribute(i);
-        API::setVertexAttributePointer(POSITION, 3, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, position));
-        API::setVertexAttributePointer(COLOR, 4, GL_UNSIGNED_BYTE, true, RENDERER_VERTEX_SIZE, offsetof(VertexData, color));
-        API::setVertexAttributePointer(UV, 2, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, uv));
-        API::setVertexAttributePointer(MASK_UV, 2, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, maskUv));
-        API::setVertexAttributePointer(TID, 1, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, tid));
-        API::setVertexAttributePointer(MID, 1, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, mid));
-        API::unbindBuffers(GL_ARRAY_BUFFER);
+        mVBO->setAttribute<glm::vec3>(POSITION);
+        mVBO->setAttribute<uint>(COLOR, 4, true);
+        mVBO->setAttribute<glm::vec2>(UV);
+        mVBO->setAttribute<glm::vec2>(MASK_UV);
+        mVBO->setAttribute<float>(TID);
+        mVBO->setAttribute<float>(MID);
+
+        mVAO->addBuffer(mVBO);
 
         GLuint* indices = new GLuint[RENDERER_INDICES_SIZE];
         for(int i=0, offset=0; i < RENDERER_INDICES_SIZE; i+=6, offset+=4)
@@ -36,7 +33,6 @@ namespace FlowEngine { namespace Graphics {
         }
 
         mIBO = new IndexBuffer(indices, RENDERER_INDICES_SIZE);
-        mVAO->unbind();
 
         mFramebufferShader->enable();
         mFramebufferShader->uniform("tex", 0);
@@ -48,7 +44,7 @@ namespace FlowEngine { namespace Graphics {
     {
         delete mIBO;
         delete mVAO;
-        API::freeBuffer(mVBO);
+        delete mVBO;
     }
 
     void BatchRenderer2D::begin()
@@ -59,7 +55,7 @@ namespace FlowEngine { namespace Graphics {
         mFrameBuffer->bind();
         mFrameBuffer->clean();
 
-        API::bindBuffer(GL_ARRAY_BUFFER, mVBO);
+        mVBO->bind();
         mBuffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
 
@@ -149,35 +145,37 @@ namespace FlowEngine { namespace Graphics {
 
     void BatchRenderer2D::flush()
     {
-        for(int i=0; i<mTextureSlots.size(); i++) {
+        for (int i = 0; i < mTextureSlots.size(); i++) {
             API::setActiveTexture(GL_TEXTURE0 + i);
             API::bindTexture(GL_TEXTURE_2D, mTextureSlots[i]);
         }
 
-        mVAO->bind();
-        mIBO->bind();
-        API::drawElements(GL_TRIANGLES, mIndexCount, GL_UNSIGNED_INT, nullptr);
-        mIBO->unbind();
-        mVAO->unbind();
+        {
+            mVAO->bind();
+            mIBO->bind();
+            API::drawElements(GL_TRIANGLES, mIndexCount, GL_UNSIGNED_INT, nullptr);
+            mIBO->unbind();
+            mVAO->unbind();
+        }
 
         mIndexCount = 0;
         mTextureSlots.clear();
-
         mPostEffect->render(mFrameBuffer, mPostEffectBuffer, mScreenQuad, mIBO);
 
         API::bindFrameBuffer(GL_FRAMEBUFFER, 0);
         API::setViewport(0, 0, mScreenSize.x, mScreenSize.y);
-
         API::setActiveTexture(GL_TEXTURE0);
         mPostEffectBuffer->getTexture()->bind();
 
-        mFramebufferShader->enable();
-        mScreenQuad->bind();
-        mIBO->bind();
-        API::drawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-        mIBO->unbind();
-        API::bindVertexArray(0);
-        mFramebufferShader->disable();
+        {
+            mFramebufferShader->enable();
+            mScreenQuad->bind();
+            mIBO->bind();
+            API::drawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+            mIBO->unbind();
+            mScreenQuad->unbind();
+            mFramebufferShader->disable();
+        }
     }
 
 }}
