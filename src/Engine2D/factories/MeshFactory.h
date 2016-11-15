@@ -2,12 +2,13 @@
 
 #include <GL/glew.h>
 #include "../api/API.h"
+#include "../graphics/buffer/vertexArray.h"
 
 namespace FlowEngine { namespace Graphics {
 
     namespace MeshFactory
     {
-        uint generateQuad(float x, float y, float width, float height);
+        VertexArray* generateQuad(float x, float y, float width, float height);
     };
 
 }}

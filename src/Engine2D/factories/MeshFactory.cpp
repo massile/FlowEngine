@@ -3,7 +3,7 @@
 
 namespace FlowEngine { namespace Graphics {
 
-    uint MeshFactory::generateQuad(float x, float y, float width, float height)
+    VertexArray* MeshFactory::generateQuad(float x, float y, float width, float height)
     {
         VertexData quad[4];
 
@@ -19,10 +19,10 @@ namespace FlowEngine { namespace Graphics {
         quad[3].position = {x, y + height, 0.0f};
         quad[3].uv = {0.0f, 0.0f};
 
-        uint meshID = API::createVertexArray();
         uint bufferID = API::createBuffer();
+        VertexArray* vertexArray = new VertexArray;
 
-        API::bindVertexArray(meshID);
+        vertexArray->bind();
         API::bindBuffer(GL_ARRAY_BUFFER, bufferID);
         API::setBufferData(GL_ARRAY_BUFFER, RENDERER_SPRITE_SIZE, quad, GL_STATIC_DRAW);
 
@@ -32,8 +32,9 @@ namespace FlowEngine { namespace Graphics {
         API::setVertexAttributePointer(POSITION, 3, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, position));
         API::setVertexAttributePointer(UV, 2, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, uv));
         API::unbindBuffers(GL_ARRAY_BUFFER);
+        vertexArray->unbind();
 
-        return meshID;
+        return vertexArray;
     }
 
 }}

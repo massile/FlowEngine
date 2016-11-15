@@ -5,13 +5,13 @@ namespace FlowEngine { namespace Graphics {
     PostEffect::PostEffect() {}
     PostEffect::~PostEffect() {}
 
-    void PostEffect::render(FrameBuffer *src, FrameBuffer *dest, uint quad, IndexBuffer *ibo)
+    void PostEffect::render(FrameBuffer *src, FrameBuffer *dest, VertexArray* quad, IndexBuffer *ibo)
     {
         dest->bind();
         API::setActiveTexture(GL_TEXTURE0);
         src->getTexture()->bind();
 
-        API::bindVertexArray(quad);
+        quad->bind();
         ibo->bind();
 
         for(PostEffectPass* pass: mPasses)

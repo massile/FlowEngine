@@ -2,6 +2,7 @@
 
 #include "PostEffectPass.h"
 #include "buffer/indexBuffer.h"
+#include "buffer/vertexArray.h"
 #include <vector>
 
 namespace FlowEngine { namespace Graphics {
@@ -14,7 +15,7 @@ namespace FlowEngine { namespace Graphics {
         PostEffect();
         ~PostEffect();
 
-        void render(FrameBuffer* src, FrameBuffer* dest, uint quad, IndexBuffer* ibo);
+        void render(FrameBuffer* src, FrameBuffer* dest, VertexArray* quad, IndexBuffer* ibo);
 
         void push(PostEffectPass* pass);
         void pop();

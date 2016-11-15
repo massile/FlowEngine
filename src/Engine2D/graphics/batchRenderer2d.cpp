@@ -7,14 +7,10 @@ namespace FlowEngine { namespace Graphics {
     BatchRenderer2D::BatchRenderer2D(const glm::vec2& screenSize)
         : mScreenSize(screenSize),
           mFrameBuffer(new FrameBuffer(screenSize.x, screenSize.y)),
-          mScreenQuad(MeshFactory::generateQuad(0, 0, mScreenSize.x, mScreenSize.y)),
-          mFramebufferShader(new Shader("resources/shaders/framebuffer.vert", "resources/shaders/framebuffer.frag")),
-          mPostEffect(new PostEffect),
+          mScreenQuad(MeshFactory::generateQuad(0, 0, screenSize.x, screenSize.y)),
           mPostEffectBuffer(new FrameBuffer(screenSize.x, screenSize.y))
     {
-        mVAO = API::createVertexArray();
-        mVBO = API::createBuffer();
-        API::bindVertexArray(mVAO);
+        mVAO->bind();
         API::bindBuffer(GL_ARRAY_BUFFER, mVBO);
         API::setBufferData(GL_ARRAY_BUFFER, RENDERER_BUFFER_SIZE, nullptr, GL_DYNAMIC_DRAW);
 
@@ -40,7 +36,7 @@ namespace FlowEngine { namespace Graphics {
         }
 
         mIBO = new IndexBuffer(indices, RENDERER_INDICES_SIZE);
-        API::unbindVertexArrays();
+        mVAO->unbind();
 
         mFramebufferShader->enable();
         mFramebufferShader->uniform("tex", 0);
@@ -51,7 +47,7 @@ namespace FlowEngine { namespace Graphics {
     BatchRenderer2D::~BatchRenderer2D()
     {
         delete mIBO;
-        API::freeVertexArray(mVAO);
+        delete mVAO;
         API::freeBuffer(mVBO);
     }
 
@@ -158,11 +154,11 @@ namespace FlowEngine { namespace Graphics {
             API::bindTexture(GL_TEXTURE_2D, mTextureSlots[i]);
         }
 
-        API::bindVertexArray(mVAO);
+        mVAO->bind();
         mIBO->bind();
         API::drawElements(GL_TRIANGLES, mIndexCount, GL_UNSIGNED_INT, nullptr);
         mIBO->unbind();
-        API::unbindVertexArrays();
+        mVAO->unbind();
 
         mIndexCount = 0;
         mTextureSlots.clear();
@@ -176,7 +172,7 @@ namespace FlowEngine { namespace Graphics {
         mPostEffectBuffer->getTexture()->bind();
 
         mFramebufferShader->enable();
-        API::bindVertexArray(mScreenQuad);
+        mScreenQuad->bind();
         mIBO->bind();
         API::drawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
         mIBO->unbind();
