@@ -10,9 +10,9 @@ namespace FlowEngine { namespace Graphics {
         mShader->uniform("pr_matrix", mProjectionMatrix);
 
         std::vector<int> texIds;
-        for(int i=0; i<RENDERER_MAX_TEXTURES+1; i++)
+        for(int i=0; i<Renderer2D::MAX_TEXTURES+1; i++)
             texIds.push_back(i);
-        mShader->uniform("textures", texIds.data(), RENDERER_MAX_TEXTURES+1);
+        mShader->uniform("textures", texIds.data(), Renderer2D::MAX_TEXTURES+1);
         mShader->disable();
     }
 

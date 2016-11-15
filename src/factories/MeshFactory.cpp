@@ -24,13 +24,13 @@ namespace FlowEngine { namespace Graphics {
 
         vertexArray->bind();
         API::bindBuffer(GL_ARRAY_BUFFER, bufferID);
-        API::setBufferData(GL_ARRAY_BUFFER, RENDERER_SPRITE_SIZE, quad, GL_STATIC_DRAW);
+        API::setBufferData(GL_ARRAY_BUFFER, Renderer2D::SPRITE_BYTE_SIZE, quad, GL_STATIC_DRAW);
 
         API::enableVertexAttribute(POSITION);
         API::enableVertexAttribute(UV);
 
-        API::setVertexAttributePointer(POSITION, 3, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, position));
-        API::setVertexAttributePointer(UV, 2, GL_FLOAT, false, RENDERER_VERTEX_SIZE, offsetof(VertexData, uv));
+        API::setVertexAttributePointer(POSITION, 3, GL_FLOAT, false, Renderer2D::VERTEX_BYTE_SIZE, offsetof(VertexData, position));
+        API::setVertexAttributePointer(UV, 2, GL_FLOAT, false, Renderer2D::VERTEX_BYTE_SIZE, offsetof(VertexData, uv));
         API::unbindBuffers(GL_ARRAY_BUFFER);
         vertexArray->unbind();
 

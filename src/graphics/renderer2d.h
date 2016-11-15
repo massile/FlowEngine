@@ -9,8 +9,26 @@
 namespace FlowEngine { namespace Graphics {
 
     class Renderable2D;
+    struct VertexData
+    {
+        glm::vec3 position;
+        uint color;
+        glm::vec2 uv;
+        glm::vec2 maskUv;
+        float tid;
+        float mid;
+    };
+
     class Renderer2D
     {
+    public:
+        static const uint VERTEX_BYTE_SIZE = sizeof(VertexData);
+        static const uint SPRITE_BYTE_SIZE = VERTEX_BYTE_SIZE * 4;
+
+        static const uint MAX_SPRITES = 60000;
+        static const uint MAX_TEXTURES = 31;
+        static const uint MAX_VERTEX_BUFFER_BYTE_SIZE = SPRITE_BYTE_SIZE * MAX_SPRITES;
+        static const uint MAX_INDICES_BYTE_SIZE = MAX_SPRITES * 6;
     protected:
         std::vector<glm::mat4> mTransformationStack;
         const glm::mat4* mTransformationBack;

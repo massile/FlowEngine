@@ -10,16 +10,6 @@
 
 namespace FlowEngine { namespace Graphics {
 
-    struct VertexData
-    {
-        glm::vec3 position;
-        uint color;
-        glm::vec2 uv;
-        glm::vec2 maskUv;
-        float tid;
-        float mid;
-    };
-
     class Renderable2D
     {
     protected:

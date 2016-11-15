@@ -10,7 +10,7 @@ namespace FlowEngine { namespace Graphics {
           mScreenQuad(MeshFactory::generateQuad(0, 0, screenSize.x, screenSize.y)),
           mPostEffectBuffer(new FrameBuffer(screenSize.x, screenSize.y))
     {
-        mVBO->resize(RENDERER_BUFFER_SIZE);
+        mVBO->resize(Renderer2D::MAX_VERTEX_BUFFER_BYTE_SIZE);
 
         mVBO->setAttribute<glm::vec3>(POSITION);
         mVBO->setAttribute<uint>(COLOR, 4, true);
@@ -21,7 +21,7 @@ namespace FlowEngine { namespace Graphics {
 
         mVAO->addBuffer(mVBO);
 
-        std::vector<GLuint> indices(RENDERER_INDICES_SIZE);
+        std::vector<GLuint> indices(Renderer2D::MAX_INDICES_BYTE_SIZE);
         for(int i=0, offset=0; i < indices.size(); i+=6, offset+=4)
         {
             indices[i] = offset;
@@ -73,7 +73,7 @@ namespace FlowEngine { namespace Graphics {
         if (!found) {
             mTextureSlots.push_back(textureID);
             textureSlot = mTextureSlots.size();
-            if (textureSlot >= RENDERER_MAX_TEXTURES) {
+            if (textureSlot >= Renderer2D::MAX_TEXTURES) {
                 end();
                 flush();
                 begin();

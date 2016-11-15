@@ -14,31 +14,31 @@ find_package(OpenGL REQUIRED)
 find_library(SOIL_LIBRARY SOIL REQUIRED)
 
 add_library(FlowEngine STATIC
-                src/Engine2D/graphics/shader.cpp src/Engine2D/graphics/shader.h
-                src/Engine2D/utils/fileutils.h
-                src/Engine2D/graphics/window.cpp src/Engine2D/graphics/window.h
-                src/Engine2D/graphics/buffer/vertexBuffer.h src/Engine2D/graphics/buffer/vertexBuffer.cpp
-                src/Engine2D/graphics/buffer/vertexArray.h src/Engine2D/graphics/buffer/vertexArray.cpp
-                src/Engine2D/graphics/buffer/indexBuffer.h src/Engine2D/graphics/buffer/indexBuffer.cpp
-                src/Engine2D/graphics/sprite.h src/Engine2D/graphics/sprite.cpp
-                src/Engine2D/graphics/renderer2d.h src/Engine2D/graphics/renderer2d.cpp
-                src/Engine2D/graphics/renderable2d.h src/Engine2D/graphics/renderable2d.cpp
-                src/Engine2D/graphics/batchRenderer2d.h src/Engine2D/graphics/batchRenderer2d.cpp
-                src/Engine2D/graphics/layers/layer.h src/Engine2D/graphics/layers/layer.cpp
-                src/Engine2D/graphics/layers/group.h src/Engine2D/graphics/layers/group.cpp
-                src/Engine2D/graphics/texture.h src/Engine2D/graphics/texture.cpp
-                src/Engine2D/flow.h src/Engine2D/flow.cpp
-                src/Engine2D/graphics/textureManager.cpp src/Engine2D/graphics/textureManager.h
-                src/Engine2D/graphics/mask.h src/Engine2D/utils/math.h
-                src/Engine2D/factories/MeshFactory.cpp src/Engine2D/factories/MeshFactory.h
-                src/Engine2D/graphics/frameBuffer.cpp src/Engine2D/graphics/frameBuffer.h
-                src/Engine2D/graphics/PostEffect.cpp src/Engine2D/graphics/PostEffect.h
-                src/Engine2D/graphics/PostEffectPass.cpp src/Engine2D/graphics/PostEffectPass.h
-                src/Engine2D/events/Event.cpp src/Engine2D/events/Event.h
-                src/Engine2D/events/IEventListener.h src/Engine2D/events/KeyEvent.cpp src/Engine2D/events/KeyEvent.h
-                src/Engine2D/events/KeyEvent.cpp src/Engine2D/events/KeyEvent.h
-                src/Engine2D/events/MouseEvent.cpp src/Engine2D/events/MouseEvent.h
-                src/Engine2D/api/API.cpp src/Engine2D/api/API.h)
+                src/graphics/shader.cpp src/graphics/shader.h
+                src/utils/fileutils.h
+                src/graphics/window.cpp src/graphics/window.h
+                src/graphics/buffer/vertexBuffer.h src/graphics/buffer/vertexBuffer.cpp
+                src/graphics/buffer/vertexArray.h src/graphics/buffer/vertexArray.cpp
+                src/graphics/buffer/indexBuffer.h src/graphics/buffer/indexBuffer.cpp
+                src/graphics/sprite.h src/graphics/sprite.cpp
+                src/graphics/renderer2d.h src/graphics/renderer2d.cpp
+                src/graphics/renderable2d.h src/graphics/renderable2d.cpp
+                src/graphics/batchRenderer2d.h src/graphics/batchRenderer2d.cpp
+                src/graphics/layers/layer.h src/graphics/layers/layer.cpp
+                src/graphics/layers/group.h src/graphics/layers/group.cpp
+                src/graphics/texture.h src/graphics/texture.cpp
+                src/flow.h src/flow.cpp
+                src/graphics/textureManager.cpp src/graphics/textureManager.h
+                src/graphics/mask.h src/utils/math.h
+                src/factories/MeshFactory.cpp src/factories/MeshFactory.h
+                src/graphics/frameBuffer.cpp src/graphics/frameBuffer.h
+                src/graphics/PostEffect.cpp src/graphics/PostEffect.h
+                src/graphics/PostEffectPass.cpp src/graphics/PostEffectPass.h
+                src/events/Event.cpp src/events/Event.h
+                src/events/IEventListener.h src/events/KeyEvent.cpp src/events/KeyEvent.h
+                src/events/KeyEvent.cpp src/events/KeyEvent.h
+                src/events/MouseEvent.cpp src/events/MouseEvent.h
+                src/api/API.cpp src/api/API.h)
 
 add_definitions(-Dinterface=class)
 
