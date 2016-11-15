@@ -21,8 +21,8 @@ namespace FlowEngine { namespace Graphics {
 
         mVAO->addBuffer(mVBO);
 
-        GLuint* indices = new GLuint[RENDERER_INDICES_SIZE];
-        for(int i=0, offset=0; i < RENDERER_INDICES_SIZE; i+=6, offset+=4)
+        std::vector<GLuint> indices(RENDERER_INDICES_SIZE);
+        for(int i=0, offset=0; i < indices.size(); i+=6, offset+=4)
         {
             indices[i] = offset;
             indices[i+1] = offset + 1;
@@ -32,7 +32,7 @@ namespace FlowEngine { namespace Graphics {
             indices[i+5] = offset;
         }
 
-        mIBO = new IndexBuffer(indices, RENDERER_INDICES_SIZE);
+        mIBO = new IndexBuffer(indices);
 
         mFramebufferShader->enable();
         mFramebufferShader->uniform("tex", 0);
