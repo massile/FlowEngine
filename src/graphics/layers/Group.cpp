@@ -7,19 +7,19 @@ namespace FlowEngine { namespace Graphics {
     {
     }
 
-    void Group::add(Renderable2D* renderable)
+    void Group::add(Sprite* renderable)
     {
         mRenderables.push_back(renderable);
     }
 
-    void Group::submit(Renderer2D* renderer) const
+    void Group::render(Renderer2D& renderer) const
     {
-        renderer->push(mTransformationMatrix);
+        renderer.push(mTransformationMatrix);
 
-        for (Renderable2D* renderable : mRenderables)
-            renderable->submit(renderer);
+        for (Sprite* renderable : mRenderables)
+            renderable->render(renderer);
 
-        renderer->pop();
+        renderer.pop();
     }
 
 }}

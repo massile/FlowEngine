@@ -2,7 +2,7 @@
 
 #include "Renderer2d.h"
 #include "buffer/IndexBuffer.h"
-#include "Renderable2d.h"
+#include "Sprite.h"
 #include "FrameBuffer.h"
 #include "PostEffect.h"
 #include "Vertex.h"
@@ -33,7 +33,7 @@ namespace FlowEngine { namespace Graphics {
         ~BatchRenderer2D();
 
         void begin() override;
-        void submit(const Renderable2D* renderable) override;
+        void submit(const Sprite* renderable) override;
         void end() override;
         void flush() override;
 

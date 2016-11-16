@@ -88,7 +88,7 @@ namespace FlowEngine { namespace Graphics {
         return submitTexture(texture->getId());
     }
 
-    void BatchRenderer2D::submit(const Renderable2D* renderable)
+    void BatchRenderer2D::submit(const Sprite* renderable)
     {
         const glm::vec3& pos = renderable->getPosition();
         const glm::vec2& size = renderable->getSize();

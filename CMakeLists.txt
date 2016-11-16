@@ -22,7 +22,7 @@ add_library(FlowEngine STATIC
         src/graphics/buffer/IndexBuffer.h src/graphics/buffer/IndexBuffer.cpp
         src/graphics/Sprite.h src/graphics/Sprite.cpp
         src/graphics/Renderer2d.h src/graphics/Renderer2d.cpp
-        src/graphics/Renderable2d.h src/graphics/Renderable2d.cpp
+        src/graphics/Sprite.h src/graphics/Sprite.cpp
         src/graphics/BatchRenderer2d.h src/graphics/BatchRenderer2d.cpp
         src/graphics/layers/Layer2D.h src/graphics/layers/Layer2D.cpp
         src/graphics/layers/Group.h src/graphics/layers/Group.cpp
@@ -44,7 +44,7 @@ add_library(FlowEngine STATIC
         src/graphics/Vertex.h src/graphics/Scene.cpp src/graphics/Scene.h
         src/graphics/layers/Layer2D.h src/graphics/layers/Layer3D.cpp
         src/graphics/layers/Layer3D.h src/graphics/layers/Layer.h
-        src/graphics/ForwardRenderer.cpp src/graphics/ForwardRenderer.h)
+        src/graphics/ForwardRenderer.cpp src/graphics/ForwardRenderer.h src/graphics/IRenderable.h)
 
 add_definitions(-Dinterface=class)
 

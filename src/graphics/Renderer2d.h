@@ -10,8 +10,8 @@
 
 namespace FlowEngine { namespace Graphics {
 
-    class Renderable2D;
-    class Renderer2D : public IRenderer<Renderable2D>
+    class Sprite;
+    class Renderer2D : public IRenderer<Sprite>
     {
     public:
         static const uint VERTEX_BYTE_SIZE = sizeof(Vertex2D);

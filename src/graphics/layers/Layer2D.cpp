@@ -30,7 +30,7 @@ namespace FlowEngine { namespace Graphics {
         return false;
     }
 
-    Renderable2D* Layer2D::add(Renderable2D* renderable)
+    Sprite* Layer2D::add(Sprite* renderable)
     {
         mRenderables.push_back(renderable);
         return renderable;
@@ -41,8 +41,8 @@ namespace FlowEngine { namespace Graphics {
         mShader->enable();
 
         mRenderer->begin();
-        for (Renderable2D* renderable : mRenderables)
-            renderable->submit(mRenderer);
+        for (Sprite* renderable : mRenderables)
+            renderable->render(*mRenderer);
         mRenderer->end();
 
         mRenderer->flush();

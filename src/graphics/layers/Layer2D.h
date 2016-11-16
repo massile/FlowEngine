@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Renderer2d.h"
-#include "../Renderable2d.h"
+#include "../Sprite.h"
 #include "../../events/IEventListener.h"
 #include "Layer.h"
 
@@ -10,7 +10,7 @@ namespace FlowEngine { namespace Graphics {
     class Layer2D : public Layer<Renderer2D>
     {
     protected:
-        std::vector<Renderable2D*> mRenderables;
+        std::vector<Sprite*> mRenderables;
         Shader* mShader;
         glm::mat4 mProjectionMatrix;
 
@@ -19,7 +19,7 @@ namespace FlowEngine { namespace Graphics {
         virtual ~Layer2D();
 
         virtual void render() override;
-        Renderable2D* add(Renderable2D* renderable);
+        Sprite* add(Sprite* renderable);
         void setMask(const Mask* mask) const { mRenderer->setMask(mask); }
 
     private:
