@@ -1,5 +1,5 @@
 #include "Layer2D.h"
-#include "../batchRenderer2d.h"
+#include "../BatchRenderer2d.h"
 
 namespace FlowEngine { namespace Graphics {
 

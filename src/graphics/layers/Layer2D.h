@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../renderer2d.h"
-#include "../renderable2d.h"
+#include "../Renderer2d.h"
+#include "../Renderable2d.h"
 #include "../../events/IEventListener.h"
 #include "Layer.h"
 

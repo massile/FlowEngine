@@ -1,4 +1,4 @@
-#include "sprite.h"
+#include "Sprite.h"
 
 namespace FlowEngine { namespace Graphics {
 

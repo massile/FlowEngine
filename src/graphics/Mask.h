@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/gtc/matrix_transform.hpp>
-#include "texture.h"
+#include "Texture.h"
 
 namespace FlowEngine { namespace Graphics {
     struct Mask

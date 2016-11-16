@@ -1,8 +1,8 @@
 #pragma once
 
 #include "PostEffectPass.h"
-#include "buffer/indexBuffer.h"
-#include "buffer/vertexArray.h"
+#include "buffer/IndexBuffer.h"
+#include "buffer/VertexArray.h"
 #include <vector>
 
 namespace FlowEngine { namespace Graphics {

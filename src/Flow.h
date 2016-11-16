@@ -1,15 +1,15 @@
 #pragma once
 
-#include "graphics/sprite.h"
-#include "graphics/renderer2d.h"
-#include "graphics/batchRenderer2d.h"
-#include "graphics/window.h"
+#include "graphics/Sprite.h"
+#include "graphics/Renderer2d.h"
+#include "graphics/BatchRenderer2d.h"
+#include "graphics/Window.h"
 #include "graphics/layers/Layer2D.h"
 
-#include "graphics/sprite.h"
-#include "graphics/renderer3d.h"
+#include "graphics/Sprite.h"
+#include "graphics/Renderer3d.h"
 #include "graphics/ForwardRenderer.h"
-#include "graphics/window.h"
+#include "graphics/Window.h"
 #include "graphics/layers/Layer3D.h"
 
 namespace FlowEngine {

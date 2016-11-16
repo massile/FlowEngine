@@ -1,5 +1,5 @@
-#include "batchRenderer2d.h"
-#include "../utils/math.h"
+#include "BatchRenderer2d.h"
+#include "../utils/Math.h"
 #include "../factories/MeshFactory.h"
 
 namespace FlowEngine { namespace Graphics {

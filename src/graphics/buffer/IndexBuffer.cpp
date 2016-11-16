@@ -1,4 +1,4 @@
-#include "indexBuffer.h"
+#include "IndexBuffer.h"
 
 namespace FlowEngine { namespace Graphics {
 

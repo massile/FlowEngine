@@ -1,12 +1,12 @@
 #pragma once
 
-#include "buffer/vertexBuffer.h"
-#include "buffer/indexBuffer.h"
-#include "buffer/vertexArray.h"
+#include "buffer/VertexBuffer.h"
+#include "buffer/IndexBuffer.h"
+#include "buffer/VertexArray.h"
 
-#include "shader.h"
-#include "renderer2d.h"
-#include "texture.h"
+#include "Shader.h"
+#include "Renderer2d.h"
+#include "Texture.h"
 
 namespace FlowEngine { namespace Graphics {
 

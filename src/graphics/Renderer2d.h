@@ -3,8 +3,8 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <vector>
-#include "texture.h"
-#include "mask.h"
+#include "Texture.h"
+#include "Mask.h"
 #include "IRenderer.h"
 #include "Vertex.h"
 

@@ -1,4 +1,4 @@
-#include "shader.h"
+#include "Shader.h"
 #include <glm/gtc/type_ptr.hpp>
 
 namespace FlowEngine { namespace Graphics {

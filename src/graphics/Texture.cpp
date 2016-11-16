@@ -1,5 +1,5 @@
 #include <SOIL/SOIL.h>
-#include "texture.h"
+#include "Texture.h"
 
 namespace FlowEngine { namespace Graphics {
 

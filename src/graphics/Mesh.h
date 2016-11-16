@@ -1,7 +1,7 @@
 #pragma once
 
-#include "buffer/vertexArray.h"
-#include "buffer/indexBuffer.h"
+#include "buffer/VertexArray.h"
+#include "buffer/IndexBuffer.h"
 
 namespace FlowEngine { namespace Graphics {
 

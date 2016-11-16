@@ -2,7 +2,7 @@
 
 #include <GL/glew.h>
 #include "../api/API.h"
-#include "../graphics/buffer/vertexArray.h"
+#include "../graphics/buffer/VertexArray.h"
 #include "../graphics/Mesh.h"
 
 namespace FlowEngine { namespace Graphics {

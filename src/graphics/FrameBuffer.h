@@ -1,7 +1,7 @@
 #pragma once
 
 #include <GL/glew.h>
-#include "texture.h"
+#include "Texture.h"
 #include "../api/API.h"
 
 namespace FlowEngine { namespace Graphics {

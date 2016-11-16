@@ -14,37 +14,37 @@ find_package(OpenGL REQUIRED)
 find_library(SOIL_LIBRARY SOIL REQUIRED)
 
 add_library(FlowEngine STATIC
-                src/graphics/shader.cpp src/graphics/shader.h
-                src/utils/fileutils.h
-                src/graphics/window.cpp src/graphics/window.h
-                src/graphics/buffer/vertexBuffer.h src/graphics/buffer/vertexBuffer.cpp
-                src/graphics/buffer/vertexArray.h src/graphics/buffer/vertexArray.cpp
-                src/graphics/buffer/indexBuffer.h src/graphics/buffer/indexBuffer.cpp
-                src/graphics/sprite.h src/graphics/sprite.cpp
-                src/graphics/renderer2d.h src/graphics/renderer2d.cpp
-                src/graphics/renderable2d.h src/graphics/renderable2d.cpp
-                src/graphics/batchRenderer2d.h src/graphics/batchRenderer2d.cpp
-                src/graphics/layers/Layer2D.h src/graphics/layers/Layer2D.cpp
-                src/graphics/layers/group.h src/graphics/layers/group.cpp
-                src/graphics/texture.h src/graphics/texture.cpp
-                src/flow.h src/flow.cpp
-                src/graphics/textureManager.cpp src/graphics/textureManager.h
-                src/graphics/mask.h src/utils/math.h
-                src/factories/MeshFactory.cpp src/factories/MeshFactory.h
-                src/graphics/frameBuffer.cpp src/graphics/frameBuffer.h
-                src/graphics/PostEffect.cpp src/graphics/PostEffect.h
-                src/graphics/PostEffectPass.cpp src/graphics/PostEffectPass.h
-                src/events/Event.cpp src/events/Event.h
-                src/events/IEventListener.h src/events/KeyEvent.cpp src/events/KeyEvent.h
-                src/events/KeyEvent.cpp src/events/KeyEvent.h
-                src/events/MouseEvent.cpp src/events/MouseEvent.h
-                src/api/API.cpp src/api/API.h
-                src/graphics/IRenderer.h src/graphics/renderer3d.h
-                src/graphics/Mesh.cpp src/graphics/Mesh.h
-                src/graphics/Vertex.h src/graphics/Scene.cpp src/graphics/Scene.h
-                src/graphics/layers/Layer2D.h src/graphics/layers/Layer3D.cpp
-                src/graphics/layers/Layer3D.h src/graphics/layers/Layer.h
-                src/graphics/ForwardRenderer.cpp src/graphics/ForwardRenderer.h)
+        src/graphics/Shader.cpp src/graphics/Shader.h
+        src/utils/FileUtils.h
+        src/graphics/Window.cpp src/graphics/Window.h
+        src/graphics/buffer/VertexBuffer.h src/graphics/buffer/VertexBuffer.cpp
+        src/graphics/buffer/VertexArray.h src/graphics/buffer/VertexArray.cpp
+        src/graphics/buffer/IndexBuffer.h src/graphics/buffer/IndexBuffer.cpp
+        src/graphics/Sprite.h src/graphics/Sprite.cpp
+        src/graphics/Renderer2d.h src/graphics/Renderer2d.cpp
+        src/graphics/Renderable2d.h src/graphics/Renderable2d.cpp
+        src/graphics/BatchRenderer2d.h src/graphics/BatchRenderer2d.cpp
+        src/graphics/layers/Layer2D.h src/graphics/layers/Layer2D.cpp
+        src/graphics/layers/Group.h src/graphics/layers/Group.cpp
+        src/graphics/Texture.h src/graphics/Texture.cpp
+        src/Flow.h src/Flow.cpp
+        src/graphics/TextureManager.cpp src/graphics/TextureManager.h
+        src/graphics/Mask.h src/utils/Math.h
+        src/factories/MeshFactory.cpp src/factories/MeshFactory.h
+        src/graphics/FrameBuffer.cpp src/graphics/FrameBuffer.h
+        src/graphics/PostEffect.cpp src/graphics/PostEffect.h
+        src/graphics/PostEffectPass.cpp src/graphics/PostEffectPass.h
+        src/events/Event.cpp src/events/Event.h
+        src/events/IEventListener.h src/events/KeyEvent.cpp src/events/KeyEvent.h
+        src/events/KeyEvent.cpp src/events/KeyEvent.h
+        src/events/MouseEvent.cpp src/events/MouseEvent.h
+        src/api/API.cpp src/api/API.h
+        src/graphics/IRenderer.h src/graphics/Renderer3d.h
+        src/graphics/Mesh.cpp src/graphics/Mesh.h
+        src/graphics/Vertex.h src/graphics/Scene.cpp src/graphics/Scene.h
+        src/graphics/layers/Layer2D.h src/graphics/layers/Layer3D.cpp
+        src/graphics/layers/Layer3D.h src/graphics/layers/Layer.h
+        src/graphics/ForwardRenderer.cpp src/graphics/ForwardRenderer.h)
 
 add_definitions(-Dinterface=class)
 

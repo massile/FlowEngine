@@ -1,9 +1,9 @@
 #pragma once
 
-#include "renderer2d.h"
-#include "buffer/indexBuffer.h"
-#include "renderable2d.h"
-#include "frameBuffer.h"
+#include "Renderer2d.h"
+#include "buffer/IndexBuffer.h"
+#include "Renderable2d.h"
+#include "FrameBuffer.h"
 #include "PostEffect.h"
 #include "Vertex.h"
 

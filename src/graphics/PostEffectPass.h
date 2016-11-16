@@ -1,7 +1,7 @@
 #pragma once
 
-#include "shader.h"
-#include "frameBuffer.h"
+#include "Shader.h"
+#include "FrameBuffer.h"
 
 namespace FlowEngine { namespace Graphics {
 

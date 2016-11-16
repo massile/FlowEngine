@@ -3,7 +3,7 @@
 #include <vector>
 #include <GL/glew.h>
 
-#include "vertexBuffer.h"
+#include "VertexBuffer.h"
 
 namespace FlowEngine { namespace Graphics {
 

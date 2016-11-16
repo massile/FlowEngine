@@ -1,6 +1,6 @@
-#include "vertexBuffer.h"
+#include "VertexBuffer.h"
 #include "../../api/API.h"
-#include "../renderable2d.h"
+#include "../Renderable2d.h"
 
 namespace FlowEngine { namespace Graphics {
 

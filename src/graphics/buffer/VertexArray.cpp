@@ -1,4 +1,4 @@
-#include "vertexArray.h"
+#include "VertexArray.h"
 #include "../../api/API.h"
 
 namespace FlowEngine { namespace Graphics {
