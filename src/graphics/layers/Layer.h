@@ -15,6 +15,8 @@ namespace FlowEngine { namespace Graphics {
         Layer(T* renderer) : mRenderer(renderer) {}
         virtual void render() = 0;
 
+        T* getRenderer() const { return mRenderer; }
+
     };
 
 }}

@@ -65,15 +65,15 @@ namespace FlowEngine { namespace Graphics {
         buffer.setAttribute<glm::vec3>(NORMAL);
         buffer.setAttribute<glm::vec2>(UV);
 
-        VertexArray vertexArray;
-        vertexArray.addBuffer(&buffer);
+        VertexArray* vertexArray = new VertexArray;
+        vertexArray->addBuffer(&buffer);
 
         std::vector<uint> indices = {
             0, 1, 2, 2, 3, 0, 3, 2, 6, 6, 7, 3, 7, 6, 5, 5, 4, 7,
             4, 0, 3, 3, 7, 4, 0, 1, 5, 5, 4, 0, 1, 5, 6, 6, 2, 1
         };
 
-        return new Mesh(&vertexArray, new IndexBuffer(indices));
+        return new Mesh(vertexArray, new IndexBuffer(indices));
     }
 
 }}

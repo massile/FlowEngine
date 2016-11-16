@@ -15,6 +15,8 @@ namespace FlowEngine { namespace Graphics {
         Layer3D(Renderer3D* renderer, Scene* scene);
         ~Layer3D();
 
+        virtual bool onEvent(const Events::Event &event) override;
+
         inline Scene* getScene() const { return mScene; }
         virtual void render() override;
     };

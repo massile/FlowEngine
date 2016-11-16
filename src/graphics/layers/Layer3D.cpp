@@ -20,4 +20,9 @@ namespace FlowEngine { namespace Graphics {
         mRenderer->flush();
     }
 
+    bool Layer3D::onEvent(const Events::Event &event)
+    {
+        return false;
+    }
+
 }}

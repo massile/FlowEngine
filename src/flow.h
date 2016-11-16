@@ -6,6 +6,12 @@
 #include "graphics/window.h"
 #include "graphics/layers/Layer2D.h"
 
+#include "graphics/sprite.h"
+#include "graphics/renderer3d.h"
+#include "graphics/ForwardRenderer.h"
+#include "graphics/window.h"
+#include "graphics/layers/Layer3D.h"
+
 namespace FlowEngine {
 
     class Flow
