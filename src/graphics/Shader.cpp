@@ -20,8 +20,8 @@ namespace FlowEngine { namespace Graphics {
         GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
         GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
 
-        std::string vertSourceString = FileUtils::read_file(mVertPath.c_str());
-        std::string fragSourceString = FileUtils::read_file(mFragPath.c_str());
+        std::string vertSourceString = FileParser::readFile(mVertPath);
+        std::string fragSourceString = FileParser::readFile(mFragPath);
 
         const char* vertSource = vertSourceString.c_str();
         const char* fragSource = fragSourceString.c_str();

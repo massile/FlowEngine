@@ -15,7 +15,7 @@ find_library(SOIL_LIBRARY SOIL REQUIRED)
 
 add_library(FlowEngine STATIC
         src/graphics/Shader.cpp src/graphics/Shader.h
-        src/utils/FileUtils.h
+        src/utils/FileParser.h
         src/graphics/Window.cpp src/graphics/Window.h
         src/graphics/buffer/VertexBuffer.h src/graphics/buffer/VertexBuffer.cpp
         src/graphics/buffer/VertexArray.h src/graphics/buffer/VertexArray.cpp
@@ -44,7 +44,8 @@ add_library(FlowEngine STATIC
         src/graphics/Vertex.h src/graphics/Scene.cpp src/graphics/Scene.h
         src/graphics/layers/Layer2D.h src/graphics/layers/Layer3D.cpp
         src/graphics/layers/Layer3D.h src/graphics/layers/Layer.h
-        src/graphics/ForwardRenderer.cpp src/graphics/ForwardRenderer.h src/graphics/IRenderable.h)
+        src/graphics/ForwardRenderer.cpp src/graphics/ForwardRenderer.h
+        src/graphics/IRenderable.h src/utils/String.h)
 
 add_definitions(-Dinterface=class)
 

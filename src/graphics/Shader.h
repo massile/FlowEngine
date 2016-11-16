@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 
 #include <glm/glm.hpp>
-#include "../utils/FileUtils.h"
+#include "../utils/FileParser.h"
 #include "../api/API.h"
 
 namespace FlowEngine { namespace Graphics {
