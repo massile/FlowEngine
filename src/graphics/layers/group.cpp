@@ -1,5 +1,4 @@
 #include "group.h"
-#include <glm/glm.hpp>
 
 namespace FlowEngine { namespace Graphics {
 
@@ -17,7 +16,7 @@ namespace FlowEngine { namespace Graphics {
     {
         renderer->push(mTransformationMatrix);
 
-        for (const Renderable2D* renderable : mRenderables)
+        for (Renderable2D* renderable : mRenderables)
             renderable->submit(renderer);
 
         renderer->pop();

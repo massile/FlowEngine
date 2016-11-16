@@ -56,7 +56,7 @@ namespace FlowEngine { namespace Graphics {
         mFrameBuffer->clean();
 
         mVBO->bind();
-        mBuffer = (VertexData*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        mBuffer = (Vertex2D*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
     }
 
     float BatchRenderer2D::submitTexture(uint textureID)

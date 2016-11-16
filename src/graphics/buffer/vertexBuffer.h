@@ -7,7 +7,7 @@
 
 namespace FlowEngine { namespace Graphics {
 
-    enum ShaderIndex { POSITION, COLOR, UV, MASK_UV, TID, MID };
+    enum ShaderIndex { POSITION, COLOR, UV, MASK_UV, TID, MID, NORMAL=COLOR };
 
     struct BufferAttribute
     {

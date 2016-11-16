@@ -24,7 +24,7 @@ add_library(FlowEngine STATIC
                 src/graphics/renderer2d.h src/graphics/renderer2d.cpp
                 src/graphics/renderable2d.h src/graphics/renderable2d.cpp
                 src/graphics/batchRenderer2d.h src/graphics/batchRenderer2d.cpp
-                src/graphics/layers/layer.h src/graphics/layers/layer.cpp
+                src/graphics/layers/Layer2D.h src/graphics/layers/Layer2D.cpp
                 src/graphics/layers/group.h src/graphics/layers/group.cpp
                 src/graphics/texture.h src/graphics/texture.cpp
                 src/flow.h src/flow.cpp
@@ -38,7 +38,13 @@ add_library(FlowEngine STATIC
                 src/events/IEventListener.h src/events/KeyEvent.cpp src/events/KeyEvent.h
                 src/events/KeyEvent.cpp src/events/KeyEvent.h
                 src/events/MouseEvent.cpp src/events/MouseEvent.h
-                src/api/API.cpp src/api/API.h)
+                src/api/API.cpp src/api/API.h
+                src/graphics/IRenderer.h src/graphics/renderer3d.h
+                src/graphics/Mesh.cpp src/graphics/Mesh.h
+                src/graphics/Vertex.h src/graphics/Scene.cpp src/graphics/Scene.h
+                src/graphics/layers/Layer2D.h src/graphics/layers/Layer3D.cpp
+                src/graphics/layers/Layer3D.h src/graphics/layers/Layer.h
+                src/graphics/ForwardRenderer.cpp src/graphics/ForwardRenderer.h)
 
 add_definitions(-Dinterface=class)
 

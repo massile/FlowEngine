@@ -1,10 +1,10 @@
-#include "layer.h"
+#include "Layer2D.h"
 #include "../batchRenderer2d.h"
 
 namespace FlowEngine { namespace Graphics {
 
-    Layer::Layer(Renderer2D* renderer, Shader* shader, glm::mat4 projectionMatrix)
-            : mRenderer(renderer), mShader(shader), mProjectionMatrix(projectionMatrix)
+    Layer2D::Layer2D(Renderer2D* renderer, Shader* shader, glm::mat4 projectionMatrix)
+            : Layer(renderer), mShader(shader), mProjectionMatrix(projectionMatrix)
     {
         mShader->enable();
         mShader->uniform("pr_matrix", mProjectionMatrix);
@@ -16,7 +16,7 @@ namespace FlowEngine { namespace Graphics {
         mShader->disable();
     }
 
-    Layer::~Layer()
+    Layer2D::~Layer2D()
     {
         delete mShader;
         delete mRenderer;
@@ -25,23 +25,23 @@ namespace FlowEngine { namespace Graphics {
             delete mRenderables[i];
     }
 
-    bool Layer::onEvent(const Events::Event &event)
+    bool Layer2D::onEvent(const Events::Event &event)
     {
         return false;
     }
 
-    Renderable2D* Layer::add(Renderable2D* renderable)
+    Renderable2D* Layer2D::add(Renderable2D* renderable)
     {
         mRenderables.push_back(renderable);
         return renderable;
     }
 
-    void Layer::render()
+    void Layer2D::render()
     {
         mShader->enable();
 
         mRenderer->begin();
-        for (const Renderable2D* renderable : mRenderables)
+        for (Renderable2D* renderable : mRenderables)
             renderable->submit(mRenderer);
         mRenderer->end();
 

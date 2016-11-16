@@ -5,6 +5,7 @@
 #include "renderable2d.h"
 #include "frameBuffer.h"
 #include "PostEffect.h"
+#include "Vertex.h"
 
 namespace FlowEngine { namespace Graphics {
 
@@ -17,7 +18,7 @@ namespace FlowEngine { namespace Graphics {
         VertexBuffer* mVBO = new VertexBuffer(GL_ARRAY_BUFFER, GL_DYNAMIC_DRAW);
         IndexBuffer* mIBO;
         uint mIndexCount;
-        VertexData* mBuffer;
+        Vertex2D* mBuffer;
         std::vector<uint> mTextureSlots;
 
         Shader* mFramebufferShader = new Shader("resources/shaders/framebuffer.vert", "resources/shaders/framebuffer.frag");
