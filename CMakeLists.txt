@@ -45,7 +45,7 @@ add_library(FlowEngine STATIC
         src/graphics/layers/Layer2D.h src/graphics/layers/Layer3D.cpp
         src/graphics/layers/Layer3D.h src/graphics/layers/Layer.h
         src/graphics/ForwardRenderer.cpp src/graphics/ForwardRenderer.h
-        src/graphics/IRenderable.h src/utils/String.h)
+        src/graphics/IRenderable.h src/utils/String.h src/graphics/Model.cpp src/graphics/Model.h)
 
 add_definitions(-Dinterface=class)
 

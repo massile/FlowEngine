@@ -50,7 +50,7 @@ namespace FlowEngine { namespace Graphics {
         glfwSetMouseButtonCallback(mWindow, mouse_button_callback);
         glfwSetCursorPosCallback(mWindow, cursor_position_callback);
         glfwSetWindowSizeCallback(mWindow, window_resize);
-
+        glEnable(GL_DEPTH_TEST);
         if (glewInit() != GLEW_OK)
         {
             std::cout << "Could not initialize GLEW!" << std::endl;
